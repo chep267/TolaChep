@@ -1,0 +1,24 @@
+/**
+ *
+ * @author dongntd@bkav.com on 06/09/2022.
+ *
+ */
+
+const THREAD_ACTION = {
+    UPDATE_LIST: {
+        SUCCESS: 'UPDATE_LIST_THREAD_SUCCESS',
+        REQUEST: 'UPDATE_LIST_THREAD_REQUEST',
+    },
+    SEARCH: {
+        SUCCESS: 'SEARCH_THREAD_SUCCESS',
+        REQUEST: 'SEARCH_THREAD_REQUEST',
+    },
+    SELECTED_THREAD: 'SELECTED_THREAD',
+    MOVE_TO_TOP: 'MOVE_THREAD_TO_TOP',
+    START_NEW_THREAD: {
+        SUCCESS: 'START_NEW_THREAD_SUCCESS',
+        REQUEST: 'START_NEW_THREAD_REQUEST',
+    },
+};
+
+export default THREAD_ACTION;

@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "paths": {
+            "@src/*": ["src/*"],
+            "@app/*": ["src/app/*"],
+            "@modules/*": ["src/modules/*"],
+            "@module-base/*": ["src/modules/module-base/*"],
+            "@module-global/*": ["src/modules/module-global/*"],
+            "@module-theme/*": ["src/modules/module-theme/*"],
+            "@module-auth/*": ["src/modules/module-auth/*"],
+            "@module-user/*": ["src/modules/module-user/*"],
+            "@module-error/*": ["src/modules/module-error/*"],
+            "@module-language/*": ["src/modules/module-language/*"],
+            "@module-messenger/*": ["src/modules/module-messenger/*"],
+            "@module-feed/*": ["src/modules/module-feed/*"]
+        }
+    }
+}

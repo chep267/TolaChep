@@ -1,0 +1,26 @@
+/**
+ *
+ * @author dongntd@bkav.com on 06/09/2022.
+ *
+ */
+
+const MESSAGE_ACTION = {
+    SEND_MESSAGE: {
+        SUCCESS: 'SEND_MESSAGE_SUCCESS',
+        REQUEST: 'SEND_MESSAGE_REQUEST',
+    },
+    GET_MESSAGES: {
+        SUCCESS: 'GET_MESSAGES_SUCCESS',
+        REQUEST: 'GET_MESSAGES_REQUEST',
+    },
+    DELETE_MESSAGE: {
+        SUCCESS: 'DELETE_MESSAGE_SUCCESS',
+        REQUEST: 'DELETE_MESSAGE_REQUEST',
+    },
+    REMOVE_MESSAGE: {
+        SUCCESS: 'REMOVE_MESSAGE_SUCCESS',
+        REQUEST: 'REMOVE_MESSAGE_REQUEST',
+    },
+};
+
+export default MESSAGE_ACTION;

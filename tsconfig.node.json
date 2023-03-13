@@ -1,0 +1,17 @@
+/**
+ *
+ * @author dongntd@bkav.com on 06/09/2022.
+ *
+ */
+
+{
+    "compilerOptions": {
+        "composite": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true
+    },
+    "include": ["vite.config.ts", "tsconfig.path.json"]
+}

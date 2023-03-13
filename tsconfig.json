@@ -1,0 +1,30 @@
+/**
+ *
+ * @author dongntd@bkav.com on 06/09/2022.
+ *
+ */
+
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "useDefineForClassFields": true,
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "composite": true,
+    },
+    "include": ["src"],
+    "extends": "./tsconfig.path.json",
+    "references": [{ "path": "./tsconfig.node.json" }]
+}
