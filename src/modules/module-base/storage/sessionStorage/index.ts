@@ -4,12 +4,13 @@
  *
  */
 
+/** utils */
 import { emptyArray } from '@module-base/constants';
 
 class SessionStorageBase {
     get = (key = '') => window.sessionStorage.getItem(key);
     getList = (keys: string[] = emptyArray) => {
-        const results = {};
+        const results: Record<string, any> = {};
         keys.forEach((key) => {
             results[key] = this.get(key);
         });

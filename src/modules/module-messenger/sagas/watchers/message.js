@@ -1,38 +1,33 @@
-import {fork, take} from "redux-saga/effects";
-import MESSAGE_ACTION from "../../actions/message";
-import {
-    doDeleteMessage,
-    doGetListMessageSuccess,
-    doRemoveMessage,
-    doSendMessage
-} from "../workers/message";
-import {doMoveThreadToTop} from "../workers/thread";
+import { fork, take } from 'redux-saga/effects';
+import MESSAGE_ACTION from '../../actions/message';
+import { doDeleteMessage, doGetListMessageSuccess, doRemoveMessage, doSendMessage } from '../workers/message';
+import { doMoveThreadToTop } from '../workers/thread';
 
 function* sendMessageWatcher() {
-    while(true) {
+    while (true) {
         const result = yield take(MESSAGE_ACTION.SEND_MESSAGE.REQUEST);
-        const {payload} = result;
+        const { payload } = result;
         yield fork(doSendMessage, payload);
         yield fork(doMoveThreadToTop, payload.threadId);
     }
 }
 
 function* deleteMessageWatcher() {
-    while(true) {
+    while (true) {
         const result = yield take(MESSAGE_ACTION.DELETE_MESSAGE.REQUEST);
         yield fork(doDeleteMessage, result.payload);
     }
 }
 
 function* removeMessageWatcher() {
-    while(true) {
+    while (true) {
         const result = yield take(MESSAGE_ACTION.REMOVE_MESSAGE.REQUEST);
         yield fork(doRemoveMessage, result.payload);
     }
 }
 
 function* getMessagesWatcher() {
-    while(true) {
+    while (true) {
         const result = yield take(MESSAGE_ACTION.GET_MESSAGES.REQUEST);
         yield fork(doGetListMessageSuccess, result.payload);
     }

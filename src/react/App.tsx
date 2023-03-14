@@ -20,7 +20,6 @@ import store from '@app/store';
 import { messages } from '@app/utils';
 
 /** global styles */
-// import 'antd/dist/reset.css';
 import './index.css';
 
 const App = () => (

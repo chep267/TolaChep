@@ -23,7 +23,13 @@ interface Props {
 function Icon(props: Props) {
     const { color, width, height } = props;
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="currentColor" viewBox="0 0 18 18" {...props}>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={width}
+            height={height}
+            fill="currentColor"
+            viewBox="0 0 18 18"
+            {...props}>
             <path stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12l3-3-3-3" />
             <path
                 stroke={color}

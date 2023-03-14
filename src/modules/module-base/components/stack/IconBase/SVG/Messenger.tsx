@@ -25,7 +25,14 @@ function Messenger(props: Props) {
                 <ellipse cx={14.972} cy={8.997} rx={0.994} ry={0.997} fill="#fff" />
             </g>
             <defs>
-                <filter id="b" x={5} y={7.5} width={3.989} height={3.993} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                <filter
+                    id="b"
+                    x={5}
+                    y={7.5}
+                    width={3.989}
+                    height={3.993}
+                    filterUnits="userSpaceOnUse"
+                    colorInterpolationFilters="sRGB">
                     <feFlood floodOpacity={0} result="BackgroundImageFix" />
                     <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                     <feOffset dy={0.5} />
@@ -35,7 +42,14 @@ function Messenger(props: Props) {
                     <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_4195_9415" />
                     <feBlend in="SourceGraphic" in2="effect1_dropShadow_4195_9415" result="shape" />
                 </filter>
-                <filter id="c" x={8.989} y={7.5} width={3.989} height={3.993} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                <filter
+                    id="c"
+                    x={8.989}
+                    y={7.5}
+                    width={3.989}
+                    height={3.993}
+                    filterUnits="userSpaceOnUse"
+                    colorInterpolationFilters="sRGB">
                     <feFlood floodOpacity={0} result="BackgroundImageFix" />
                     <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                     <feOffset dy={0.5} />
@@ -45,7 +59,14 @@ function Messenger(props: Props) {
                     <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_4195_9415" />
                     <feBlend in="SourceGraphic" in2="effect1_dropShadow_4195_9415" result="shape" />
                 </filter>
-                <filter id="d" x={12.978} y={7.5} width={3.989} height={3.993} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                <filter
+                    id="d"
+                    x={12.978}
+                    y={7.5}
+                    width={3.989}
+                    height={3.993}
+                    filterUnits="userSpaceOnUse"
+                    colorInterpolationFilters="sRGB">
                     <feFlood floodOpacity={0} result="BackgroundImageFix" />
                     <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                     <feOffset dy={0.5} />

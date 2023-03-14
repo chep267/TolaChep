@@ -22,7 +22,13 @@ function SvgComponent(props: Props) {
     const { color } = props;
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={25} viewBox="0 0 24 25" {...props}>
-            <path d="M3 18.5h18M3 12.5h18M3 6.5h18" stroke={color || '#fff'} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+            <path
+                d="M3 18.5h18M3 12.5h18M3 6.5h18"
+                stroke={color || '#fff'}
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
         </svg>
     );
 }

@@ -4,9 +4,10 @@
  *
  */
 
-export type TYPE_LOCALE = 'VI' | 'EN';
+/** utils */
+import { TYPE_LOCALE_OBJECT } from '@module-language/utils';
 
-export const LOCALE_OBJECT: Record<TYPE_LOCALE, TYPE_LOCALE> = {
+export const LOCALE_OBJECT: TYPE_LOCALE_OBJECT = {
     VI: 'VI',
     EN: 'EN',
 };

@@ -65,11 +65,7 @@ function AvatarBase(props: AvatarProps) {
     //     </div>
     // );
 
-    return (
-        <div className={className}>
-            {/*<Avatar alt="avt" src={src} {...stringAvatar(account, size)} />*/}
-        </div>
-    );
+    return <div className={className}>{/*<Avatar alt="avt" src={src} {...stringAvatar(account, size)} />*/}</div>;
 }
 
 const mapStateToProps = () => {

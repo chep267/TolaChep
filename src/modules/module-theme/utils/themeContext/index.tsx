@@ -6,7 +6,7 @@
 
 import * as React from 'react';
 
-// Const
+/** utils */
 import { LIGHT_THEME, themes } from '@module-theme/constants';
 import { TYPE_THEME, TYPE_MODE_THEME } from '@module-theme/utils';
 
@@ -27,8 +27,8 @@ ThemeContext.displayName = 'ThemeContext';
 
 const useTheme = () => React.useContext<ThemeProps>(ThemeContext);
 
-function withTheme(WrappedComponent) {
-    return function EnhancedComponent(props) {
+function withTheme(WrappedComponent: React.ElementType) {
+    return function EnhancedComponent(props: any) {
         const theme = useTheme();
         return <WrappedComponent {...props} theme={theme} />;
     };

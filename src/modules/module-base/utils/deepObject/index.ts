@@ -11,7 +11,7 @@ import { emptyArray } from '@module-base/constants';
  *
  * use: update sâu Array | Object
  */
-function deepUpdate(original: object | Array<any>, keys: Array<string | number> = emptyArray, data: any) {
+function deepUpdate(original: object | Array<any>, keys: Array<string | number> = emptyArray, data: any): any {
     if (keys.length === 0) return data;
 
     const currentKey = keys[0];
@@ -43,7 +43,7 @@ function deepUpdate(original: object | Array<any>, keys: Array<string | number> 
  *
  * use: get sâu Array | Object
  */
-function deepGet(original: any, keys: string[] = emptyArray) {
+function deepGet(original: any, keys: string[] = emptyArray): any {
     if (keys.length === 0 || !original) return original;
     if (keys.length > 0 && typeof original !== 'object') return original;
 

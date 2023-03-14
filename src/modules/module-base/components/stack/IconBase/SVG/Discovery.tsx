@@ -23,18 +23,35 @@ function SVGComponent(props) {
                     filterUnits="userSpaceOnUse"
                     colorInterpolationFilters="sRGB">
                     <feFlood floodOpacity={0} result="BackgroundImageFix" />
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                    <feColorMatrix
+                        in="SourceAlpha"
+                        type="matrix"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha"
+                    />
                     <feOffset dy={2} />
                     <feGaussianBlur stdDeviation={5} />
                     <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_10770_6740" />
                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_10770_6740" result="shape" />
                 </filter>
-                <linearGradient id="paint0_linear_10770_6740" x1={14.9997} y1={1.33325} x2={14.9997} y2={24.6666} gradientUnits="userSpaceOnUse">
+                <linearGradient
+                    id="paint0_linear_10770_6740"
+                    x1={14.9997}
+                    y1={1.33325}
+                    x2={14.9997}
+                    y2={24.6666}
+                    gradientUnits="userSpaceOnUse">
                     <stop stopColor="#8EEBFF" />
                     <stop offset={1} stopColor="#06B7DE" />
                 </linearGradient>
-                <linearGradient id="paint1_linear_10770_6740" x1={14.9999} y1={8.46558} x2={14.9999} y2={17.5345} gradientUnits="userSpaceOnUse">
+                <linearGradient
+                    id="paint1_linear_10770_6740"
+                    x1={14.9999}
+                    y1={8.46558}
+                    x2={14.9999}
+                    y2={17.5345}
+                    gradientUnits="userSpaceOnUse">
                     <stop stopColor="white" />
                     <stop offset={1} stopColor="white" stopOpacity={0} />
                 </linearGradient>

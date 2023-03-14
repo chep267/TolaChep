@@ -18,6 +18,8 @@ export const Z_INDEX = {
     lv8: 80,
     lv9: 90,
     lv10: 100,
+    underModal: 899,
+    modal: 900,
     underMax: 998,
     max: 999,
 };

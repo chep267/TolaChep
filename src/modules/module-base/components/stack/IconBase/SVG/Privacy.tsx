@@ -22,7 +22,11 @@ function Icon(props: Props) {
     const { color } = props;
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" fill="none" viewBox="0 0 24 24" {...props}>
-            <path stroke={color} strokeWidth="1.2" d="M12 1.5C6.201 1.5 1.5 6.201 1.5 12S6.201 22.5 12 22.5 22.5 17.799 22.5 12 17.799 1.5 12 1.5z" />
+            <path
+                stroke={color}
+                strokeWidth="1.2"
+                d="M12 1.5C6.201 1.5 1.5 6.201 1.5 12S6.201 22.5 12 22.5 22.5 17.799 22.5 12 17.799 1.5 12 1.5z"
+            />
             <path
                 stroke={color}
                 strokeWidth="1.2"

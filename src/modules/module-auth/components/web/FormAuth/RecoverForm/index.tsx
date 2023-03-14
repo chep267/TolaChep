@@ -5,84 +5,142 @@
  */
 
 import * as React from 'react';
-import { App, Form, Checkbox, InputRef } from 'antd';
+import { Form, Checkbox, InputRef } from 'antd';
 
 /** actions */
-import { AUTH_ACTION, authAction } from '@module-auth/actions';
-
-/** utils */
-import { authMessage, TYPE_AUTH_FORM_ERROR } from '@module-auth/utils';
-import { useAppDispatch } from '@app/store';
-
-/** styles */
-import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/SignInForm/styles';
+import { authAction } from '@module-auth/actions';
 
 /** components */
+import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/SignInForm/styles';
 import FormInput from '@module-auth/components/web/FormAuth/FormInput';
 import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
-import { useNavigate } from 'react-router-dom';
-import { SCREEN } from '@module-global/constants';
+import { getTextIntl } from '@module-base/components';
+
+/** utils */
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
-import { getTextIntl, TextIntl } from '@module-base/components';
+import { authMessage, TYPE_AUTH_FORM_ERROR } from '@module-auth/utils';
+import { useAppDispatch } from '@app/store';
+import { Decrypt } from '@module-base/utils';
+import { localStorageBase } from '@module-base/storage';
+import { emailLocalKey } from '@module-global/constants';
+import { REG_PHONE, REGEX_EMAIL } from '@module-base/constants';
 
 function RegisterForm() {
-    const { message } = App.useApp();
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const accountRef: React.Ref<InputRef> = React.useRef(null);
     const passwordRef: React.Ref<InputRef> = React.useRef(null);
     const passwordHillRef: React.Ref<InputRef> = React.useRef(null);
 
-    const [status, setStatus] = React.useState<TYPE_AUTH_FORM_ERROR>(AUTH_FORM_ERROR.DEFAULT);
-    const [passwordSame, setPasswordSame] = React.useState(false);
+    const [status, setStatus] = React.useState<{
+        account: TYPE_AUTH_FORM_ERROR;
+        password: TYPE_AUTH_FORM_ERROR;
+        passwordHill: TYPE_AUTH_FORM_ERROR;
+    }>({
+        account: AUTH_FORM_ERROR.DEFAULT,
+        password: AUTH_FORM_ERROR.DEFAULT,
+        passwordHill: AUTH_FORM_ERROR.DEFAULT,
+    });
     const [isSubmit, setIsSubmit] = React.useState(false);
+
+    const isAccountNotEmailOrPhone = (acc: string) => !(REGEX_EMAIL.test(acc) || REG_PHONE.test(acc));
+
+    const onResetStatus = React.useCallback(() => {
+        setStatus({
+            account: AUTH_FORM_ERROR.DEFAULT,
+            password: AUTH_FORM_ERROR.DEFAULT,
+            passwordHill: AUTH_FORM_ERROR.DEFAULT,
+        });
+    }, []);
 
     const onSubmit = () => {
         const account = accountRef.current?.input?.value?.trim() || '';
         const password = passwordRef.current?.input?.value?.trim() || '';
         const passwordHill = passwordHillRef.current?.input?.value?.trim() || '';
-
         switch (true) {
-            case !account || status === AUTH_FORM_ERROR.ACCOUNT_EMPTY: {
+            case !account || status.account === AUTH_FORM_ERROR.ACCOUNT_EMPTY: {
                 accountRef.current?.focus();
-                if (status !== AUTH_FORM_ERROR.ACCOUNT_EMPTY) setStatus(AUTH_FORM_ERROR.ACCOUNT_EMPTY);
+                if (status.account !== AUTH_FORM_ERROR.ACCOUNT_EMPTY) {
+                    setStatus({
+                        account: AUTH_FORM_ERROR.ACCOUNT_EMPTY,
+                        password: AUTH_FORM_ERROR.DEFAULT,
+                        passwordHill: AUTH_FORM_ERROR.DEFAULT,
+                    });
+                }
                 return;
             }
-            case !password || status === AUTH_FORM_ERROR.PASSWORD_EMPTY: {
+            case !password || status.password === AUTH_FORM_ERROR.PASSWORD_EMPTY: {
                 passwordRef.current?.focus();
-                if (status !== AUTH_FORM_ERROR.PASSWORD_EMPTY) setStatus(AUTH_FORM_ERROR.PASSWORD_EMPTY);
+                if (status.password !== AUTH_FORM_ERROR.PASSWORD_EMPTY) {
+                    setStatus({
+                        account: AUTH_FORM_ERROR.DEFAULT,
+                        password: AUTH_FORM_ERROR.PASSWORD_EMPTY,
+                        passwordHill: AUTH_FORM_ERROR.DEFAULT,
+                    });
+                }
+                return;
+            }
+            case !passwordHill || status.passwordHill === AUTH_FORM_ERROR.PASSWORD_HILL_EMPTY: {
+                passwordHillRef.current?.focus();
+                if (status.password !== AUTH_FORM_ERROR.PASSWORD_HILL_EMPTY) {
+                    setStatus({
+                        account: AUTH_FORM_ERROR.DEFAULT,
+                        password: AUTH_FORM_ERROR.DEFAULT,
+                        passwordHill: AUTH_FORM_ERROR.PASSWORD_HILL_EMPTY,
+                    });
+                }
+                return;
+            }
+            case isAccountNotEmailOrPhone(account): {
+                accountRef.current?.focus();
+                console.log('REGEX_EMAIL: ', REGEX_EMAIL.test(account));
+                console.log('REG_PHONE: ', REG_PHONE.test(account));
+                debugger;
+                if (status.account !== AUTH_FORM_ERROR.ACCOUNT_FAILED) {
+                    setStatus({
+                        account: AUTH_FORM_ERROR.ACCOUNT_FAILED,
+                        password: AUTH_FORM_ERROR.DEFAULT,
+                        passwordHill: AUTH_FORM_ERROR.DEFAULT,
+                    });
+                }
                 return;
             }
             case password.length < 6: {
                 passwordRef.current?.focus();
-                if (status !== AUTH_FORM_ERROR.PASSWORD_SHORT) setStatus(AUTH_FORM_ERROR.PASSWORD_SHORT);
-                return;
-            }
-            case !passwordHill || status === AUTH_FORM_ERROR.PASSWORD_HILL_EMPTY: {
-                passwordHillRef.current?.focus();
-                if (status !== AUTH_FORM_ERROR.PASSWORD_HILL_EMPTY) setStatus(AUTH_FORM_ERROR.PASSWORD_HILL_EMPTY);
+                if (status.password !== AUTH_FORM_ERROR.PASSWORD_SHORT) {
+                    setStatus({
+                        account: AUTH_FORM_ERROR.DEFAULT,
+                        password: AUTH_FORM_ERROR.PASSWORD_SHORT,
+                        passwordHill: AUTH_FORM_ERROR.DEFAULT,
+                    });
+                }
                 return;
             }
             case password !== passwordHill: {
                 passwordHillRef.current?.focus();
-                if (status !== AUTH_FORM_ERROR.PASSWORD_DIFFERENT) setStatus(AUTH_FORM_ERROR.PASSWORD_DIFFERENT);
+                if (status.passwordHill !== AUTH_FORM_ERROR.PASSWORD_DIFFERENT) {
+                    setStatus({
+                        account: AUTH_FORM_ERROR.DEFAULT,
+                        password: AUTH_FORM_ERROR.PASSWORD_DIFFERENT,
+                        passwordHill: AUTH_FORM_ERROR.PASSWORD_DIFFERENT,
+                    });
+                }
                 return;
             }
             default:
                 setIsSubmit(true);
                 const onSuccess = () => {
-                    setStatus(AUTH_FORM_ERROR.DEFAULT);
+                    onResetStatus();
                     setIsSubmit(false);
-                    message
-                        .success(<TextIntl message={authMessage['module.auth.form.message.success.register']} />, 3)
-                        .then();
-                    navigate(SCREEN.SIGN_IN, { replace: true });
                 };
 
                 const onFailure = (value: TYPE_AUTH_FORM_ERROR) => {
                     accountRef.current?.focus();
-                    setStatus(value);
+                    setStatus({
+                        account: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
+                        password: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
+                        passwordHill: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
+                    });
                     setIsSubmit(false);
                 };
 
@@ -91,91 +149,64 @@ function RegisterForm() {
         }
     };
 
-    const checkPassword = (value: TYPE_AUTH_FORM_ERROR) => {
+    const checkPassword = () => {
         const password = passwordRef.current?.input?.value?.trim() || '';
         const passwordHill = passwordHillRef.current?.input?.value?.trim() || '';
-        setStatus(value);
-        setPasswordSame(!!(passwordHill && password === passwordHill));
+        return passwordHill && password === passwordHill;
     };
 
-    const error = {
-        account: status === AUTH_FORM_ERROR.ACCOUNT_EMPTY,
-        password: status === AUTH_FORM_ERROR.PASSWORD_EMPTY,
-        passwordHill: status === AUTH_FORM_ERROR.PASSWORD_HILL_EMPTY,
-        passwordShort: status === AUTH_FORM_ERROR.PASSWORD_SHORT,
-        passwordDifferent: status === AUTH_FORM_ERROR.PASSWORD_DIFFERENT,
-        incorrect: status === AUTH_FORM_ERROR.ACCOUNT_INCORRECT,
-        registered: status === AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
-    };
+    const success = checkPassword();
 
     return (
         <FormStyle
             name="tola_register_form"
             initialValues={{
                 remember: true,
+                username: Decrypt(localStorageBase.get(emailLocalKey) || ''),
             }}>
             <FormInput
                 ref={accountRef}
                 name="username"
-                validateStatus={error.account || error.incorrect || error.registered ? 'error' : undefined}
+                validateStatus={status.account ? 'error' : undefined}
                 help={
-                    error.account
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.account.empty'] })
-                        : error.registered
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.account.registered'] })
-                        : error.incorrect
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.account.incorrect'] })
+                    status.account
+                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.account}`] })
                         : undefined
                 }
-                hasFeedback={error.account || error.incorrect || error.registered}
+                hasFeedback={!!status.account}
                 type="text"
                 autoFocus
                 placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.account'] })}
-                resetStatus={setStatus}
+                resetStatus={onResetStatus}
             />
             <FormInput
                 ref={passwordRef}
                 name="password"
-                validateStatus={
-                    passwordSame ? 'success' : error.password || error.incorrect || error.passwordShort ? 'error' : undefined
-                }
+                validateStatus={success ? 'success' : status.password ? 'error' : undefined}
                 help={
-                    error.password
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.password.empty'] })
-                        : error.passwordShort
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.password.incorrect'] })
-                        : error.incorrect
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.account.incorrect'] })
+                    status.password
+                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.password}`] })
                         : undefined
                 }
-                hasFeedback={passwordSame || error.password || error.incorrect || error.passwordShort}
+                hasFeedback={success || !!status.password}
                 type="password"
                 placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.password'] })}
-                resetStatus={checkPassword}
+                resetStatus={onResetStatus}
             />
+
             <FormInput
                 ref={passwordHillRef}
                 name="passwordHill"
-                validateStatus={
-                    passwordSame
-                        ? 'success'
-                        : error.passwordHill || error.incorrect || error.passwordDifferent
-                        ? 'error'
-                        : undefined
-                }
+                validateStatus={success ? 'success' : status.passwordHill ? 'error' : undefined}
                 help={
-                    error.passwordHill
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.passwordHill.empty'] })
-                        : error.passwordDifferent
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.passwordHill.incorrect'] })
-                        : error.incorrect
-                        ? getTextIntl({ message: authMessage['module.auth.form.input.error.account.incorrect'] })
+                    status.passwordHill
+                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.passwordHill}`] })
                         : undefined
                 }
-                hasFeedback={passwordSame || error.passwordHill || error.incorrect || error.passwordDifferent}
+                hasFeedback={success || !!status.passwordHill}
                 type="password"
                 placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.passwordHill'] })}
-                resetStatus={checkPassword}
+                resetStatus={onResetStatus}
             />
 
             <Form.Item>
@@ -184,7 +215,7 @@ function RegisterForm() {
                 </Form.Item>
 
                 <ButtonSubmit type="primary" size="large" htmlType="submit" onClick={onSubmit} loading={isSubmit}>
-                    {getTextIntl({ message: authMessage['module.auth.form.title.register'] })}
+                    {getTextIntl({ message: authMessage['module.auth.form.title.signin'] })}
                 </ButtonSubmit>
             </Form.Item>
 

@@ -1,7 +1,7 @@
 import avtChatBot from '../assets/images/avtChatBot.jpg';
 import avtCloud from '../assets/images/avtCloud.jpg';
 import background from '../assets/images/background.jpg';
-import {emptyUser} from "../../login/constants/user";
+import { emptyUser } from '../../login/constants/user';
 
 function UserDefault(uid = '', name = '') {
     if (uid === 'uid-chatbot') {

@@ -19,7 +19,7 @@ import { PATH_USER_FIREBASE } from '@module-user/constants';
 import { TYPE_USER } from '@module-user/utils';
 import { emptyFunction } from '@module-base/constants';
 
-export function* doGetUser(payload: { uid: string; onSuccess?: () => void; onFailure?: () => void }) {
+export function* doGetUser(payload: { uid: string; onSuccess?: () => void; onFailure?: () => void }): any {
     const { uid, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const response = yield call(FIREBASE_GET, { path: `${PATH_USER_FIREBASE}${uid}` });
     if (response.exists()) {
@@ -33,7 +33,7 @@ export function* doGetUser(payload: { uid: string; onSuccess?: () => void; onFai
     return false;
 }
 
-export function* doCreateUser(payload: { user: TYPE_USER; onSuccess?: () => void; onFailure?: () => void }) {
+export function* doCreateUser(payload: { user: TYPE_USER; onSuccess?: () => void; onFailure?: () => void }): any {
     const { user, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const error = yield call(FIREBASE_SET, { path: `${PATH_USER_FIREBASE}${user.uid}`, data: user });
     if (error) {

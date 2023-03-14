@@ -3,12 +3,14 @@
  * @author dongntd@bkav.com on 06/09/2022.
  *
  */
+
+/** utils */
 import { emptyArray } from '@module-base/constants';
 
 class LocalStorageBase {
     get = (key = '') => window.localStorage.getItem(key);
     getList = (keys: string[] = emptyArray) => {
-        const results = {};
+        const results: Record<string, any> = {};
         keys.forEach((key) => {
             results[key] = this.get(key);
         });

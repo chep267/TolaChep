@@ -8,7 +8,14 @@ function SVGComponent(props) {
                 stroke="#C5C8CA"
                 strokeWidth={4}
             />
-            <rect x={13.4136} y={3.11133} width={4.39993} height={82.6817} transform="rotate(-45 13.4136 3.11133)" fill="#C5C8CA" />
+            <rect
+                x={13.4136}
+                y={3.11133}
+                width={4.39993}
+                height={82.6817}
+                transform="rotate(-45 13.4136 3.11133)"
+                fill="#C5C8CA"
+            />
         </svg>
     );
 }

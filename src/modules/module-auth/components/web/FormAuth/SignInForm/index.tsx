@@ -17,12 +17,13 @@ import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
 import { getTextIntl } from '@module-base/components';
 
 /** utils */
-import { AUTH_FORM_ERROR, REG_PHONE, REGEX_EMAIL } from '@module-auth/constants';
+import { AUTH_FORM_ERROR } from '@module-auth/constants';
 import { authMessage, TYPE_AUTH_FORM_ERROR } from '@module-auth/utils';
 import { useAppDispatch } from '@app/store';
 import { Decrypt } from '@module-base/utils';
 import { localStorageBase } from '@module-base/storage';
 import { emailLocalKey } from '@module-global/constants';
+import { REG_PHONE, REGEX_EMAIL } from '@module-base/constants';
 
 function SignInForm() {
     const dispatch = useAppDispatch();
@@ -115,14 +116,14 @@ function SignInForm() {
 
     return (
         <FormStyle
-            name='tola_signin_form'
+            name="tola_signin_form"
             initialValues={{
                 remember: true,
                 username: Decrypt(localStorageBase.get(emailLocalKey) || ''),
             }}>
             <FormInput
                 ref={accountRef}
-                name='username'
+                name="username"
                 validateStatus={status.account ? 'error' : undefined}
                 help={
                     status.account
@@ -130,14 +131,14 @@ function SignInForm() {
                         : undefined
                 }
                 hasFeedback={!!status.account}
-                type='text'
+                type="text"
                 autoFocus
                 placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.account'] })}
                 resetStatus={onResetStatus}
             />
             <FormInput
                 ref={passwordRef}
-                name='password'
+                name="password"
                 validateStatus={status.password ? 'error' : undefined}
                 help={
                     status.password
@@ -145,17 +146,17 @@ function SignInForm() {
                         : undefined
                 }
                 hasFeedback={!!status.password}
-                type='password'
+                type="password"
                 placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.password'] })}
                 resetStatus={onResetStatus}
             />
 
             <Form.Item>
-                <Form.Item name='remember' valuePropName='checked' noStyle>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
                     <Checkbox>{getTextIntl({ message: authMessage['module.auth.form.checkbox.giveMe'] })}</Checkbox>
                 </Form.Item>
 
-                <ButtonSubmit type='primary' size='large' htmlType='submit' onClick={onSubmit} loading={isSubmit}>
+                <ButtonSubmit type="primary" size="large" htmlType="submit" onClick={onSubmit} loading={isSubmit}>
                     {getTextIntl({ message: authMessage['module.auth.form.title.signin'] })}
                 </ButtonSubmit>
             </Form.Item>

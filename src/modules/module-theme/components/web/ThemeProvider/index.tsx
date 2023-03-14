@@ -7,8 +7,8 @@
 import React, { ReactNode, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { ConfigProvider, theme as antdTheme } from 'antd';
-import en from 'antd/locale/en_US';
-import vi from 'antd/locale/vi_VN';
+import enAntd from 'antd/locale/en_US';
+import viAntd from 'antd/locale/vi_VN';
 
 /** utils */
 import { localStorageBase } from '@module-base/storage';
@@ -60,9 +60,9 @@ function ThemeProviderBase({ children }: Props) {
         <ThemeContext.Provider value={store}>
             <ThemeProvider theme={themes[mode]}>
                 <ConfigProvider
-                    locale={locale === LOCALE_OBJECT.EN ? en : vi}
+                    locale={locale === LOCALE_OBJECT.EN ? enAntd : viAntd}
                     theme={{
-                        algorithm: mode === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+                        algorithm: mode === DARK_THEME ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
                         token:
                             mode === PURPLE_THEME
                                 ? {

@@ -22,7 +22,7 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "baseUrl": ".",
-        "composite": true,
+        "composite": true
     },
     "include": ["src"],
     "extends": "./tsconfig.path.json",

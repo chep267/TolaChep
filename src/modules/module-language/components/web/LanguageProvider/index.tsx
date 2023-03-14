@@ -7,7 +7,7 @@
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 
-// constants
+/** constants */
 import { LOCALE_OBJECT } from '@module-language/constants';
 import { localeLocalKey } from '@module-global/constants';
 
@@ -15,16 +15,13 @@ import { localeLocalKey } from '@module-global/constants';
 import { getDeviceLanguage } from '@module-language/selectors';
 
 /** utils */
-import { LanguageContext } from '@module-language/utils';
+import { LanguageContext, TYPE_MESSAGES, TYPE_LOCALE } from '@module-language/utils';
 import { localStorageBase } from '@module-base/storage';
 import { Encrypt, Decrypt } from '@module-base/utils';
 
-// type
-import { TYPE_LOCALE } from '@module-language/constants';
-
 interface Props {
     children: React.ReactNode;
-    messages: Record<TYPE_LOCALE, any>;
+    messages: TYPE_MESSAGES;
 }
 
 function LanguageProvider({ children, messages }: Props) {

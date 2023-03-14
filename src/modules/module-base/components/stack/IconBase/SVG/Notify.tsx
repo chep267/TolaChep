@@ -16,7 +16,13 @@ function Notify(props: Props) {
                 strokeLinejoin="round"
             />
             <path d="M12 4V2" stroke="#fff" strokeWidth={1.5} strokeLinecap="round" />
-            <path d="M13.73 22a1.999 1.999 0 0 1-3.46 0" stroke="#fff" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+            <path
+                d="M13.73 22a1.999 1.999 0 0 1-3.46 0"
+                stroke="#fff"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
         </svg>
     );
 }

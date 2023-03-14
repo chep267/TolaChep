@@ -4,7 +4,7 @@
  *
  */
 
-export function* safeEffect(effect) {
+export function* safeEffect(effect: any) {
     try {
         return { response: yield effect, error: null };
     } catch (error) {

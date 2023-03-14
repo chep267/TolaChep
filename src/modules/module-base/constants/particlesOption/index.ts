@@ -5,6 +5,8 @@
  */
 
 import type { ISourceOptions } from 'tsparticles-engine';
+
+/** utils */
 import { TYPE_THEME } from '@module-theme/utils';
 
 export const getOption: (theme: TYPE_THEME) => ISourceOptions = (theme) => ({
