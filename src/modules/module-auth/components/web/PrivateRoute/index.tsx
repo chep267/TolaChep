@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import * as React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 /** actions */
@@ -17,7 +17,7 @@ import StartScreen from '@module-auth/screens/web/Start';
 import { localStorageBase, sessionStorageBase } from '@module-base/storage';
 import { meIdLocalKey, routerLocalKey, SCREEN } from '@module-global/constants';
 import { AUTH_STORE_KEY } from '@module-auth/constants';
-import { Decrypt } from '@module-base/utils';
+import { Decrypt, Encrypt } from '@module-base/utils';
 import { useAppDispatch, useAppSelector } from '@app/store';
 
 interface Props {
@@ -34,19 +34,28 @@ function PrivateRoute(props: Props) {
     const meId = useAppSelector((state) => state[AUTH_STORE_KEY.ROOT].meId);
     const meIdLocal = Decrypt(localStorageBase.get(meIdLocalKey) || '');
 
-    useEffect(() => {
+    React.useEffect(() => {
         const goHome = () => {
-            const prevRouterPathname: string = sessionStorageBase.get(routerLocalKey) || SCREEN.FEED;
+            const prevRouterPathname: string = Decrypt(sessionStorageBase.get(routerLocalKey) || '') || SCREEN.FEED;
             navigate(prevRouterPathname, { replace: true });
         };
-        const doStart = () => {
+
+        const saveRoute = () => {
             const { pathname, search } = location;
-            sessionStorageBase.set(routerLocalKey, type === 'auth' ? SCREEN.FEED : pathname + search);
+            let route = type === 'auth' ? SCREEN.FEED : pathname + search;
+            if (route === '/' || pathname === '/') {
+                route = SCREEN.FEED;
+            }
+            sessionStorageBase.set(routerLocalKey, Encrypt(route));
+        };
+
+        const doStart = () => {
+            saveRoute();
             dispatch(authAction.autoStart.request({ uid: meIdLocal }));
         };
+
         const goSignIn = () => {
-            const { pathname, search } = location;
-            sessionStorageBase.set(routerLocalKey, type === 'auth' ? SCREEN.FEED : pathname + search);
+            saveRoute();
             navigate(SCREEN.SIGN_IN, { replace: true });
         };
 
@@ -66,7 +75,7 @@ function PrivateRoute(props: Props) {
     }, [meId, meIdLocal]);
 
     if (type === 'auth' || meId) {
-        return <>{element}</>;
+        return <React.Fragment>{element}</React.Fragment>;
     }
 
     return <StartScreen />;

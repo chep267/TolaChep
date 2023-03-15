@@ -15,7 +15,9 @@ function FeedScreen() {
     return (
         <FeedContainer>
             <FeedLeft>FeedLeft</FeedLeft>
-            <FeedBody>{/*<FeedContent>/!*<Content1 />*!/</FeedContent>*/}</FeedBody>
+            <FeedBody>
+                <FeedContent>{/*<Content1 />*/}</FeedContent>
+            </FeedBody>
             <FeedRight>FeedRight</FeedRight>
         </FeedContainer>
     );

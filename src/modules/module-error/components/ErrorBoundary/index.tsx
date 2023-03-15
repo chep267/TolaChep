@@ -13,7 +13,7 @@ export default class ErrorBoundary extends React.Component<
     { children: React.ReactNode; elementFallBack?: React.FunctionComponent; isAutoReload?: boolean },
     { hasError: boolean }
 > {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.state = { hasError: false };
     }
@@ -23,7 +23,7 @@ export default class ErrorBoundary extends React.Component<
         return { hasError: true };
     }
 
-    componentDidCatch(error, errorInfo) {
+    componentDidCatch(error: any, errorInfo: any) {
         // You can also log the error to an error reporting service
         // logErrorToMyService(error, errorInfo);
         console.log('Tola - error: ', error, '\n--\n', errorInfo, '\n--');

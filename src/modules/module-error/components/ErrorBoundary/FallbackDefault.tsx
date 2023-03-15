@@ -34,7 +34,6 @@ export default function FallbackDefault({ isAutoReload }: { isAutoReload: boolea
     }, [second]);
 
     const reloadWindow = React.useCallback(() => {
-        localStorage.clear();
         window.location.reload();
     }, []);
 

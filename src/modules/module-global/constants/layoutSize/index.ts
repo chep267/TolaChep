@@ -17,4 +17,4 @@ export const MESSENGER_CENTER_MAX_WIDTH = 1300;
 export const MESSENGER_CENTER_NORMAL_WIDTH = 720;
 export const MESSENGER_CENTER_MIN_WIDTH = 480;
 
-export const TIME_LOADING_APP = 1000;
+export const TIME_LOADING_APP = 1 || 1000;

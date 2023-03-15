@@ -47,7 +47,7 @@ function ToLaApp() {
         <ErrorBoundary isAutoReload>
             <App>
                 <React.Suspense fallback={null}>
-                    {/*{!window.isToLaStart && (timer || isLoading) ? <LoadingScreen /> : null}*/}
+                    {!window.isToLaStart && (timer || isLoading) ? <LoadingScreen /> : null}
                     <AppRouter />
                 </React.Suspense>
             </App>
