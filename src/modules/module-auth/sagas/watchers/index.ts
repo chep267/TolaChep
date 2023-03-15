@@ -6,10 +6,10 @@
 
 import { fork, take } from 'redux-saga/effects';
 
-// actions
+/** actions */
 import { AUTH_ACTION } from '@module-auth/actions';
 
-// worker
+/** workers */
 import { doSignIn, doSignOut, doAutoStart, doRegister } from '@module-auth/sagas/workers';
 
 function* watchAutoStart(): any {

@@ -7,7 +7,7 @@
 import { call, put, fork } from 'redux-saga/effects';
 
 /** actions */
-import { userAction } from '@module-user/actions';
+import { TYPE_USER_ACTION_PAYLOAD, USER_ACTION, userAction } from '@module-user/actions';
 
 /** apis */
 import { FIREBASE_GET, FIREBASE_SET } from '@module-global/apis';
@@ -19,7 +19,7 @@ import { PATH_USER_FIREBASE } from '@module-user/constants';
 import { TYPE_USER } from '@module-user/utils';
 import { emptyFunction } from '@module-base/constants';
 
-export function* doGetUser(payload: { uid: string; onSuccess?: () => void; onFailure?: () => void }): any {
+export function* doGetUser(payload: TYPE_USER_ACTION_PAYLOAD[typeof USER_ACTION.GET.REQUEST]): any {
     const { uid, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const response = yield call(FIREBASE_GET, { path: `${PATH_USER_FIREBASE}${uid}` });
     if (response.exists()) {

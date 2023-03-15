@@ -8,7 +8,7 @@ import * as React from 'react';
 import { App } from 'antd';
 
 /** actions */
-import { GLOBAL_ACTION } from '@module-global/actions';
+import { globalAction } from '@module-global/actions';
 
 /** components */
 import { ErrorBoundary } from '@module-error/components';
@@ -36,7 +36,7 @@ function ToLaApp() {
             setTimer(false);
         }, TIME_LOADING_APP);
 
-        dispatch({ type: GLOBAL_ACTION.START_APP.REQUEST, payload: { onSuccess: onStartSuccess } });
+        dispatch(globalAction.startApp.request({ onSuccess: onStartSuccess }));
 
         return () => {
             clearTimeout(TimeOut);

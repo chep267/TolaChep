@@ -25,7 +25,7 @@ import { localStorageBase } from '@module-base/storage';
 import { emailLocalKey } from '@module-global/constants';
 import { REG_PHONE, REGEX_EMAIL } from '@module-base/constants';
 
-function RegisterForm() {
+function RecoverForm() {
     const dispatch = useAppDispatch();
 
     const accountRef: React.Ref<InputRef> = React.useRef(null);
@@ -43,8 +43,6 @@ function RegisterForm() {
     });
     const [isSubmit, setIsSubmit] = React.useState(false);
 
-    const isAccountNotEmailOrPhone = (acc: string) => !(REGEX_EMAIL.test(acc) || REG_PHONE.test(acc));
-
     const onResetStatus = React.useCallback(() => {
         setStatus({
             account: AUTH_FORM_ERROR.DEFAULT,
@@ -57,6 +55,9 @@ function RegisterForm() {
         const account = accountRef.current?.input?.value?.trim() || '';
         const password = passwordRef.current?.input?.value?.trim() || '';
         const passwordHill = passwordHillRef.current?.input?.value?.trim() || '';
+        const isEmail = REGEX_EMAIL.test(account);
+        const isPhone = REG_PHONE.test(account);
+
         switch (true) {
             case !account || status.account === AUTH_FORM_ERROR.ACCOUNT_EMPTY: {
                 accountRef.current?.focus();
@@ -91,11 +92,8 @@ function RegisterForm() {
                 }
                 return;
             }
-            case isAccountNotEmailOrPhone(account): {
+            case !isEmail && !isPhone: {
                 accountRef.current?.focus();
-                console.log('REGEX_EMAIL: ', REGEX_EMAIL.test(account));
-                console.log('REG_PHONE: ', REG_PHONE.test(account));
-                debugger;
                 if (status.account !== AUTH_FORM_ERROR.ACCOUNT_FAILED) {
                     setStatus({
                         account: AUTH_FORM_ERROR.ACCOUNT_FAILED,
@@ -137,14 +135,14 @@ function RegisterForm() {
                 const onFailure = (value: TYPE_AUTH_FORM_ERROR) => {
                     accountRef.current?.focus();
                     setStatus({
-                        account: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
-                        password: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
-                        passwordHill: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
+                        account: value,
+                        password: value,
+                        passwordHill: value,
                     });
                     setIsSubmit(false);
                 };
 
-                dispatch(authAction.register.request({ email: account, phone: '', password, onSuccess, onFailure }));
+                dispatch(authAction.register.request({ account, password, onSuccess, onFailure }));
                 return;
         }
     };
@@ -161,7 +159,7 @@ function RegisterForm() {
         <FormStyle
             name="tola_register_form"
             initialValues={{
-                remember: true,
+                remember_username: true,
                 username: Decrypt(localStorageBase.get(emailLocalKey) || ''),
             }}>
             <FormInput
@@ -179,6 +177,7 @@ function RegisterForm() {
                 placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.account'] })}
                 resetStatus={onResetStatus}
             />
+
             <FormInput
                 ref={passwordRef}
                 name="password"
@@ -210,12 +209,11 @@ function RegisterForm() {
             />
 
             <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle>
+                <Form.Item name="remember_username" valuePropName="checked" noStyle>
                     <Checkbox>{getTextIntl({ message: authMessage['module.auth.form.checkbox.giveMe'] })}</Checkbox>
                 </Form.Item>
-
                 <ButtonSubmit type="primary" size="large" htmlType="submit" onClick={onSubmit} loading={isSubmit}>
-                    {getTextIntl({ message: authMessage['module.auth.form.title.signin'] })}
+                    {getTextIntl({ message: authMessage['module.auth.form.title.recover'] })}
                 </ButtonSubmit>
             </Form.Item>
 
@@ -224,4 +222,4 @@ function RegisterForm() {
     );
 }
 
-export default RegisterForm;
+export default RecoverForm;

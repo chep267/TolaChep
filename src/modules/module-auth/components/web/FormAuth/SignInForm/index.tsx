@@ -40,8 +40,6 @@ function SignInForm() {
     });
     const [isSubmit, setIsSubmit] = React.useState(false);
 
-    const isAccountNotEmailOrPhone = (acc: string) => !(REGEX_EMAIL.test(acc) || REG_PHONE.test(acc));
-
     const onResetStatus = React.useCallback(() => {
         setStatus({
             account: AUTH_FORM_ERROR.DEFAULT,
@@ -52,6 +50,9 @@ function SignInForm() {
     const onSubmit = () => {
         const account = accountRef.current?.input?.value?.trim() || '';
         const password = passwordRef.current?.input?.value?.trim() || '';
+        const isEmail = REGEX_EMAIL.test(account);
+        const isPhone = REG_PHONE.test(account);
+
         switch (true) {
             case !account || status.account === AUTH_FORM_ERROR.ACCOUNT_EMPTY: {
                 accountRef.current?.focus();
@@ -73,7 +74,7 @@ function SignInForm() {
                 }
                 return;
             }
-            case isAccountNotEmailOrPhone(account): {
+            case !isEmail && !isPhone: {
                 accountRef.current?.focus();
                 if (status.account !== AUTH_FORM_ERROR.ACCOUNT_FAILED) {
                     setStatus({
@@ -103,13 +104,13 @@ function SignInForm() {
                 const onFailure = (value: TYPE_AUTH_FORM_ERROR) => {
                     accountRef.current?.focus();
                     setStatus({
-                        account: AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED,
-                        password: AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED,
+                        account: value,
+                        password: value,
                     });
                     setIsSubmit(false);
                 };
 
-                dispatch(authAction.signIn.request({ email: account, phone: account, password, onSuccess, onFailure }));
+                dispatch(authAction.signIn.request({ account, password, onSuccess, onFailure }));
                 return;
         }
     };
@@ -118,7 +119,7 @@ function SignInForm() {
         <FormStyle
             name="tola_signin_form"
             initialValues={{
-                remember: true,
+                remember_username: true,
                 username: Decrypt(localStorageBase.get(emailLocalKey) || ''),
             }}>
             <FormInput
@@ -136,6 +137,7 @@ function SignInForm() {
                 placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.account'] })}
                 resetStatus={onResetStatus}
             />
+
             <FormInput
                 ref={passwordRef}
                 name="password"
@@ -152,7 +154,7 @@ function SignInForm() {
             />
 
             <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle>
+                <Form.Item name="remember_username" valuePropName="checked" noStyle>
                     <Checkbox>{getTextIntl({ message: authMessage['module.auth.form.checkbox.giveMe'] })}</Checkbox>
                 </Form.Item>
 

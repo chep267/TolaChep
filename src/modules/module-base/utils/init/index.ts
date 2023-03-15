@@ -4,8 +4,6 @@
  *
  */
 
-import { emptyObject } from '@module-base/constants';
-
 /** hàm tạo message cho intl */
 export const parseMessageToDefineIntlMessage = <messageType>(message: Readonly<messageType>) =>
     (Object.keys(message) as (keyof messageType)[]).reduce(
@@ -25,7 +23,7 @@ export const parseMessageToDefineIntlMessage = <messageType>(message: Readonly<m
     );
 
 /** hàm tạo action key cho module */
-export const createActionKey = <Root extends string, ActionKey extends Readonly<string[]>>(
+export const createActionKey = <Root extends Readonly<string>, ActionKey extends Readonly<string[]>>(
     rootKey: Root,
     arrActionKey: ActionKey
 ) =>
@@ -48,10 +46,11 @@ export const createActionKey = <Root extends string, ActionKey extends Readonly<
     );
 
 /** hàm tạo action dispatch */
-export const createAction = (type = '', payload: object = emptyObject) => ({
-    type,
-    payload,
-});
+export function createAction<Type extends keyof Action, Action extends Record<Type, object>>(type: Type) {
+    return function (payload: Action[Type]) {
+        return { type, payload };
+    };
+}
 
 /** hàm tạo object */
 // export function createObject<Root extends string, Keys extends Readonly<string[]>>(rootKey: Root, arrKey: Keys) {

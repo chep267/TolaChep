@@ -34,30 +34,35 @@ export function* doCheckAuth(payload: { account: string; password: string; type?
     return AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED;
 }
 
-export function* doCheckSignInAccount(payload: { email: string; password: string }): any {
-    const { email, password } = payload;
-    const { response, error } = yield call(signInAccount, email, password);
+export function* doCheckSignInAccount(payload: { account: string; password: string }) {
+    const { account, password } = payload;
+    const { response, error } = yield call(signInAccount, account, password);
     if (error) {
         const { code } = error;
         if (code === 'auth/wrong-password') {
-            return AUTH_FORM_ERROR.ACCOUNT_INCORRECT;
+            return {
+                uid: AUTH_FORM_ERROR.ACCOUNT_INCORRECT,
+            };
         }
-        return AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED;
+        return {
+            uid: AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED,
+        };
     }
     return response;
 }
 
-export function* doCheckRegisterAccount(payload: { email: string; password: string }): any {
-    const { email, password } = payload;
-    const { response, error } = yield call(registerAccount, email, password);
+export function* doCheckRegisterAccount(payload: { account: string; password: string }): any {
+    const { account, password } = payload;
+    const { response, error } = yield call(registerAccount, account, password);
     if (error) {
-        return AUTH_FORM_ERROR.ACCOUNT_REGISTERED;
+        return {
+            uid: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
+        };
     }
     return response;
 }
 
 export function* doCheckSignOutAccount(): any {
-    const { response, error } = yield call(signOutAccount);
-    debugger;
+    const { error } = yield call(signOutAccount);
     return !error;
 }

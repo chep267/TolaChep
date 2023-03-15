@@ -8,11 +8,9 @@ const emptyFunction = Object.freeze(() => undefined) as () => void;
 const emptyObject = Object.freeze({}) as {};
 const emptyArray = Object.freeze([]) as [];
 
-type Props = Record<string, any>;
-
 const comparePure =
     (type: 'pure' | 'check' | 'ignore' = 'pure', keys: string[] = emptyArray) =>
-    (prev: Props, next: Props) => {
+    (prev: Record<string, any>, next: Record<string, any>) => {
         if (type === 'pure') {
             return true;
         }

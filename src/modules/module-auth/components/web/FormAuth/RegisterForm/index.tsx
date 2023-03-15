@@ -5,7 +5,7 @@
  */
 
 import * as React from 'react';
-import { Form, Checkbox, InputRef } from 'antd';
+import { Form, Checkbox, InputRef, App } from 'antd';
 
 /** actions */
 import { authAction } from '@module-auth/actions';
@@ -27,6 +27,8 @@ import { REG_PHONE, REGEX_EMAIL } from '@module-base/constants';
 
 function RegisterForm() {
     const dispatch = useAppDispatch();
+    const { message } = App.useApp();
+    const msgSuccess = getTextIntl({ message: authMessage['module.auth.form.message.success.register'] });
 
     const accountRef: React.Ref<InputRef> = React.useRef(null);
     const passwordRef: React.Ref<InputRef> = React.useRef(null);
@@ -43,8 +45,6 @@ function RegisterForm() {
     });
     const [isSubmit, setIsSubmit] = React.useState(false);
 
-    const isAccountNotEmailOrPhone = (acc: string) => !(REGEX_EMAIL.test(acc) || REG_PHONE.test(acc));
-
     const onResetStatus = React.useCallback(() => {
         setStatus({
             account: AUTH_FORM_ERROR.DEFAULT,
@@ -57,6 +57,9 @@ function RegisterForm() {
         const account = accountRef.current?.input?.value?.trim() || '';
         const password = passwordRef.current?.input?.value?.trim() || '';
         const passwordHill = passwordHillRef.current?.input?.value?.trim() || '';
+        const isEmail = REGEX_EMAIL.test(account);
+        const isPhone = REG_PHONE.test(account);
+
         switch (true) {
             case !account || status.account === AUTH_FORM_ERROR.ACCOUNT_EMPTY: {
                 accountRef.current?.focus();
@@ -91,11 +94,8 @@ function RegisterForm() {
                 }
                 return;
             }
-            case isAccountNotEmailOrPhone(account): {
+            case !isEmail && !isPhone: {
                 accountRef.current?.focus();
-                console.log('REGEX_EMAIL: ', REGEX_EMAIL.test(account));
-                console.log('REG_PHONE: ', REG_PHONE.test(account));
-                debugger;
                 if (status.account !== AUTH_FORM_ERROR.ACCOUNT_FAILED) {
                     setStatus({
                         account: AUTH_FORM_ERROR.ACCOUNT_FAILED,
@@ -130,21 +130,21 @@ function RegisterForm() {
             default:
                 setIsSubmit(true);
                 const onSuccess = () => {
+                    message.success(msgSuccess, 2).then();
                     onResetStatus();
                     setIsSubmit(false);
                 };
-
                 const onFailure = (value: TYPE_AUTH_FORM_ERROR) => {
                     accountRef.current?.focus();
                     setStatus({
-                        account: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
-                        password: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
-                        passwordHill: AUTH_FORM_ERROR.ACCOUNT_REGISTERED,
+                        account: value,
+                        password: value,
+                        passwordHill: value,
                     });
                     setIsSubmit(false);
                 };
 
-                dispatch(authAction.register.request({ email: account, phone: '', password, onSuccess, onFailure }));
+                dispatch(authAction.register.request({ account, password, onSuccess, onFailure }));
                 return;
         }
     };
@@ -152,7 +152,7 @@ function RegisterForm() {
     const checkPassword = () => {
         const password = passwordRef.current?.input?.value?.trim() || '';
         const passwordHill = passwordHillRef.current?.input?.value?.trim() || '';
-        return passwordHill && password === passwordHill;
+        return passwordHill && passwordHill.length > 5 && password === passwordHill;
     };
 
     const success = checkPassword();
@@ -161,7 +161,7 @@ function RegisterForm() {
         <FormStyle
             name="tola_register_form"
             initialValues={{
-                remember: true,
+                remember_username: true,
                 username: Decrypt(localStorageBase.get(emailLocalKey) || ''),
             }}>
             <FormInput
@@ -179,10 +179,11 @@ function RegisterForm() {
                 placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.account'] })}
                 resetStatus={onResetStatus}
             />
+
             <FormInput
                 ref={passwordRef}
                 name="password"
-                validateStatus={success ? 'success' : status.password ? 'error' : undefined}
+                validateStatus={status.password ? 'error' : success ? 'success' : undefined}
                 help={
                     status.password
                         ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.password}`] })
@@ -197,7 +198,7 @@ function RegisterForm() {
             <FormInput
                 ref={passwordHillRef}
                 name="passwordHill"
-                validateStatus={success ? 'success' : status.passwordHill ? 'error' : undefined}
+                validateStatus={status.passwordHill ? 'error' : success ? 'success' : undefined}
                 help={
                     status.passwordHill
                         ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.passwordHill}`] })
@@ -210,12 +211,12 @@ function RegisterForm() {
             />
 
             <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle>
+                <Form.Item name="remember_username" valuePropName="checked" noStyle>
                     <Checkbox>{getTextIntl({ message: authMessage['module.auth.form.checkbox.giveMe'] })}</Checkbox>
                 </Form.Item>
 
                 <ButtonSubmit type="primary" size="large" htmlType="submit" onClick={onSubmit} loading={isSubmit}>
-                    {getTextIntl({ message: authMessage['module.auth.form.title.signin'] })}
+                    {getTextIntl({ message: authMessage['module.auth.form.title.register'] })}
                 </ButtonSubmit>
             </Form.Item>
 

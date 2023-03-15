@@ -11,23 +11,58 @@ import { TYPE_USER } from '@module-user/utils';
 const arrActionKey = ['GET', 'CREATE', 'UPDATE', 'DELETE'] as const;
 export const USER_ACTION = createActionKey('USER_ACTION', arrActionKey);
 
+export type TYPE_USER_ACTION_PAYLOAD = {
+    [USER_ACTION.GET.REQUEST]: {
+        uid: string;
+        onSuccess?(): void;
+        onFailure?(): void;
+    };
+    [USER_ACTION.GET.SUCCESS]: {
+        user: TYPE_USER;
+    };
+    [USER_ACTION.CREATE.REQUEST]: {
+        uid: string;
+    };
+    [USER_ACTION.CREATE.SUCCESS]: {
+        user: TYPE_USER;
+    };
+    [USER_ACTION.UPDATE.REQUEST]: {
+        account: string;
+        password: string;
+        onSuccess(): void;
+        onFailure(): void;
+    };
+    [USER_ACTION.UPDATE.SUCCESS]: {
+        user: TYPE_USER;
+    };
+    [USER_ACTION.DELETE.REQUEST]: {
+        account: string;
+        password: string;
+        onSuccess(): void;
+        onFailure(): void;
+    };
+    [USER_ACTION.DELETE.SUCCESS]: {};
+};
+
+function createUserAction<Type extends keyof TYPE_USER_ACTION_PAYLOAD>(type: Type) {
+    return createAction<Type, TYPE_USER_ACTION_PAYLOAD>(type);
+}
+
 export const userAction = {
     get: {
-        request: (payload: { account: string; password: string; onSuccess(): void; onFailure(): void }) =>
-            createAction(USER_ACTION.GET.REQUEST, payload),
-        success: (payload: { user: TYPE_USER }) => createAction(USER_ACTION.GET.SUCCESS, payload),
+        request: createUserAction(USER_ACTION.GET.REQUEST),
+        success: createUserAction(USER_ACTION.GET.SUCCESS),
     },
     create: {
-        request: (payload: { uid: string }) => createAction(USER_ACTION.CREATE.REQUEST, payload),
-        success: (payload: { user: TYPE_USER }) => createAction(USER_ACTION.CREATE.SUCCESS, payload),
+        request: createUserAction(USER_ACTION.CREATE.REQUEST),
+        success: createUserAction(USER_ACTION.CREATE.SUCCESS),
     },
     update: {
-        request: (payload: { account: string; password: string; onSuccess(): void; onFailure(): void }) =>
-            createAction(USER_ACTION.UPDATE.REQUEST, payload),
-        success: (payload: { user: TYPE_USER }) => createAction(USER_ACTION.UPDATE.SUCCESS, payload),
+        request: createUserAction(USER_ACTION.UPDATE.REQUEST),
+        success: createUserAction(USER_ACTION.UPDATE.SUCCESS),
     },
     delete: {
-        request: (payload: { account: string; password: string; onSuccess(): void; onFailure(): void }) =>
-            createAction(USER_ACTION.DELETE.REQUEST, payload),
+        request: createUserAction(USER_ACTION.DELETE.REQUEST),
+        success: createUserAction(USER_ACTION.DELETE.SUCCESS),
     },
 };
