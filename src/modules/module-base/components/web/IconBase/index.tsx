@@ -5,9 +5,17 @@
  */
 
 import * as React from 'react';
+
+/** utils */
 import { comparePure } from '@module-base/constants';
 
 const Icons = {
+    /** app bar icon */
+    feed: React.lazy(() => import('./svg/Feed')),
+    messenger: React.lazy(() => import('./svg/Messenger')),
+    task: React.lazy(() => import('./svg/Task')),
+
+    /** app icon */
     menu: React.lazy(() => import('./svg/Menu')),
     logoApp: React.lazy(() => import('./svg/LogoApp')),
 };
@@ -19,7 +27,7 @@ interface Props extends React.SVGProps<SVGSVGElement> {
     size?: number;
 }
 
-const IconsBase = React.memo((props: Props) => {
+const IconBase = React.memo((props: Props) => {
     const { name, size = 24, viewBox = '0 0 24 24', style, className } = props;
     const Icon: React.LazyExoticComponent<(props: Props) => JSX.Element> = Icons[name];
 
@@ -30,4 +38,4 @@ const IconsBase = React.memo((props: Props) => {
     );
 }, comparePure());
 
-export default IconsBase;
+export default IconBase;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import SafeLayout from '@module-base/components/Layout/SafeLayout';
-import Button from '@module-base/components/stack/Button';
+import SafeLayout from '@module-base/components/web/Layout/SafeLayout';
+import Button from '@module-base/components/web/stack/Button';
 
 export const Container = styled(SafeLayout)(({ theme }) => ({
     position: 'fixed',

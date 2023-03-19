@@ -66,8 +66,8 @@ export const DARK_COLOR = Object.freeze({
         placeholder: '#747474',
     },
     background: {
-        component: '#262626',
-        input: '#000000',
+        component: '#f0f2f5',
+        input: '#ffffff',
     },
     icon: {
         base: '#828282',
@@ -78,4 +78,4 @@ export const DARK_COLOR = Object.freeze({
     ...GENERAL_COLOR,
 });
 
-export type TypeColor = typeof LIGHT_COLOR;
+export type TypeColor = typeof LIGHT_COLOR | typeof PURPLE_COLOR | typeof DARK_COLOR;

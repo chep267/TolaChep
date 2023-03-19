@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form, Input, Button, Checkbox, InputRef } from 'antd';
 
-import { SafeLayout } from '@module-base/components/Layout';
+import { SafeLayout } from '@module-base/components/web/Layout';
 import { FlexBase } from '@module-theme/constants';
 
 /**

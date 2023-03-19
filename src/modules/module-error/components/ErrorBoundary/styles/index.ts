@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 
 /** components */
-import { PureContainer, TextIntl } from '@module-base/components';
+import { PureContainer, TextIntl } from '@module-base/components/web';
 
 /** utils */
 import { FlexBase } from '@module-theme/constants';

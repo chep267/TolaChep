@@ -9,19 +9,18 @@ import styled from 'styled-components';
 
 /** components */
 import NF404 from '@module-base/assets/images/404.jpg';
-import { SafeLayout } from '@module-base/components/Layout';
-import { HEADER_HEIGHT, APP_BAR_WIDTH } from '@module-global/constants';
 
-const View = styled(SafeLayout)({
-    padding: 10,
-    width: `calc(100vw - ${APP_BAR_WIDTH + 20}px)`,
-    height: `calc(100vh - ${HEADER_HEIGHT + 20}px)`,
-    img: {
-        borderRadius: 8,
-        width: `calc(100vw - ${APP_BAR_WIDTH + 20}px)`,
-        height: `calc(100vh - ${HEADER_HEIGHT + 20}px)`,
-    },
-});
+const View = styled.div`
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    img {
+        border-radius: 8px;
+        width: 100%;
+        height: auto;
+    }
+`;
 
 export default function NotFoundScreen() {
     return (

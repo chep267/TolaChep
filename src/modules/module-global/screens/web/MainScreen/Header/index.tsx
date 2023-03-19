@@ -9,9 +9,8 @@ import { Layout, theme } from 'antd';
 import styled from 'styled-components';
 
 /** components */
-import IconsBase from '@module-base/components/IconBase';
-import MenuHeader from '@module-global/screens/web/MainScreen/Header/MenuHeader';
-import { AppName } from '@module-global/components/web';
+import { IconBase } from '@module-base/components/web';
+import { AppName, MenuHeader } from '@module-global/components/web';
 
 const { Header } = Layout;
 
@@ -26,6 +25,10 @@ const HeaderLayout = styled(Header)`
         min-height: var(--HEADER_HEIGHT);
         max-height: var(--HEADER_HEIGHT);
         overflow: hidden;
+        -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+        -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+        box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+        z-index: 999;
     }
 `;
 
@@ -59,7 +62,7 @@ const TolaHeader: React.FC = () => {
     return (
         <HeaderLayout style={{ backgroundColor: colorBgElevated }}>
             <Left>
-                <IconsBase name="logoApp" />
+                <IconBase name="logoApp" />
                 <AppName />
             </Left>
             <Right>

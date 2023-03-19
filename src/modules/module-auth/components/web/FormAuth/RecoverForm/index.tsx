@@ -14,7 +14,7 @@ import { authAction } from '@module-auth/actions';
 import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/SignInForm/styles';
 import FormInput from '@module-auth/components/web/FormAuth/FormInput';
 import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
-import { getTextIntl } from '@module-base/components';
+import { getTextIntl } from '@module-base/components/web';
 
 /** utils */
 import { AUTH_FORM_ERROR } from '@module-auth/constants';

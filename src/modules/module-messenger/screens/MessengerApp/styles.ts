@@ -16,7 +16,7 @@ import {
     MESSENGER_CENTER_NORMAL_WIDTH,
     MESSENGER_LEFT_MAX_WIDTH_RESIZE,
 } from '@module-global/constants';
-import { SafeLayout } from '@module-base/components/Layout';
+import { SafeLayout } from '@module-base/components/web/Layout';
 
 export const MessengerContainer = styled(SafeLayout)`
     padding: ${BODY_PADDING}px 0;

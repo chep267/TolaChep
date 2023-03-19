@@ -3,9 +3,9 @@
  */
 
 import React, { useState } from 'react';
-import AVATAR_DEFAULT from '../../../assets/images/avatar.png';
+import AVATAR_DEFAULT from '../../../../assets/images/avatar.png';
 import FullScreen from '../FullScreen/FullScreen';
-import imgLoading from '../../../assets/gif/imgLoading.gif';
+import imgLoading from '../../../../assets/gif/imgLoading.gif';
 
 export default function ImageBase(props: any) {
     const { url = AVATAR_DEFAULT, size = 40, name } = props;

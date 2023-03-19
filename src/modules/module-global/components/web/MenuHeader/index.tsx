@@ -14,8 +14,8 @@ import { MenuInfo } from 'rc-menu/lib/interface';
 import { authAction } from '@module-auth/actions';
 
 /** components */
-import { MenuBase } from '@module-base/components';
-import type { TypeMenuBase } from '@module-base/components';
+import { MenuBase } from '@module-base/components/web';
+import type { TypeMenuBase } from '@module-base/components/web';
 
 /** utils */
 import { useAppDispatch } from '@app/store';
@@ -44,19 +44,23 @@ export default function MenuHeader() {
     const { toggleTheme } = useTheme();
     const dispatch = useAppDispatch();
 
-    const items: TypeMenuBase[] = React.useMemo(
-        () => [
+    const items: TypeMenuBase[] = React.useMemo(() => {
+        const icon = <SettingOutlined />;
+        return [
             {
                 key: 'lang',
+                type: 'intl',
                 message: langMessage['module.language.lang'],
-                icon: <SettingOutlined />,
+                icon,
                 children: [
                     {
                         key: 'lang.vi',
+                        type: 'intl',
                         message: langMessage['module.language.lang.vi'],
                     },
                     {
                         key: 'lang.en',
+                        type: 'intl',
                         message: langMessage['module.language.lang.en'],
                     },
                 ],
@@ -64,19 +68,21 @@ export default function MenuHeader() {
             {
                 key: 'divider1',
                 type: 'divider',
-                message: {},
             },
             {
                 key: 'theme',
+                type: 'intl',
                 message: themeMessage['module.theme.theme'],
-                icon: <SettingOutlined />,
+                icon,
                 children: [
                     {
                         key: 'theme.light',
+                        type: 'intl',
                         message: themeMessage['module.theme.theme.light'],
                     },
                     {
                         key: 'theme.dark',
+                        type: 'intl',
                         message: themeMessage['module.theme.theme.dark'],
                     },
                 ],
@@ -84,16 +90,15 @@ export default function MenuHeader() {
             {
                 key: 'divider2',
                 type: 'divider',
-                message: {},
             },
             {
                 key: 'signout',
+                type: 'intl',
                 message: authMessage['module.auth.form.title.signout'],
-                icon: <SettingOutlined />,
+                icon,
             },
-        ],
-        []
-    );
+        ];
+    }, []);
 
     const onClickMenuItem = ({ key }: MenuInfo) => {
         switch (key) {

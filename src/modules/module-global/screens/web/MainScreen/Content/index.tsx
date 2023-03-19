@@ -19,16 +19,12 @@ const ContentLayout = styled(Content)`
         max-height: calc(100vh - var(--HEADER_HEIGHT));
         overflow: hidden auto;
         scroll-behavior: smooth;
-        background-color: red;
-        padding: 0 10px;
+        overscroll-behavior: none;
     }
 `;
 
 export default function TolaContent(props: { element: React.ReactElement }) {
     const { element } = props;
-    const {
-        token: { colorBgContainer },
-    } = theme.useToken();
 
     return (
         <Layout>

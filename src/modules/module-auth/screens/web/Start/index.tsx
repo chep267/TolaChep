@@ -8,7 +8,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 /** components */
-import { SafeLayout } from '@module-base/components/Layout';
+import { SafeLayout } from '@module-base/components/web/Layout';
 
 const View = styled(SafeLayout)({
     padding: 10,

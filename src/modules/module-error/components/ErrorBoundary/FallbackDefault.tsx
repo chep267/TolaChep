@@ -13,8 +13,8 @@ import Logo from '@module-error/assets/svg/error.jpeg';
 
 /** components */
 import { FallBackLayout, Container, ButtonRetry, TextAutoReload, Title, Content } from './styles';
-import { getTextIntl } from '@module-base/components';
-const ToLaParticle = React.lazy(() => import('@module-base/components/Particles'));
+import { getTextIntl } from '@module-base/components/web';
+const ToLaParticle = React.lazy(() => import('@module-base/components/web/Particles'));
 
 export default function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
     const [second, setSecond] = React.useState(100);

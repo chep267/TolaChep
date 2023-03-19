@@ -3,7 +3,7 @@
 
 import React, { MouseEvent } from 'react';
 // import iconDownload from '../../../messenger/assets/images/iconDownload.svg';
-import { Container, BtnClose, BtnDownLoad } from '@module-base/components/stack/FullScreen/Style';
+import { Container, BtnClose, BtnDownLoad } from '@module-base/components/web/stack/FullScreen/Style';
 
 function FullScreen(props: any) {
     const { url, name, onClose } = props;

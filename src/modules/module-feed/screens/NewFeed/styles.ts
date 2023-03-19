@@ -7,7 +7,7 @@
 import styled from 'styled-components';
 
 /** components */
-import { SafeLayout, ScrollBar } from '@module-base/components/Layout';
+import { SafeLayout, ScrollBar } from '@module-base/components/web/Layout';
 
 /** utils */
 import {

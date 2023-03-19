@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 /** components */
 import NF404 from '@module-base/assets/images/404.jpg';
-import { SafeLayout } from '@module-base/components/Layout';
+import { SafeLayout } from '@module-base/components/web/Layout';
 import { HEADER_HEIGHT, APP_BAR_WIDTH } from '@module-global/constants';
 
 const View = styled(SafeLayout)({

@@ -4,7 +4,7 @@
  *
  */
 import styled from 'styled-components';
-import SafeLayout from '@module-base/components/Layout/SafeLayout';
+import SafeLayout from '@module-base/components/web/Layout/SafeLayout';
 
 export const AvatarContainer = styled(SafeLayout)({
     // display

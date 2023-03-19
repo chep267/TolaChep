@@ -11,8 +11,8 @@ import { MenuOutlined, SettingOutlined } from '@ant-design/icons';
 import { MenuInfo } from 'rc-menu/lib/interface';
 
 /** components */
-import { MenuBase } from '@module-base/components';
-import type { TypeMenuBase } from '@module-base/components';
+import { MenuBase } from '@module-base/components/web';
+import type { TypeMenuBase } from '@module-base/components/web';
 
 /** utils */
 import { localeObject } from '@module-language/constants';
@@ -43,15 +43,18 @@ function FormMenu() {
         () => [
             {
                 key: 'lang',
+                type: 'intl',
                 message: langMessage['module.language.lang'],
                 icon: <SettingOutlined />,
                 children: [
                     {
                         key: 'lang.vi',
+                        type: 'intl',
                         message: langMessage['module.language.lang.vi'],
                     },
                     {
                         key: 'lang.en',
+                        type: 'intl',
                         message: langMessage['module.language.lang.en'],
                     },
                 ],
@@ -59,19 +62,21 @@ function FormMenu() {
             {
                 key: 'divider1',
                 type: 'divider',
-                message: {},
             },
             {
                 key: 'theme',
+                type: 'intl',
                 message: themeMessage['module.theme.theme'],
                 icon: <SettingOutlined />,
                 children: [
                     {
                         key: 'theme.light',
+                        type: 'intl',
                         message: themeMessage['module.theme.theme.light'],
                     },
                     {
                         key: 'theme.dark',
+                        type: 'intl',
                         message: themeMessage['module.theme.theme.dark'],
                     },
                 ],
