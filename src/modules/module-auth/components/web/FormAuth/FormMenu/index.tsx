@@ -5,27 +5,20 @@
  */
 
 import * as React from 'react';
-import type { MenuProps } from 'antd';
+import styled from 'styled-components';
 import { Button, Dropdown } from 'antd';
-import { MenuOutlined, GlobalOutlined, SettingOutlined } from '@ant-design/icons';
+import { MenuOutlined, SettingOutlined } from '@ant-design/icons';
+import { MenuInfo } from 'rc-menu/lib/interface';
 
 /** components */
+import { MenuBase } from '@module-base/components';
+import type { TypeMenuBase } from '@module-base/components';
 
 /** utils */
-import { useLanguage } from '@module-language/utils';
-import { LOCALE_OBJECT } from '@module-language/constants';
-import { useTheme } from '@module-theme/utils/themeContext';
-
-// msg
-import { langMessage } from '@module-language/utils/msg';
-import { themeMessage } from '@module-theme/utils/msg';
-import styled from 'styled-components';
-import { Expand } from '@module-base/components/stack/Button/Animation';
-import { FlexBase, FlexCustom, LIGHT_THEME, DARK_THEME, PURPLE_THEME } from '@module-theme/constants';
-import { textMedium, textSmall } from '@module-theme/constants/mixin/Text';
-import { TextIntl } from '@module-base/components';
-
-// Styles
+import { localeObject } from '@module-language/constants';
+import { FlexBase, FlexCustom, themeObject } from '@module-theme/constants';
+import { useLanguage, langMessage } from '@module-language/utils';
+import { useTheme, themeMessage } from '@module-theme/utils';
 
 const LayoutMenu = styled.div(({ theme }) => ({
     ...FlexCustom({ flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-start' }),
@@ -34,105 +27,87 @@ const LayoutMenu = styled.div(({ theme }) => ({
     height: 100,
 }));
 
-const ButtonMenu = styled(Button)(({ theme }) => {
-    const styleDesktop = window.isMobile
-        ? {
-              borderRadius: '50%',
-              width: theme.iconSize.medium * 2,
-              height: theme.iconSize.medium * 2,
-          }
-        : Expand({ borderRadius: '50%', size: theme.iconSize.large * 2 });
-    return {
-        ...FlexBase,
-        ...styleDesktop,
-        overflow: 'hidden',
-    };
-});
-
-const Label = styled(TextIntl)(({ theme }) => ({
-    ...textMedium,
-    padding: '10px 20px',
-}));
-
-const SubLabel = styled(TextIntl)(({ theme }) => ({
-    ...textSmall,
-    padding: '10px 20px',
+const ButtonMenu = styled(Button)(({ theme }) => ({
+    ...FlexBase,
+    borderRadius: '50%',
+    width: theme.iconSize.medium * 2,
+    height: theme.iconSize.medium * 2,
+    overflow: 'hidden',
 }));
 
 function FormMenu() {
-    const { locale, toggleLanguage } = useLanguage();
-    const { mode, toggleTheme } = useTheme();
+    const { toggleLanguage } = useLanguage();
+    const { toggleTheme } = useTheme();
 
-    const items: MenuProps['items'] = React.useMemo(() => {
-        return [
+    const items: TypeMenuBase[] = React.useMemo(
+        () => [
             {
                 key: 'lang',
-                label: <Label message={langMessage['module.language.lang']} />,
-                icon: <GlobalOutlined />,
-                children: [
-                    {
-                        key: 'lang-vi',
-                        label: (
-                            <SubLabel
-                                onClick={() => toggleLanguage(LOCALE_OBJECT.VI)}
-                                message={langMessage['module.language.lang.vi']}
-                            />
-                        ),
-                    },
-                    {
-                        key: 'lang-en',
-                        label: (
-                            <SubLabel
-                                onClick={() => toggleLanguage(LOCALE_OBJECT.EN)}
-                                message={langMessage['module.language.lang.en']}
-                            />
-                        ),
-                    },
-                ],
-            },
-            {
-                type: 'divider',
-            },
-            {
-                key: 'theme',
-                label: <Label message={themeMessage['module.theme.theme']} />,
+                message: langMessage['module.language.lang'],
                 icon: <SettingOutlined />,
                 children: [
                     {
-                        key: 'theme-light',
-                        label: (
-                            <SubLabel
-                                onClick={() => toggleTheme(LIGHT_THEME)}
-                                message={themeMessage['module.theme.theme.light']}
-                            />
-                        ),
+                        key: 'lang.vi',
+                        message: langMessage['module.language.lang.vi'],
                     },
                     {
-                        key: 'theme-purple',
-                        label: (
-                            <SubLabel
-                                onClick={() => toggleTheme(PURPLE_THEME)}
-                                message={themeMessage['module.theme.theme.purple']}
-                            />
-                        ),
-                    },
-                    {
-                        key: 'theme-dark',
-                        label: (
-                            <SubLabel
-                                onClick={() => toggleTheme(DARK_THEME)}
-                                message={themeMessage['module.theme.theme.dark']}
-                            />
-                        ),
+                        key: 'lang.en',
+                        message: langMessage['module.language.lang.en'],
                     },
                 ],
             },
-        ];
-    }, [locale, mode]);
+            {
+                key: 'divider1',
+                type: 'divider',
+                message: {},
+            },
+            {
+                key: 'theme',
+                message: themeMessage['module.theme.theme'],
+                icon: <SettingOutlined />,
+                children: [
+                    {
+                        key: 'theme.light',
+                        message: themeMessage['module.theme.theme.light'],
+                    },
+                    {
+                        key: 'theme.dark',
+                        message: themeMessage['module.theme.theme.dark'],
+                    },
+                ],
+            },
+        ],
+        []
+    );
+
+    const onClickMenuItem = ({ key }: MenuInfo) => {
+        switch (key) {
+            case 'lang.vi': {
+                toggleLanguage(localeObject.vi);
+                break;
+            }
+            case 'lang.en': {
+                toggleLanguage(localeObject.en);
+                break;
+            }
+            case 'theme.light': {
+                toggleTheme(themeObject.light);
+                break;
+            }
+            case 'theme.dark': {
+                toggleTheme(themeObject.dark);
+                break;
+            }
+            default:
+                break;
+        }
+    };
+
+    const renderMenu = () => <MenuBase onClick={onClickMenuItem} items={items} />;
 
     return (
         <LayoutMenu>
-            <Dropdown trigger={['click']} menu={{ items }} placement="bottomRight">
+            <Dropdown trigger={['click']} placement="bottomRight" dropdownRender={renderMenu}>
                 <ButtonMenu>
                     <MenuOutlined />
                 </ButtonMenu>

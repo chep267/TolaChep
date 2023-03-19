@@ -7,14 +7,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import * as path from 'path';
+
+/** module path */
 import tsPaths from './tsconfig.path.json';
 
 /**
- * Resolve tsconfig.json paths to Webpack aliases
+ * Resolve tsconfig.json paths to aliases
  * @return {object Alias} - Alias config
- * @param paths
  */
-function resolveTsconfigPathsToAlias(paths = tsPaths.compilerOptions.paths) {
+function resolveTsconfigPathsToAlias() {
+    const paths = tsPaths.compilerOptions.paths;
     return Object.keys(paths).reduce((alias, item) => {
         const key = item.replace('/*', '');
         alias[key] = path.resolve(__dirname, paths[item][0].replace('/*', ''));

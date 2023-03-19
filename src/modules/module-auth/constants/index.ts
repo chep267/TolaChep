@@ -4,13 +4,13 @@
  *
  */
 
-export const AUTH_STORE_KEY = {
+export const AUTH_STORE_KEY = Object.freeze({
     ROOT: 'StoreAuth',
-} as const;
+});
 
 export const PATH_AUTH_FIREBASE = '/auths/';
 
-export const AUTH_FORM_ERROR = {
+export const AUTH_FORM_ERROR = Object.freeze({
     /**  không có lỗi */
     DEFAULT: '',
 
@@ -40,4 +40,4 @@ export const AUTH_FORM_ERROR = {
 
     /**  mật khẩu xác nhận không khớp */
     PASSWORD_DIFFERENT: 'passwordHill.different',
-} as const;
+});

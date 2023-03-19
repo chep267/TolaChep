@@ -15,5 +15,5 @@ function* watchStartApp(): any {
     }
 }
 
-const GlobalSaga = [watchStartApp];
+const GlobalSaga = Object.freeze([watchStartApp]);
 export default GlobalSaga;

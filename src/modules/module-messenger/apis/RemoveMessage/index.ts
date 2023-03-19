@@ -7,7 +7,6 @@
 import { fork } from 'redux-saga/effects';
 import { doRemoveMessageProps, doSendMessageProps } from '@module-messenger/apis/inteface.message';
 import { FIREBASE_SET, FIREBASE_UPDATE } from '@module-global/apis';
-import { chatBotMessage, chatBotSay } from '@module-messenger/constants/Message';
 import { Encrypt } from '@module-base/utils';
 
 /** Api remove message */

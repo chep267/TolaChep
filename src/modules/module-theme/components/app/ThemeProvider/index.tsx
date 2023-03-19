@@ -12,7 +12,8 @@ import { ThemeContext } from '@module-theme/utils/themeContext';
 
 /** utils */
 import { localStorageBase } from '@module-base/storage';
-import { DARK_THEME, LIGHT_THEME, themes } from '@module-theme/constants';
+import { themeObject, themes } from '@module-theme/constants';
+import { TypeModeTheme } from '@module-theme/utils';
 
 /**
  * Note: Dam bao cau hinh themes lay tu server duoc tra va truoc khi mount component nay ra.
@@ -25,42 +26,11 @@ type Props = {
 
 function ThemeProviderBase({ children }: Props) {
     // const modeRef = useRef(localStorageBase.get('theme')).current || 'os-default';
-    const [mode, setMode] = useState<typeof LIGHT_THEME | typeof DARK_THEME>(LIGHT_THEME);
+    const [mode, setMode] = useState<TypeModeTheme>(themeObject.light);
     const [theme, setTheme] = useState(themes[mode]);
 
-    // useEffect(() => {
-    //     if (modeRef === 'os-default') {
-    //         const isOsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    //         const _mode = isOsDark ? DARK_THEME : LIGHT_THEME;
-    //         setMode(_mode);
-    //         document.documentElement.setAttribute('data-theme', _mode);
-    //         return;
-    //     }
-    //
-    //     document.documentElement.setAttribute('data-theme', mode);
-    // }, []);
-
-    // useEffect(() => {
-    //     const onSystemThemeChange = (e: MediaQueryListEvent) => {
-    //         if (localStorageBase.get('theme')) {
-    //             return;
-    //         }
-    //         const isOsDark = e.matches;
-    //         const _mode = isOsDark ? DARK_THEME : LIGHT_THEME;
-    //         document.documentElement.setAttribute('data-theme', _mode);
-    //     };
-    //
-    //     const matchMediaPrefDark = window.matchMedia('(prefers-color-scheme: dark)');
-    //
-    //     matchMediaPrefDark.addEventListener('change', onSystemThemeChange);
-    //
-    //     return () => {
-    //         matchMediaPrefDark.removeEventListener('change', onSystemThemeChange);
-    //     };
-    // }, []);
-
     const toggleTheme = () => {
-        const _mode = mode === LIGHT_THEME ? DARK_THEME : LIGHT_THEME;
+        const _mode = mode === themeObject.light ? themeObject.dark : themeObject.light;
         document.documentElement.setAttribute('data-theme', _mode);
         // @ts-ignore
         localStorageBase.set('theme', _mode);

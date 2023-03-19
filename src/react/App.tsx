@@ -22,18 +22,6 @@ import { messages } from '@app/utils';
 /** global styles */
 import './index.css';
 
-const App = () => (
-    <ReduxProvider store={store}>
-        <LanguageProvider messages={messages}>
-            <ThemeProvider>
-                <UiProvider>
-                    <MainScreen />
-                </UiProvider>
-            </ThemeProvider>
-        </LanguageProvider>
-    </ReduxProvider>
-);
-
 declare global {
     interface WindowType {
         checkMobile(): boolean;
@@ -47,5 +35,17 @@ declare global {
 window.checkMobile = () => /iPhone|iPad|iPod|Android|Mobi/i.test(navigator.userAgent);
 window.isMobile = window.checkMobile();
 window.isToLaStart = false;
+
+const App = () => (
+    <ReduxProvider store={store}>
+        <LanguageProvider messages={messages}>
+            <ThemeProvider>
+                <UiProvider>
+                    <MainScreen />
+                </UiProvider>
+            </ThemeProvider>
+        </LanguageProvider>
+    </ReduxProvider>
+);
 
 export default App;

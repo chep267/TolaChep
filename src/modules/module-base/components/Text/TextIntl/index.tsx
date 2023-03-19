@@ -16,13 +16,13 @@ type TextIntlProps = {
     messageOption?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
 };
 
-export function getTextIntl(props: TextIntlProps): string {
+export function getTextIntl(props: TextIntlProps) {
     const { message, messageOption } = props;
     const intl = useIntl();
     return intl.formatMessage(message, messageOption);
 }
 
-export function TextIntl(props: TextIntlProps & TextProps) {
+export default function TextIntl(props: TextIntlProps & TextProps) {
     const { message, messageOption, ...spanProps } = props;
     return <Typography.Text {...spanProps}>{getTextIntl({ message, messageOption })}</Typography.Text>;
 }

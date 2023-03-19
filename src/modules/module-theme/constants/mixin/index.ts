@@ -6,6 +6,8 @@
 
 import { CSSObject } from 'styled-components';
 
+export * from './Text';
+
 export const FlexBase: CSSObject = {
     display: 'flex',
     position: 'relative',

@@ -8,16 +8,18 @@ import { FONT_SIZE } from '@module-theme/constants/fontSize';
 import { ICON_SIZE } from '@module-theme/constants/iconSize';
 import { Z_INDEX } from '@module-theme/constants/zIndex';
 import { LIGHT_COLOR, DARK_COLOR, PURPLE_COLOR } from '@module-theme/constants/color';
-import { TYPE_MODE_THEME, TYPE_THEME } from '@module-theme/utils';
+import { TypeTheme, TypeThemeObject, TypeModeTheme } from '@module-theme/utils';
 
-export const DARK_THEME = 'dark' as const;
-export const PURPLE_THEME = 'purple' as const;
-export const LIGHT_THEME = 'light' as const;
+export const themeObject: TypeThemeObject = Object.freeze({
+    light: 'light',
+    dark: 'dark',
+    purple: 'purple',
+});
 
 export const themes: {
-    [key in TYPE_MODE_THEME]: TYPE_THEME;
+    [key in TypeModeTheme]: TypeTheme;
 } = {
-    [LIGHT_THEME]: {
+    [themeObject.light]: {
         // Bộ màu cơ bản cung cấp sẵn dùng
         color: LIGHT_COLOR,
         zIndex: Z_INDEX,
@@ -25,7 +27,7 @@ export const themes: {
         iconSize: ICON_SIZE,
     },
 
-    [PURPLE_THEME]: {
+    [themeObject.purple]: {
         // Bộ màu cơ bản cung cấp sẵn dùng
         color: PURPLE_COLOR,
         zIndex: Z_INDEX,
@@ -33,7 +35,7 @@ export const themes: {
         iconSize: ICON_SIZE,
     },
 
-    [DARK_THEME]: {
+    [themeObject.dark]: {
         // Bộ màu cơ bản cung cấp sẵn dùng
         color: DARK_COLOR,
         zIndex: Z_INDEX,

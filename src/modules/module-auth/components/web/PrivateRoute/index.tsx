@@ -32,11 +32,11 @@ function PrivateRoute(props: Props) {
     const dispatch = useAppDispatch();
 
     const meId = useAppSelector((state) => state[AUTH_STORE_KEY.ROOT].meId);
-    const meIdLocal = Decrypt(localStorageBase.get(meIdLocalKey) || '');
+    const meIdLocal = Decrypt(localStorageBase.get(meIdLocalKey));
 
     React.useEffect(() => {
         const goHome = () => {
-            const prevRouterPathname: string = Decrypt(sessionStorageBase.get(routerLocalKey) || '') || SCREEN.FEED;
+            const prevRouterPathname: string = Decrypt(sessionStorageBase.get(routerLocalKey)) || SCREEN.FEED;
             navigate(prevRouterPathname, { replace: true });
         };
 

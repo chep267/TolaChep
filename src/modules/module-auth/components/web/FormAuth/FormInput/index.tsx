@@ -11,7 +11,7 @@ import { FormItemProps } from 'antd/es/form/FormItem';
 import { InputProps } from 'rc-input/lib/interface';
 
 /** utils */
-import { TYPE_AUTH_FORM_ERROR } from '@module-auth/utils';
+import { TypeAuthFormError } from '@module-auth/utils';
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
 import { localStorageBase } from '@module-base/storage';
 import { emailLocalKey } from '@module-global/constants';

@@ -7,7 +7,7 @@
 import * as React from 'react';
 
 export default class PureContainer extends React.Component<React.HTMLAttributes<HTMLDivElement>> {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
     }
 

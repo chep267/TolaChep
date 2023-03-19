@@ -7,6 +7,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { theme } from 'antd';
+import { useLocation } from 'react-router-dom';
 
 /** components */
 import FormMenu from '@module-auth/components/web/FormAuth/FormMenu';
@@ -15,7 +16,6 @@ import RegisterForm from '@module-auth/components/web/FormAuth/RegisterForm';
 import RecoverForm from '@module-auth/components/web/FormAuth/RecoverForm';
 
 /** styles */
-import { useLocation } from 'react-router-dom';
 import { SCREEN } from '@module-global/constants';
 import { FlexBase } from '@module-theme/constants';
 

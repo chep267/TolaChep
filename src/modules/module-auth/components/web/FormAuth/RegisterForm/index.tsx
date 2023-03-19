@@ -18,7 +18,7 @@ import { getTextIntl } from '@module-base/components';
 
 /** utils */
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
-import { authMessage, TYPE_AUTH_FORM_ERROR } from '@module-auth/utils';
+import { authMessage, TypeAuthFormError } from '@module-auth/utils';
 import { useAppDispatch } from '@app/store';
 import { Decrypt } from '@module-base/utils';
 import { localStorageBase } from '@module-base/storage';
@@ -35,9 +35,9 @@ function RegisterForm() {
     const passwordHillRef: React.Ref<InputRef> = React.useRef(null);
 
     const [status, setStatus] = React.useState<{
-        account: TYPE_AUTH_FORM_ERROR;
-        password: TYPE_AUTH_FORM_ERROR;
-        passwordHill: TYPE_AUTH_FORM_ERROR;
+        account: TypeAuthFormError;
+        password: TypeAuthFormError;
+        passwordHill: TypeAuthFormError;
     }>({
         account: AUTH_FORM_ERROR.DEFAULT,
         password: AUTH_FORM_ERROR.DEFAULT,
@@ -134,7 +134,7 @@ function RegisterForm() {
                     onResetStatus();
                     setIsSubmit(false);
                 };
-                const onFailure = (value: TYPE_AUTH_FORM_ERROR) => {
+                const onFailure = (value: TypeAuthFormError) => {
                     accountRef.current?.focus();
                     setStatus({
                         account: value,
@@ -162,7 +162,7 @@ function RegisterForm() {
             name="tola_register_form"
             initialValues={{
                 remember_username: true,
-                username: Decrypt(localStorageBase.get(emailLocalKey) || ''),
+                username: Decrypt(localStorageBase.get(emailLocalKey)),
             }}>
             <FormInput
                 ref={accountRef}

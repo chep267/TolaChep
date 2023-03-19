@@ -34,7 +34,7 @@ function Encrypt(value = ''): string {
  *
  * return: giải mã hóa chuỗi
  */
-function Decrypt(value = ''): string {
+function Decrypt(value: null | undefined | string = ''): string {
     if (!value) return '';
     let result = '';
 

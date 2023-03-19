@@ -6,7 +6,7 @@ import { USER_STORE_KEY } from '@module-user/constants';
  *
  */
 
-export interface TYPE_USER {
+export interface TypeUser {
     uid: string;
     info: {
         account: string;
@@ -25,20 +25,20 @@ export interface TYPE_USER {
     };
 }
 
-export type TYPE_USER_STORE_HAS_USER = {
+export type TypeUser_STORE_HAS_USER = {
     [key: string]: {
         itemIds: string[];
         total: number;
     };
 };
 
-export type TYPE_USER_STORE_USER = {
+export type TypeUser_STORE_USER = {
     [key: string]: {
-        data: TYPE_USER;
+        data: TypeUser;
     };
 };
 
-export type TYPE_USER_STORE = {
-    [USER_STORE_KEY.HAS_USER]: TYPE_USER_STORE_HAS_USER;
-    [USER_STORE_KEY.USER]: TYPE_USER_STORE_USER;
+export type TypeUser_STORE = {
+    [USER_STORE_KEY.HAS_USER]: TypeUser_STORE_HAS_USER;
+    [USER_STORE_KEY.USER]: TypeUser_STORE_USER;
 };

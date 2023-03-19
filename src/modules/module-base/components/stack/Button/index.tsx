@@ -8,7 +8,7 @@ import React, { ComponentPropsWithoutRef } from 'react';
 
 /** components */
 import { Container } from './Styles';
-import Icon, { IconsType } from '@module-base/components/stack/IconBase';
+import Icon, { IconsType } from '@module-base/components/IconBase';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     text?: string;

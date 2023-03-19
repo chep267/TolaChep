@@ -7,18 +7,18 @@
 import * as React from 'react';
 
 /** utils */
-import { LIGHT_THEME, themes } from '@module-theme/constants';
-import { TYPE_THEME, TYPE_MODE_THEME } from '@module-theme/utils';
+import { themeObject, themes } from '@module-theme/constants';
+import { TypeTheme, TypeModeTheme } from '@module-theme/utils';
 
 export type ThemeProps = {
-    mode: TYPE_MODE_THEME;
-    theme: TYPE_THEME;
-    toggleTheme: (value: TYPE_MODE_THEME) => void;
+    mode: TypeModeTheme;
+    theme: TypeTheme;
+    toggleTheme: (value: TypeModeTheme) => void;
 };
 
 const initialState = {
-    mode: LIGHT_THEME,
-    theme: themes[LIGHT_THEME],
+    mode: themeObject.light,
+    theme: themes[themeObject.light],
     toggleTheme: () => null,
 };
 

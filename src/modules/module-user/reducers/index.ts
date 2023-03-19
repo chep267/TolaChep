@@ -12,15 +12,15 @@ import { addUserToState } from '@module-user/reducers/user';
 
 /** utils */
 import { USER_STORE_KEY } from '@module-user/constants';
-import { TYPE_USER_STORE } from '@module-user/utils';
+import { TypeUser_STORE } from '@module-user/utils';
 import { USER_ACTION } from '@module-user/actions';
 
-const initialState: TYPE_USER_STORE = {
+const initialState: TypeUser_STORE = {
     [USER_STORE_KEY.HAS_USER]: {},
     [USER_STORE_KEY.USER]: {},
 };
 
-const moduleUserReducer = {
+const moduleUserReducer = Object.freeze({
     [USER_STORE_KEY.ROOT]: createReducer(initialState, (builder) => {
         builder.addCase(createAction(USER_ACTION.GET.SUCCESS), addUserToState);
         builder.addCase(createAction(USER_ACTION.CREATE.SUCCESS), addUserToState);
@@ -30,6 +30,6 @@ const moduleUserReducer = {
             // debugger;
         });
     }),
-};
+});
 
 export default moduleUserReducer;

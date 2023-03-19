@@ -4,11 +4,12 @@
  *
  */
 
-import { LOCALE_OBJECT, TYPE_LOCALE } from '@module-language/constants';
+import { localeObject } from '@module-language/constants';
+import { TypeLocale } from '@module-language/utils';
 
-export const getDeviceLanguage: () => TYPE_LOCALE = () => {
+export const getDeviceLanguage: () => TypeLocale = () => {
     const deviceLanguage = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language;
     // vi_VN | en_UK | en_US | ...
-    const defaultLocal = `${deviceLanguage || LOCALE_OBJECT.VI}`.slice(0, 2) as TYPE_LOCALE;
-    return !!LOCALE_OBJECT[defaultLocal] ? defaultLocal : LOCALE_OBJECT.VI;
+    const defaultLocal = `${deviceLanguage || localeObject.vi}`.slice(0, 2) as TypeLocale;
+    return !!localeObject[defaultLocal] ? defaultLocal : localeObject.vi;
 };

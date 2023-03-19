@@ -6,13 +6,13 @@
 
 /** utils */
 import { createActionKey, createAction } from '@module-base/utils';
-import { TYPE_USER } from '@module-user/utils';
-import { TYPE_AUTH_FORM_ERROR } from '@module-auth/utils';
+import { TypeUser } from '@module-user/utils';
+import { TypeAuthFormError } from '@module-auth/utils';
 
 const arrActionKey = ['AUTO_START', 'SIGN_IN', 'REGISTER', 'RECOVER', 'SIGN_OUT', 'CHANGE_PATH_NAME'] as const;
 export const AUTH_ACTION = createActionKey('AUTH_ACTION', arrActionKey);
 
-export type TYPE_AUTH_ACTION_PAYLOAD = {
+export type TypeAuthActionPayload = {
     [AUTH_ACTION.AUTO_START.REQUEST]: {
         uid: string;
     };
@@ -26,14 +26,12 @@ export type TYPE_AUTH_ACTION_PAYLOAD = {
         account: string;
         password: string;
         onSuccess?(): void;
-        onFailure?(value: TYPE_AUTH_FORM_ERROR): void;
+        onFailure?(value: TypeAuthFormError): void;
     };
     [AUTH_ACTION.SIGN_IN.SUCCESS]: {
-        user: TYPE_USER;
+        user: TypeUser;
     };
     [AUTH_ACTION.SIGN_OUT.REQUEST]: {
-        account: string;
-        password: string;
         onSuccess?(): void;
         onFailure?(): void;
     };
@@ -43,16 +41,16 @@ export type TYPE_AUTH_ACTION_PAYLOAD = {
         password: string;
         type?: 'account';
         onSuccess?(): void;
-        onFailure?(value: TYPE_AUTH_FORM_ERROR): void;
+        onFailure?(value: TypeAuthFormError): void;
     };
     [AUTH_ACTION.REGISTER.SUCCESS]: {};
 };
 
-function createAuthAction<Type extends keyof TYPE_AUTH_ACTION_PAYLOAD>(type: Type) {
-    return createAction<Type, TYPE_AUTH_ACTION_PAYLOAD>(type);
+function createAuthAction<Type extends keyof TypeAuthActionPayload>(type: Type) {
+    return createAction<Type, TypeAuthActionPayload>(type);
 }
 
-export const authAction = {
+export const authAction = Object.freeze({
     autoStart: {
         request: createAuthAction(AUTH_ACTION.AUTO_START.REQUEST),
         success: createAuthAction(AUTH_ACTION.AUTO_START.SUCCESS),
@@ -69,4 +67,4 @@ export const authAction = {
         request: createAuthAction(AUTH_ACTION.REGISTER.REQUEST),
         success: createAuthAction(AUTH_ACTION.REGISTER.SUCCESS),
     },
-};
+});

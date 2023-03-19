@@ -20,7 +20,7 @@ const initialState: TYPE_STORE_AUTH = {
     user: emptyUser,
 };
 
-const moduleAuthReducer = {
+const moduleAuthReducer = Object.freeze({
     [AUTH_STORE_KEY.ROOT]: createReducer(initialState, (builder) => {
         builder.addCase(createAction<Pick<TYPE_STORE_AUTH, 'user'>>(AUTH_ACTION.SIGN_IN.SUCCESS), signInSuccess);
         builder.addCase(createAction(AUTH_ACTION.SIGN_OUT.SUCCESS), signOutSuccess);
@@ -28,6 +28,6 @@ const moduleAuthReducer = {
             // // do nothing
         });
     }),
-};
+});
 
 export default moduleAuthReducer;

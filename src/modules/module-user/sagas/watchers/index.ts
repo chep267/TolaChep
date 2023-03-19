@@ -26,5 +26,5 @@ function* watchCreateUser(): any {
     }
 }
 
-const UserSaga = [watchGetUser, watchCreateUser];
+const UserSaga = Object.freeze([watchGetUser, watchCreateUser]);
 export default UserSaga;

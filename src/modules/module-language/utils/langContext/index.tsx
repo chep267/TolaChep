@@ -7,18 +7,19 @@
 import * as React from 'react';
 
 /** constants */
-import { LOCALE_OBJECT, TYPE_LOCALE } from '@module-language/constants';
+import { localeObject } from '@module-language/constants';
+import { TypeLocale } from '@module-language/utils';
 
 export interface LanguageProps {
-    locale: TYPE_LOCALE;
+    locale: TypeLocale;
     messages: Record<string, string>;
-    toggleLanguage: (value: TYPE_LOCALE) => void;
+    toggleLanguage: (value: TypeLocale) => void;
 }
 
 const LanguageContext = React.createContext<LanguageProps>({
-    locale: LOCALE_OBJECT.VI,
+    locale: localeObject.vi,
     messages: {},
-    toggleLanguage: (value: TYPE_LOCALE) => value,
+    toggleLanguage: (value: TypeLocale) => value,
 });
 
 LanguageContext.displayName = 'LanguageContext';

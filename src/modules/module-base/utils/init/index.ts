@@ -5,8 +5,8 @@
  */
 
 /** hàm tạo message cho intl */
-export const parseMessageToDefineIntlMessage = <messageType>(message: Readonly<messageType>) =>
-    (Object.keys(message) as (keyof messageType)[]).reduce(
+export function createMessageIntl<messageType>(message: Readonly<messageType>) {
+    const msg = (Object.keys(message) as (keyof messageType)[]).reduce(
         (obj, key) => {
             obj[key] = {
                 id: key,
@@ -21,13 +21,15 @@ export const parseMessageToDefineIntlMessage = <messageType>(message: Readonly<m
             };
         }
     );
+    return Object.freeze(msg);
+}
 
 /** hàm tạo action key cho module */
-export const createActionKey = <Root extends Readonly<string>, ActionKey extends Readonly<string[]>>(
+export function createActionKey<Root extends Readonly<string>, ActionKey extends Readonly<string[]>>(
     rootKey: Root,
     arrActionKey: ActionKey
-) =>
-    arrActionKey.reduce(
+) {
+    const action = arrActionKey.reduce(
         (obj, key: ActionKey[number]) => {
             obj[key] = {
                 REQUEST: `${rootKey}_${key}_REQUEST`,
@@ -44,6 +46,8 @@ export const createActionKey = <Root extends Readonly<string>, ActionKey extends
             };
         }
     );
+    return Object.freeze(action);
+}
 
 /** hàm tạo action dispatch */
 export function createAction<Type extends keyof Action, Action extends Record<Type, object>>(type: Type) {

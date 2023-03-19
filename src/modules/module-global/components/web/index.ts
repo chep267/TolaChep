@@ -5,3 +5,4 @@
  */
 
 export { default as UiProvider } from './UiProvider';
+export { default as AppName } from './AppName';

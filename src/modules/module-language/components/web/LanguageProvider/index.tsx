@@ -8,30 +8,30 @@ import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 
 /** constants */
-import { LOCALE_OBJECT } from '@module-language/constants';
+import { localeObject } from '@module-language/constants';
 import { localeLocalKey } from '@module-global/constants';
 
 // selectors
 import { getDeviceLanguage } from '@module-language/selectors';
 
 /** utils */
-import { LanguageContext, TYPE_MESSAGES, TYPE_LOCALE } from '@module-language/utils';
+import { LanguageContext, TypeMessages, TypeLocale } from '@module-language/utils';
 import { localStorageBase } from '@module-base/storage';
 import { Encrypt, Decrypt } from '@module-base/utils';
 
 interface Props {
     children: React.ReactNode;
-    messages: TYPE_MESSAGES;
+    messages: TypeMessages;
 }
 
 function LanguageProvider({ children, messages }: Props) {
-    const [locale, setLocale] = React.useState<TYPE_LOCALE>(getDeviceLanguage());
+    const [locale, setLocale] = React.useState<TypeLocale>(getDeviceLanguage());
 
     React.useEffect(() => {
         const initLanguage = async () => {
             const lastLocale = (await localStorageBase.get(localeLocalKey)) || '';
-            const localeCookie = Decrypt(lastLocale) as TYPE_LOCALE;
-            if (localeCookie && localeCookie !== locale && !!LOCALE_OBJECT[localeCookie]) {
+            const localeCookie = Decrypt(lastLocale) as TypeLocale;
+            if (localeCookie && localeCookie !== locale && !!localeObject[localeCookie]) {
                 setLocale(localeCookie);
             }
         };
@@ -39,7 +39,7 @@ function LanguageProvider({ children, messages }: Props) {
         initLanguage().then();
     }, []);
 
-    const toggleLanguage = (value: TYPE_LOCALE) => {
+    const toggleLanguage = (value: TypeLocale) => {
         if (locale === value) {
             return;
         }

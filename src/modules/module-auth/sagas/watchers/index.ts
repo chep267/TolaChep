@@ -40,5 +40,5 @@ function* watchSignOut(): any {
     }
 }
 
-const AuthSaga = [watchAutoStart, watchSignIn, watchRegister, watchSignOut];
+const AuthSaga = Object.freeze([watchAutoStart, watchSignIn, watchRegister, watchSignOut]);
 export default AuthSaga;

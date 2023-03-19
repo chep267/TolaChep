@@ -7,9 +7,9 @@
 import type { ISourceOptions } from 'tsparticles-engine';
 
 /** utils */
-import { TYPE_THEME } from '@module-theme/utils';
+import { TypeTheme } from '@module-theme/utils';
 
-export const getOption: (theme: TYPE_THEME) => ISourceOptions = (theme) => ({
+export const getOption: (theme: TypeTheme) => ISourceOptions = (theme) => ({
     background: {
         color: {
             value: theme.color.particle,
@@ -82,7 +82,7 @@ export const getOption: (theme: TYPE_THEME) => ISourceOptions = (theme) => ({
     detectRetina: true,
 });
 
-export const getOptionStar: (theme?: TYPE_THEME) => ISourceOptions = (theme) => ({
+export const getOptionStar: (theme?: TypeTheme) => ISourceOptions = (theme) => ({
     autoPlay: true,
     background: {
         color: {

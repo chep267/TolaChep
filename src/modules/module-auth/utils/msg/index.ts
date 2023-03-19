@@ -4,10 +4,11 @@
  *
  */
 
-import { parseMessageToDefineIntlMessage } from '@module-base/utils';
+import { createMessageIntl } from '@module-base/utils';
 
-export const EN_AUTH = {
+export const EN_AUTH = Object.freeze({
     'module.auth.form.title.signin': 'Sign In',
+    'module.auth.form.title.signout': 'Sign Out',
     'module.auth.form.title.register': 'Register',
     'module.auth.form.title.recover': 'Recover',
     'module.auth.form.checkbox.giveMe': 'Remember me',
@@ -33,10 +34,11 @@ export const EN_AUTH = {
         'This email/phone number already exists! Please use a different email/phone number.',
 
     'module.auth.form.message.success.register': 'Sign Up Success! Please log in now!',
-} as const;
+});
 
-export const VI_AUTH = {
+export const VI_AUTH = Object.freeze({
     'module.auth.form.title.signin': 'Đăng nhập',
+    'module.auth.form.title.signout': 'Đăng xuất',
     'module.auth.form.title.register': 'Đăng ký',
     'module.auth.form.title.recover': 'Xác thực',
     'module.auth.form.checkbox.giveMe': 'Ghi nhớ tôi',
@@ -62,6 +64,6 @@ export const VI_AUTH = {
     'module.auth.form.input.error.passwordHill.different': 'Mật khẩu xác nhận không khớp !!!',
 
     'module.auth.form.message.success.register': 'Đăng ký thành công! Bạn hãy đăng nhập ngay nhé!',
-} as const;
+});
 
-export const authMessage = parseMessageToDefineIntlMessage(VI_AUTH);
+export const authMessage = createMessageIntl(VI_AUTH);

@@ -4,7 +4,7 @@
  *
  */
 
-import { TYPE_USER } from '@module-user/utils';
+import { TypeUser } from '@module-user/utils';
 
 export const genUid = (id = '') => `uid-${id || Date.now()}`;
 
@@ -21,7 +21,7 @@ export const genNewUser = ({
     contact?: string;
     type: 'account' | 'facebook' | 'google';
 }) => {
-    const user: TYPE_USER = {
+    const user: TypeUser = {
         uid: uid || genUid(),
         info: {
             account: '',

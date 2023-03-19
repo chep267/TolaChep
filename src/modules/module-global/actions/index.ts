@@ -24,9 +24,9 @@ function createGlobalAction<Type extends keyof TYPE_GLOBAL_ACTION_PAYLOAD>(type:
     return createAction<Type, TYPE_GLOBAL_ACTION_PAYLOAD>(type);
 }
 
-export const globalAction = {
+export const globalAction = Object.freeze({
     startApp: {
         request: createGlobalAction(GLOBAL_ACTION.START_APP.REQUEST),
         success: createGlobalAction(GLOBAL_ACTION.START_APP.SUCCESS),
     },
-};
+});

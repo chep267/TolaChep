@@ -4,4 +4,5 @@
  *
  */
 
-export * from './TextIntl';
+import TextIntl, { getTextIntl } from './TextIntl';
+export { TextIntl, getTextIntl };

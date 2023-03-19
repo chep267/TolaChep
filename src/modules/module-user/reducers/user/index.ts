@@ -4,10 +4,10 @@
  *
  */
 
-import { TYPE_USER_STORE } from '@module-user/utils';
+import { TypeUser_STORE } from '@module-user/utils';
 import { USER_STORE_KEY } from '@module-user/constants';
 
-export const addUserToState = (state: TYPE_USER_STORE, action) => {
+export const addUserToState = (state: TypeUser_STORE, action) => {
     const { user, parentId = 'root' } = action.payload;
 
     // update User

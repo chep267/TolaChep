@@ -4,7 +4,7 @@
  *
  */
 
-const GENERAL_COLOR = {
+const GENERAL_COLOR = Object.freeze({
     default: {
         normal: '#f0f2f5',
         light: '#f0f2f5',
@@ -19,9 +19,9 @@ const GENERAL_COLOR = {
         warning: '#ffac38',
         danger: '#ff0032',
     },
-} as const;
+});
 
-export const LIGHT_COLOR = {
+export const LIGHT_COLOR = Object.freeze({
     particle: '#0d47a1',
     text: {
         normal: '#000000',
@@ -38,9 +38,9 @@ export const LIGHT_COLOR = {
         default: '#038cf5',
     },
     ...GENERAL_COLOR,
-};
+});
 
-export const PURPLE_COLOR = {
+export const PURPLE_COLOR = Object.freeze({
     particle: '#7360F2',
     text: {
         normal: '#7360F2',
@@ -57,9 +57,9 @@ export const PURPLE_COLOR = {
         default: '#038cf5',
     },
     ...GENERAL_COLOR,
-};
+});
 
-export const DARK_COLOR = {
+export const DARK_COLOR = Object.freeze({
     particle: '#000033',
     text: {
         normal: '#ffffff',
@@ -76,6 +76,6 @@ export const DARK_COLOR = {
         default: '#038cf5',
     },
     ...GENERAL_COLOR,
-};
+});
 
-export type COLOR_TYPE = typeof LIGHT_COLOR;
+export type TypeColor = typeof LIGHT_COLOR;

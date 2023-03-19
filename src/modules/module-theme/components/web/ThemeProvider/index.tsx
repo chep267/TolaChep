@@ -12,12 +12,12 @@ import viAntd from 'antd/locale/vi_VN';
 
 /** utils */
 import { localStorageBase } from '@module-base/storage';
-import { LIGHT_THEME, PURPLE_THEME, DARK_THEME, themes } from '@module-theme/constants';
-import { ThemeContext, TYPE_MODE_THEME } from '@module-theme/utils';
+import { themeObject, themes } from '@module-theme/constants';
+import { ThemeContext, TypeModeTheme } from '@module-theme/utils';
 import { themeLocalKey } from '@module-global/constants';
 import { Decrypt, Encrypt } from '@module-base/utils';
 import { useLanguage } from '@module-language/utils';
-import { LOCALE_OBJECT } from '@module-language/constants';
+import { localeObject } from '@module-language/constants';
 
 /**
  * Note: Dam bao cau hinh themes lay tu server duoc tra va truoc khi mount component nay ra.
@@ -31,15 +31,15 @@ type Props = {
 function ThemeProviderBase({ children }: Props) {
     const { locale } = useLanguage();
 
-    const [mode, setMode] = useState<TYPE_MODE_THEME>(() => {
-        const modeCookie = Decrypt(localStorageBase.get(themeLocalKey) || '') as TYPE_MODE_THEME;
+    const [mode, setMode] = useState<TypeModeTheme>(() => {
+        const modeCookie = Decrypt(localStorageBase.get(themeLocalKey)) as TypeModeTheme;
         if (modeCookie && !!themes[modeCookie]) {
             return modeCookie;
         }
-        return LIGHT_THEME;
+        return themeObject.light;
     });
 
-    const toggleTheme = (value: TYPE_MODE_THEME) => {
+    const toggleTheme = (value: TypeModeTheme) => {
         if (mode === value) {
             return;
         }
@@ -60,15 +60,16 @@ function ThemeProviderBase({ children }: Props) {
         <ThemeContext.Provider value={store}>
             <ThemeProvider theme={themes[mode]}>
                 <ConfigProvider
-                    locale={locale === LOCALE_OBJECT.EN ? enAntd : viAntd}
+                    locale={locale === localeObject.en ? enAntd : viAntd}
                     theme={{
-                        algorithm: mode === DARK_THEME ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+                        algorithm: mode === themeObject.dark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
                         token:
-                            mode === PURPLE_THEME
+                            mode === themeObject.purple
                                 ? {
                                       colorPrimary: '#9e339f',
                                   }
                                 : {},
+                        hashed: false,
                     }}>
                     {children}
                 </ConfigProvider>

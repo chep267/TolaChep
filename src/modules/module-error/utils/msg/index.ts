@@ -4,20 +4,20 @@
  *
  */
 
-import { parseMessageToDefineIntlMessage } from '@module-base/utils';
+import { createMessageIntl } from '@module-base/utils';
 
-export const EN_ERROR = {
+export const EN_ERROR = Object.freeze({
     'module.error.fallback.title': 'An error occurred',
     'module.error.fallback.content': 'Please try to run the application again',
     'module.error.fallback.retry': 'Retry',
     'module.error.fallback.autoReload': '(Auto rerun after {value} seconds)',
-} as const;
+});
 
-export const VI_ERROR = {
+export const VI_ERROR = Object.freeze({
     'module.error.fallback.title': 'Đã xảy ra lỗi',
     'module.error.fallback.content': 'Bạn hãy thử chạy lại ứng dụng',
     'module.error.fallback.retry': 'Thử lại',
     'module.error.fallback.autoReload': '(Tự động chạy lại sau {value} giây)',
-} as const;
+});
 
-export const errorMessage = parseMessageToDefineIntlMessage(VI_ERROR);
+export const errorMessage = createMessageIntl(VI_ERROR);

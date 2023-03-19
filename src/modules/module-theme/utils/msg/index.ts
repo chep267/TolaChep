@@ -4,22 +4,22 @@
  *
  */
 
-import { parseMessageToDefineIntlMessage } from '@module-base/utils';
+import { createMessageIntl } from '@module-base/utils';
 
-export const EN_THEME = {
+export const EN_THEME = Object.freeze({
     'module.theme.theme': 'Theme',
     'module.theme.theme.light': 'Light',
     'module.theme.theme.purple': 'Purple',
     'module.theme.theme.dark': 'Dark',
     'module.theme.theme.system': 'System',
-} as const;
+});
 
-export const VI_THEME = {
+export const VI_THEME = Object.freeze({
     'module.theme.theme': 'Giao diện',
     'module.theme.theme.light': 'Sáng',
     'module.theme.theme.purple': 'Cá tính',
     'module.theme.theme.dark': 'Tối',
     'module.theme.theme.system': 'Hệ thống',
-} as const;
+});
 
-export const themeMessage = parseMessageToDefineIntlMessage(VI_THEME);
+export const themeMessage = createMessageIntl(VI_THEME);

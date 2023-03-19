@@ -8,7 +8,7 @@ import React from 'react';
 
 /** components */
 import { Item } from '../Styles';
-import Icon, { IconsType } from '@module-base/components/stack/IconBase';
+import Icon, { IconsType } from '@module-base/components/IconBase';
 
 /** utils */
 import { emptyFunction, emptyObject } from '@module-base/constants';

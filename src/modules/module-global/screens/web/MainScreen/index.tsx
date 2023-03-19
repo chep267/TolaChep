@@ -4,23 +4,22 @@
  *
  */
 
-import React from 'react';
+import * as React from 'react';
+import { Layout } from 'antd';
 
-/** components */
-import { MainContainer, MainBody, MainHeader, MainSider, MainContent } from './styles';
+import TolaSider from './Sider';
+import TolaHeader from './Header';
+import TolaContent from './Content';
 
-function MainScreen(props: any) {
+export default function MainScreen(props: { element: React.ReactElement }) {
     const { element } = props;
-
     return (
-        <MainContainer>
-            <MainHeader />
-            <MainBody>
-                <MainSider />
-                <MainContent>{element}</MainContent>
-            </MainBody>
-        </MainContainer>
+        <Layout>
+            <TolaHeader />
+            <Layout hasSider>
+                <TolaSider />
+                <TolaContent element={element} />
+            </Layout>
+        </Layout>
     );
 }
-
-export default MainScreen;

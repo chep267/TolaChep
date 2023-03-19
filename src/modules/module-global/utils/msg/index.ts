@@ -4,18 +4,18 @@
  *
  */
 
-import { parseMessageToDefineIntlMessage } from '@module-base/utils';
+import { createMessageIntl } from '@module-base/utils';
 
-export const EN_GLOBAL = {
+export const EN_GLOBAL = Object.freeze({
     'module.global.lang': 'Language',
     'module.global.lang.vi': 'Vietnamese',
     'module.global.lang.en': 'English',
-} as const;
+});
 
-export const VI_GLOBAL = {
+export const VI_GLOBAL = Object.freeze({
     'module.global.lang': 'Ngôn ngữ',
     'module.global.lang.vi': 'Tiếng Việt',
     'module.global.lang.en': 'Tiếng Anh',
-} as const;
+});
 
-export const globalMessage = parseMessageToDefineIntlMessage(VI_GLOBAL);
+export const globalMessage = createMessageIntl(VI_GLOBAL);

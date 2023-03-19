@@ -4,18 +4,18 @@
  *
  */
 
-import { parseMessageToDefineIntlMessage } from '@module-base/utils';
+import { createMessageIntl } from '@module-base/utils';
 
-export const EN_LANG = {
+export const EN_LANG = Object.freeze({
     'module.language.lang': 'Language',
     'module.language.lang.vi': 'Vietnamese',
     'module.language.lang.en': 'English',
-} as const;
+});
 
-export const VI_LANG = {
+export const VI_LANG = Object.freeze({
     'module.language.lang': 'Ngôn ngữ',
     'module.language.lang.vi': 'Tiếng Việt',
     'module.language.lang.en': 'Tiếng Anh',
-} as const;
+});
 
-export const langMessage = parseMessageToDefineIntlMessage(VI_LANG);
+export const langMessage = createMessageIntl(VI_LANG);

@@ -6,25 +6,25 @@
 
 /** utils */
 import { createAction, createActionKey } from '@module-base/utils';
-import { TYPE_USER } from '@module-user/utils';
+import { TypeUser } from '@module-user/utils';
 
 const arrActionKey = ['GET', 'CREATE', 'UPDATE', 'DELETE'] as const;
 export const USER_ACTION = createActionKey('USER_ACTION', arrActionKey);
 
-export type TYPE_USER_ACTION_PAYLOAD = {
+export type TypeUser_ACTION_PAYLOAD = {
     [USER_ACTION.GET.REQUEST]: {
         uid: string;
         onSuccess?(): void;
         onFailure?(): void;
     };
     [USER_ACTION.GET.SUCCESS]: {
-        user: TYPE_USER;
+        user: TypeUser;
     };
     [USER_ACTION.CREATE.REQUEST]: {
         uid: string;
     };
     [USER_ACTION.CREATE.SUCCESS]: {
-        user: TYPE_USER;
+        user: TypeUser;
     };
     [USER_ACTION.UPDATE.REQUEST]: {
         account: string;
@@ -33,7 +33,7 @@ export type TYPE_USER_ACTION_PAYLOAD = {
         onFailure(): void;
     };
     [USER_ACTION.UPDATE.SUCCESS]: {
-        user: TYPE_USER;
+        user: TypeUser;
     };
     [USER_ACTION.DELETE.REQUEST]: {
         account: string;
@@ -44,11 +44,11 @@ export type TYPE_USER_ACTION_PAYLOAD = {
     [USER_ACTION.DELETE.SUCCESS]: {};
 };
 
-function createUserAction<Type extends keyof TYPE_USER_ACTION_PAYLOAD>(type: Type) {
-    return createAction<Type, TYPE_USER_ACTION_PAYLOAD>(type);
+function createUserAction<Type extends keyof TypeUser_ACTION_PAYLOAD>(type: Type) {
+    return createAction<Type, TypeUser_ACTION_PAYLOAD>(type);
 }
 
-export const userAction = {
+export const userAction = Object.freeze({
     get: {
         request: createUserAction(USER_ACTION.GET.REQUEST),
         success: createUserAction(USER_ACTION.GET.SUCCESS),
@@ -65,4 +65,4 @@ export const userAction = {
         request: createUserAction(USER_ACTION.DELETE.REQUEST),
         success: createUserAction(USER_ACTION.DELETE.SUCCESS),
     },
-};
+});

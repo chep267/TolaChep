@@ -15,7 +15,7 @@ import { SCREEN } from '@module-global/constants';
 
 /** screens */
 const SignInScreen = React.lazy(() => import('@module-auth/screens/web/SignIn'));
-const HomeScreen = React.lazy(() => import('@module-global/screens/web/MainScreen'));
+const MainScreen = React.lazy(() => import('@module-global/screens/web/MainScreen'));
 const FeedScreen = React.lazy(() => import('@module-feed/screens/NewFeed'));
 const MessengerScreen = React.lazy(() => import('@module-messenger/screens/MessengerApp'));
 const NotFoundScreen = React.lazy(() => import('@module-global/screens/web/NotFound'));
@@ -40,7 +40,7 @@ export default function AppRouter() {
                     <Route path={SCREEN.SIGN_IN} element={<PrivateRoute type="auth" element={<SignInScreen />} />} />
                     <Route path={SCREEN.REGISTER} element={<PrivateRoute type="auth" element={<SignInScreen />} />} />
                     <Route path={SCREEN.RECOVER} element={<PrivateRoute type="auth" element={<SignInScreen />} />} />
-                    <Route path="*" element={<PrivateRoute element={<HomeScreen element={<HomeRouter />} />} />} />
+                    <Route path="*" element={<PrivateRoute element={<MainScreen element={<HomeRouter />} />} />} />
                 </Routes>
             </React.Suspense>
         </BrowserRouter>

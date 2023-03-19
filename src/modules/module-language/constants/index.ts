@@ -5,9 +5,9 @@
  */
 
 /** utils */
-import { TYPE_LOCALE_OBJECT } from '@module-language/utils';
+import { TypeLocaleObject } from '@module-language/utils';
 
-export const LOCALE_OBJECT: TYPE_LOCALE_OBJECT = {
-    VI: 'VI',
-    EN: 'EN',
-};
+export const localeObject: TypeLocaleObject = Object.freeze({
+    vi: 'vi',
+    en: 'en',
+});

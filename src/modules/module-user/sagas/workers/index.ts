@@ -7,7 +7,7 @@
 import { call, put, fork } from 'redux-saga/effects';
 
 /** actions */
-import { TYPE_USER_ACTION_PAYLOAD, USER_ACTION, userAction } from '@module-user/actions';
+import { TypeUser_ACTION_PAYLOAD, USER_ACTION, userAction } from '@module-user/actions';
 
 /** apis */
 import { FIREBASE_GET, FIREBASE_SET } from '@module-global/apis';
@@ -16,10 +16,10 @@ import { FIREBASE_GET, FIREBASE_SET } from '@module-global/apis';
 
 /** utils */
 import { PATH_USER_FIREBASE } from '@module-user/constants';
-import { TYPE_USER } from '@module-user/utils';
+import { TypeUser } from '@module-user/utils';
 import { emptyFunction } from '@module-base/constants';
 
-export function* doGetUser(payload: TYPE_USER_ACTION_PAYLOAD[typeof USER_ACTION.GET.REQUEST]): any {
+export function* doGetUser(payload: TypeUser_ACTION_PAYLOAD[typeof USER_ACTION.GET.REQUEST]): any {
     const { uid, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const response = yield call(FIREBASE_GET, { path: `${PATH_USER_FIREBASE}${uid}` });
     if (response.exists()) {
@@ -33,7 +33,7 @@ export function* doGetUser(payload: TYPE_USER_ACTION_PAYLOAD[typeof USER_ACTION.
     return false;
 }
 
-export function* doCreateUser(payload: { user: TYPE_USER; onSuccess?: () => void; onFailure?: () => void }): any {
+export function* doCreateUser(payload: { user: TypeUser; onSuccess?: () => void; onFailure?: () => void }): any {
     const { user, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const error = yield call(FIREBASE_SET, { path: `${PATH_USER_FIREBASE}${user.uid}`, data: user });
     if (error) {

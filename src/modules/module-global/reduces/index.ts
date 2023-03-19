@@ -30,7 +30,7 @@ const initialState: TYPE_GLOBAL_STORE = {
     },
 };
 
-const moduleGlobalReducer = {
+const moduleGlobalReducer = Object.freeze({
     [GLOBAL_STORE_KEY.ROOT]: createReducer(initialState, (builder) => {
         builder.addCase(createAction<{ avatar: string; cover: string }>(GLOBAL_ACTION.START_APP.SUCCESS), startAppSuccess);
         builder.addDefaultCase((state, action) => {
@@ -39,6 +39,6 @@ const moduleGlobalReducer = {
             // debugger;
         });
     }),
-};
+});
 
 export default moduleGlobalReducer;
