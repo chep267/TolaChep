@@ -1,18 +1,20 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 /** utils */
-import { createActionKey, createAction } from '@module-base/utils';
-import { TypeUser } from '@module-user/utils';
-import { TypeAuthFormError } from '@module-auth/utils';
+import { createActionKey, createAction as createActionBase } from '@module-base/utils';
+
+/** types */
+import type { UserType } from '@module-user/utils';
+import type { AuthFormErrorType } from '@module-auth/utils';
 
 const arrActionKey = ['AUTO_START', 'SIGN_IN', 'REGISTER', 'RECOVER', 'SIGN_OUT', 'CHANGE_PATH_NAME'] as const;
-export const AUTH_ACTION = createActionKey('AUTH_ACTION', arrActionKey);
+const AUTH_ACTION = createActionKey('AUTH_ACTION', arrActionKey);
 
-export type TypeAuthActionPayload = {
+type AuthActionPayloadType = {
     [AUTH_ACTION.AUTO_START.REQUEST]: {
         uid: string;
     };
@@ -26,10 +28,10 @@ export type TypeAuthActionPayload = {
         account: string;
         password: string;
         onSuccess?(): void;
-        onFailure?(value: TypeAuthFormError): void;
+        onFailure?(value: AuthFormErrorType): void;
     };
     [AUTH_ACTION.SIGN_IN.SUCCESS]: {
-        user: TypeUser;
+        user: UserType;
     };
     [AUTH_ACTION.SIGN_OUT.REQUEST]: {
         onSuccess?(): void;
@@ -41,30 +43,33 @@ export type TypeAuthActionPayload = {
         password: string;
         type?: 'account';
         onSuccess?(): void;
-        onFailure?(value: TypeAuthFormError): void;
+        onFailure?(value: AuthFormErrorType): void;
     };
     [AUTH_ACTION.REGISTER.SUCCESS]: {};
 };
 
-function createAuthAction<Type extends keyof TypeAuthActionPayload>(type: Type) {
-    return createAction<Type, TypeAuthActionPayload>(type);
+function createAction<Type extends keyof AuthActionPayloadType>(type: Type) {
+    return createActionBase<Type, AuthActionPayloadType>(type);
 }
 
-export const authAction = Object.freeze({
+const authAction = Object.freeze({
     autoStart: {
-        request: createAuthAction(AUTH_ACTION.AUTO_START.REQUEST),
-        success: createAuthAction(AUTH_ACTION.AUTO_START.SUCCESS),
+        request: createAction(AUTH_ACTION.AUTO_START.REQUEST),
+        success: createAction(AUTH_ACTION.AUTO_START.SUCCESS),
     },
     signIn: {
-        request: createAuthAction(AUTH_ACTION.SIGN_IN.REQUEST),
-        success: createAuthAction(AUTH_ACTION.SIGN_IN.SUCCESS),
+        request: createAction(AUTH_ACTION.SIGN_IN.REQUEST),
+        success: createAction(AUTH_ACTION.SIGN_IN.SUCCESS),
     },
     signOut: {
-        request: createAuthAction(AUTH_ACTION.SIGN_OUT.REQUEST),
-        success: createAuthAction(AUTH_ACTION.SIGN_OUT.SUCCESS),
+        request: createAction(AUTH_ACTION.SIGN_OUT.REQUEST),
+        success: createAction(AUTH_ACTION.SIGN_OUT.SUCCESS),
     },
     register: {
-        request: createAuthAction(AUTH_ACTION.REGISTER.REQUEST),
-        success: createAuthAction(AUTH_ACTION.REGISTER.SUCCESS),
+        request: createAction(AUTH_ACTION.REGISTER.REQUEST),
+        success: createAction(AUTH_ACTION.REGISTER.SUCCESS),
     },
 });
+
+export type { AuthActionPayloadType };
+export { authAction, AUTH_ACTION };

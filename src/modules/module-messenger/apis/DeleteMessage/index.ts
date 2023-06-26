@@ -1,19 +1,20 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { fork, select } from 'redux-saga/effects';
 import { doDeleteMessageProps, doRemoveMessageProps, doSendMessageProps } from '@module-messenger/apis/inteface.message';
 import { FIREBASE_REMOVE, FIREBASE_SET, FIREBASE_UPDATE } from '@module-global/apis';
-import { chatBotMessage, chatBotSay } from '@module-messenger/constants/Message';
+// import { chatBotMessage, chatBotSay } from '@module-messenger/constants/Message';
 import { Encrypt } from '@module-base/utils';
 import { emptyArray } from '@module-base/constants';
+// @ts-ignore
 import { getPrevMessageId } from '@module-messenger/selectors/message';
 
 /** Api delete message */
-export function* apiDeleteMessage(payload: doDeleteMessageProps) {
+export function* apiDeleteMessage(payload: doDeleteMessageProps): any {
     const { threadId, meId, messageId, files = emptyArray } = payload;
 
     if (!threadId || !meId || !messageId) {

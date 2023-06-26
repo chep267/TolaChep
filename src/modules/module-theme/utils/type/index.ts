@@ -1,21 +1,30 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import { TypeColor, FONT_SIZE_TYPE, ICON_SIZE_TYPE, Z_INDEX_TYPE } from '@module-theme/constants';
+/** utils */
+import { FONT_SIZE, ICON_SIZE, themeObject, Z_INDEX } from '@module-theme/constants';
 
-export interface TypeTheme {
-    color: TypeColor;
-    fontSize: FONT_SIZE_TYPE;
-    iconSize: ICON_SIZE_TYPE;
-    zIndex: Z_INDEX_TYPE;
-}
-
-export type TypeModeTheme = 'light' | 'dark' | 'purple';
-export type TypeThemeObject = Readonly<{ [key in TypeModeTheme]: key }>;
+type FontSizeType = typeof FONT_SIZE;
+type IconSizeType = typeof ICON_SIZE;
+type ZIndexType = typeof Z_INDEX;
+type ThemeType = {
+    fontSize: FontSizeType;
+    iconSize: IconSizeType;
+    zIndex: ZIndexType;
+};
+type ThemeModeType = keyof typeof themeObject;
+type ThemeObjectType = Readonly<{ [key in ThemeModeType]: key }>;
+type ThemeProps = {
+    mode: ThemeModeType;
+    theme: ThemeType;
+    toggleTheme: (value: ThemeModeType) => void;
+};
 
 declare module 'styled-components' {
-    export interface DefaultTheme extends TypeTheme {}
+    export type DefaultTheme = ThemeType;
 }
+
+export type { ThemeProps, FontSizeType, IconSizeType, ZIndexType, ThemeType, ThemeModeType, ThemeObjectType };

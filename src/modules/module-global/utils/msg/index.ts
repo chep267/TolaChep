@@ -1,21 +1,24 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
+/** utils */
 import { createMessageIntl } from '@module-base/utils';
 
-export const EN_GLOBAL = Object.freeze({
+const EN_GLOBAL = {
     'module.global.lang': 'Language',
     'module.global.lang.vi': 'Vietnamese',
     'module.global.lang.en': 'English',
-});
+} as const;
 
-export const VI_GLOBAL = Object.freeze({
+const VI_GLOBAL = {
     'module.global.lang': 'Ngôn ngữ',
     'module.global.lang.vi': 'Tiếng Việt',
     'module.global.lang.en': 'Tiếng Anh',
-});
+} as const;
 
-export const globalMessage = createMessageIntl(VI_GLOBAL);
+const globalMessage = createMessageIntl(VI_GLOBAL);
+
+export { globalMessage, VI_GLOBAL, EN_GLOBAL };

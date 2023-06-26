@@ -1,10 +1,10 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 export { default as firebaseApp } from './firebase';
-export * from './ui';
+export * from '../components/web/UiProvider/UiContext';
 export * from './msg';
 export * from './type';

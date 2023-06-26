@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -8,7 +8,7 @@ import React from 'react';
 
 /** components */
 import { Item } from '../Styles';
-import Icon, { IconsType } from '@module-base/components/web/IconBase';
+import Icon, { IconBaseType } from '@module-base/components/web/IconBase';
 
 /** utils */
 import { emptyFunction, emptyObject } from '@module-base/constants';
@@ -20,7 +20,7 @@ interface ButtonProps {
     onPress?(): void;
     text?: string;
     mode?: string;
-    icon?: IconsType;
+    icon?: IconBaseType;
     size?: number;
     style?: object;
     className?: string;

@@ -1,37 +1,36 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
-import { App } from 'antd';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 
 /** actions */
 import { globalAction } from '@module-global/actions';
+import { useAppDispatch } from '@app/store';
 
 /** components */
+import { App } from 'antd';
 import { ErrorBoundary } from '@module-error/components';
 
 /** utils */
 import { TIME_LOADING_APP } from '@module-global/constants';
-import { useAppDispatch } from '@app/store';
 
 /** screens */
-const LoadingScreen = React.lazy(() => import('@module-global/screens/web/LoadingScreen'));
-const AppRouter = React.lazy(() => import('@app/screens/AppRouter'));
+const LoadingScreen = lazy(() => import('@modules/module-global/screens/web/LoadingScreen'));
+const AppRouter = lazy(() => import('@app/screens/AppRouter'));
 
 function ToLaApp() {
     const dispatch = useAppDispatch();
-    const [timer, setTimer] = React.useState(true);
-    const [isLoading, setLoading] = React.useState(true);
+    const [timer, setTimer] = useState(true);
+    const [isLoading, setLoading] = useState(true);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const onStartSuccess = () => {
             window.isToLaStart = true;
-            setLoading(true);
+            setLoading(false);
         };
-
         const TimeOut: NodeJS.Timeout = setTimeout(() => {
             setTimer(false);
         }, TIME_LOADING_APP);
@@ -46,10 +45,9 @@ function ToLaApp() {
     return (
         <ErrorBoundary isAutoReload>
             <App>
-                <React.Suspense fallback={null}>
-                    {!window.isToLaStart && (timer || isLoading) ? <LoadingScreen /> : null}
-                    <AppRouter />
-                </React.Suspense>
+                <Suspense fallback={null}>
+                    {!window.isToLaStart && (timer || isLoading) ? <LoadingScreen /> : <AppRouter />}
+                </Suspense>
             </App>
         </ErrorBoundary>
     );

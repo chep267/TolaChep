@@ -1,12 +1,13 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
+/** utils */
 import { createMessageIntl } from '@module-base/utils';
 
-export const EN_AUTH = Object.freeze({
+const EN_AUTH = {
     'module.auth.form.title.signin': 'Sign In',
     'module.auth.form.title.signout': 'Sign Out',
     'module.auth.form.title.register': 'Register',
@@ -34,9 +35,9 @@ export const EN_AUTH = Object.freeze({
         'This email/phone number already exists! Please use a different email/phone number.',
 
     'module.auth.form.message.success.register': 'Sign Up Success! Please log in now!',
-});
+} as const;
 
-export const VI_AUTH = Object.freeze({
+const VI_AUTH = {
     'module.auth.form.title.signin': 'Đăng nhập',
     'module.auth.form.title.signout': 'Đăng xuất',
     'module.auth.form.title.register': 'Đăng ký',
@@ -64,6 +65,8 @@ export const VI_AUTH = Object.freeze({
     'module.auth.form.input.error.passwordHill.different': 'Mật khẩu xác nhận không khớp !!!',
 
     'module.auth.form.message.success.register': 'Đăng ký thành công! Bạn hãy đăng nhập ngay nhé!',
-});
+} as const;
 
-export const authMessage = createMessageIntl(VI_AUTH);
+const authMessage = createMessageIntl(VI_AUTH);
+
+export { authMessage, VI_AUTH, EN_AUTH };

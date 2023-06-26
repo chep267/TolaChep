@@ -1,13 +1,15 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-export type TYPE_GLOBAL_STORE = {
+type GlobalStoreType = {
     router: string;
     image: {
         avatar: string;
         cover: string;
     };
 };
+
+export type { GlobalStoreType };

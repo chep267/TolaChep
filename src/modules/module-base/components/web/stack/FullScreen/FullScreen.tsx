@@ -3,7 +3,6 @@
 
 import React, { MouseEvent } from 'react';
 // import iconDownload from '../../../messenger/assets/images/iconDownload.svg';
-import { Container, BtnClose, BtnDownLoad } from '@module-base/components/web/stack/FullScreen/Style';
 
 function FullScreen(props: any) {
     const { url, name, onClose } = props;
@@ -33,14 +32,15 @@ function FullScreen(props: any) {
     };
 
     return (
-        <Container role="presentation" onClick={onClose}>
-            <BtnClose onClick={onClose}>X</BtnClose>
-            <BtnDownLoad onClick={onDownload}>{/*<img src={iconDownload} alt="" loading="lazy" />*/}</BtnDownLoad>
-            <div>
-                {/*<img src={url} alt="" onClick={onItemClick} title={name} />*/}
-                <button onClick={onDownload}>{/*<img src={iconDownload} alt="" loading="lazy" />*/}</button>
-            </div>
-        </Container>
+        // <Container role="presentation" onClick={onClose}>
+        //     <BtnClose onClick={onClose}>X</BtnClose>
+        //     <BtnDownLoad onClick={onDownload}>{/*<img src={iconDownload} alt="" loading="lazy" />*/}</BtnDownLoad>
+        //     <div>
+        //         {/*<img src={url} alt="" onClick={onItemClick} title={name} />*/}
+        //         <button onClick={onDownload}>{/*<img src={iconDownload} alt="" loading="lazy" />*/}</button>
+        //     </div>
+        // </Container>
+        <div />
     );
 }
 

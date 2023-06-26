@@ -1,45 +1,44 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import React, { ReactNode, useState } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { ConfigProvider, theme as antdTheme } from 'antd';
+import React, { useState, useMemo } from 'react';
 import enAntd from 'antd/locale/en_US';
 import viAntd from 'antd/locale/vi_VN';
 
+/** components */
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { ConfigProvider, theme as antdTheme } from 'antd';
+
 /** utils */
-import { localStorageBase } from '@module-base/storage';
-import { themeObject, themes } from '@module-theme/constants';
-import { ThemeContext, TypeModeTheme } from '@module-theme/utils';
-import { themeLocalKey } from '@module-global/constants';
+import { ThemeContext } from '@module-theme/utils';
 import { Decrypt, Encrypt } from '@module-base/utils';
 import { useLanguage } from '@module-language/utils';
+
+/** constants */
+import { localStorageBase } from '@module-base/utils';
 import { localeObject } from '@module-language/constants';
+import { themeLocalKey } from '@module-global/constants';
+import { themeObject, themes } from '@module-theme/constants';
 
-/**
- * Note: Dam bao cau hinh themes lay tu server duoc tra va truoc khi mount component nay ra.
- * Component nay khong ho tro update theme de dam bao van de hieu nang.
- */
+/** types */
+import type { FC, ReactNode } from 'react';
+import type { ThemeModeType, ThemeProps } from '@module-theme/utils';
 
-type Props = {
-    children: ReactNode;
-};
-
-function ThemeProviderBase({ children }: Props) {
+const ThemeProvider: FC<ReactNode> = ({ children }: { children: ReactNode }) => {
     const { locale } = useLanguage();
 
-    const [mode, setMode] = useState<TypeModeTheme>(() => {
-        const modeCookie = Decrypt(localStorageBase.get(themeLocalKey)) as TypeModeTheme;
+    const [mode, setMode] = useState<ThemeModeType>(() => {
+        const modeCookie = Decrypt(localStorageBase.get(themeLocalKey)) as ThemeModeType;
         if (modeCookie && !!themes[modeCookie]) {
             return modeCookie;
         }
         return themeObject.light;
     });
 
-    const toggleTheme = (value: TypeModeTheme) => {
+    const toggleTheme = (value: ThemeModeType) => {
         if (mode === value) {
             return;
         }
@@ -47,7 +46,7 @@ function ThemeProviderBase({ children }: Props) {
         setMode(value);
     };
 
-    const store = React.useMemo(
+    const store: ThemeProps = useMemo(
         () => ({
             mode,
             theme: themes[mode],
@@ -58,7 +57,7 @@ function ThemeProviderBase({ children }: Props) {
 
     return (
         <ThemeContext.Provider value={store}>
-            <ThemeProvider theme={themes[mode]}>
+            <StyledThemeProvider theme={themes[mode]}>
                 <ConfigProvider
                     locale={locale === localeObject.en ? enAntd : viAntd}
                     theme={{
@@ -73,9 +72,10 @@ function ThemeProviderBase({ children }: Props) {
                     }}>
                     {children}
                 </ConfigProvider>
-            </ThemeProvider>
+            </StyledThemeProvider>
         </ThemeContext.Provider>
     );
-}
+};
 
-export default ThemeProviderBase;
+ThemeProvider.displayName = 'ThemeProvider';
+export default ThemeProvider;

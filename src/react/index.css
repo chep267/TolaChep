@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -37,18 +37,6 @@ code {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-
-    --HEADER_HEIGHT: 60px;
-    --HEADER_PADDING: 20px;
-    --APP_BAR_WIDTH: 60px;
-    --BODY_PADDING: 10px;
-    --CONTENT_MIN_WIDTH_HEIGHT: 480px;
-    --CONTENT_MAX_WIDTH_HEIGHT: 680px;
-
-    --MESSENGER_LEFT_MAX_WIDTH: 360px;
-    --MESSENGER_LEFT_MAX_WIDTH_RESIZE: 88px;
-
-    --feed-left-width: 360px;
 }
 
 h1 {

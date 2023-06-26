@@ -1,14 +1,11 @@
-import styled from 'styled-components';
-import { Form, Input, Button, Checkbox, InputRef } from 'antd';
-
-import { SafeLayout } from '@module-base/components/web/Layout';
-import { FlexBase } from '@module-theme/constants';
-
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
+
+import styled from 'styled-components';
+import { Form, Button } from 'antd';
 
 export const FormStyle = styled(Form)(({ theme }) => ({
     width: '100%',

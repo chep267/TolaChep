@@ -1,17 +1,16 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
+import React, { Component } from 'react';
 
-export default class PureContainer extends React.Component<React.HTMLAttributes<HTMLDivElement>> {
-    constructor(props: any) {
-        super(props);
-    }
+/** types */
+import type { HTMLAttributes } from 'react';
 
-    shouldComponentUpdate(): boolean {
+class PureContainer extends Component<HTMLAttributes<HTMLDivElement>> {
+    shouldComponentUpdate() {
         return false;
     }
 
@@ -20,3 +19,5 @@ export default class PureContainer extends React.Component<React.HTMLAttributes<
         return <div {...divProps}>{children}</div>;
     }
 }
+
+export default PureContainer;

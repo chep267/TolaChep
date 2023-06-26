@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -11,8 +11,8 @@ import styled from 'styled-components';
 import { FlexBase } from '@module-theme/constants';
 
 /** components */
-const ToLaParticle = React.lazy(() => import('@module-base/components/web/Particles'));
-const FormAuth = React.lazy(() => import('@module-auth/components/web/FormAuth'));
+const ToLaParticle = React.lazy(() => import('@modules/module-base/components/web/Particles'));
+const FormAuth = React.lazy(() => import('@modules/module-auth/components/web/FormAuth'));
 
 const LayoutScreen = styled.div({
     ...FlexBase,

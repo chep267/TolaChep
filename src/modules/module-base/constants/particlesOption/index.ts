@@ -1,15 +1,15 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import type { ISourceOptions } from 'tsparticles-engine';
 
 /** utils */
-import { TypeTheme } from '@module-theme/utils';
+import { ThemeType } from '@module-theme/utils';
 
-export const getOption: (theme: TypeTheme) => ISourceOptions = (theme) => ({
+export const getOption: (theme: ThemeType) => ISourceOptions = (theme) => ({
     background: {
         color: {
             value: theme.color.particle,
@@ -82,7 +82,7 @@ export const getOption: (theme: TypeTheme) => ISourceOptions = (theme) => ({
     detectRetina: true,
 });
 
-export const getOptionStar: (theme?: TypeTheme) => ISourceOptions = (theme) => ({
+export const getOptionStar: (theme?: ThemeType) => ISourceOptions = (theme) => ({
     autoPlay: true,
     background: {
         color: {

@@ -1,13 +1,13 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { call, put, all, fork, delay } from 'redux-saga/effects';
 
 /** actions */
-import { AUTH_ACTION, authAction, TypeAuthActionPayload } from '@module-auth/actions';
+import { AUTH_ACTION, authAction, AuthActionPayloadType } from '@module-auth/actions';
 
 /** selectors */
 import { genNewUser, genUid } from '@module-user/selectors';
@@ -18,22 +18,24 @@ import { doCheckRegisterAccount, doCheckSignInAccount, doCheckSignOutAccount } f
 
 /** utils */
 import { Encrypt } from '@module-base/utils';
-import { localStorageBase } from '@module-base/storage';
+import { localStorageBase } from '@module-base/utils';
 import { emptyFunction, emptyObject } from '@module-base/constants';
 import { emailLocalKey, meIdLocalKey } from '@module-global/constants';
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
-import { TypeUser } from '@module-user/utils';
+
+/** types */
+import type { UserType } from '@module-user/utils';
 
 /** hàm tự động đăng nhập lại khi mở web */
-export function* doAutoStart(payload: TypeAuthActionPayload[typeof AUTH_ACTION.AUTO_START.REQUEST]) {
-    const user: false | TypeUser = yield call(doGetUser, payload);
+function* doAutoStart(payload: AuthActionPayloadType[typeof AUTH_ACTION.AUTO_START.REQUEST]) {
+    const user: false | UserType = yield call(doGetUser, payload);
     if (user) {
         yield put(authAction.signIn.success({ user }));
     }
 }
 
 /** hàm đăng nhập */
-export function* doSignIn(payload: TypeAuthActionPayload[typeof AUTH_ACTION.SIGN_IN.REQUEST]) {
+function* doSignIn(payload: AuthActionPayloadType[typeof AUTH_ACTION.SIGN_IN.REQUEST]) {
     const { account, password, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const { uid }: { uid: string } = yield call(doCheckSignInAccount, { account, password });
 
@@ -47,7 +49,7 @@ export function* doSignIn(payload: TypeAuthActionPayload[typeof AUTH_ACTION.SIGN
     /** Success */
     const userId = genUid(uid);
     yield fork(localStorageBase.setList, [meIdLocalKey, emailLocalKey], [Encrypt(userId), Encrypt(account)]);
-    const user: TypeUser = yield call(doGetUser, { uid: userId });
+    const user: UserType = yield call(doGetUser, { uid: userId });
     if (!user) {
         /** Failure */
         yield fork(onFailure, AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED);
@@ -58,7 +60,7 @@ export function* doSignIn(payload: TypeAuthActionPayload[typeof AUTH_ACTION.SIGN
 }
 
 /** hàm đăng kí */
-export function* doRegister(payload: TypeAuthActionPayload[typeof AUTH_ACTION.REGISTER.REQUEST]) {
+function* doRegister(payload: AuthActionPayloadType[typeof AUTH_ACTION.REGISTER.REQUEST]) {
     const { account = '', password, type = 'account', onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const { uid }: { uid: string } = yield call(doCheckRegisterAccount, { account, password });
 
@@ -80,10 +82,12 @@ export function* doRegister(payload: TypeAuthActionPayload[typeof AUTH_ACTION.RE
 }
 
 /** hàm đăng xuất */
-export function* doSignOut(payload: TypeAuthActionPayload[typeof AUTH_ACTION.SIGN_OUT.REQUEST]): any {
+function* doSignOut(payload: AuthActionPayloadType[typeof AUTH_ACTION.SIGN_OUT.REQUEST]): any {
     const { onSuccess = emptyFunction } = payload;
     yield fork(localStorageBase.remove, meIdLocalKey);
     yield put(authAction.signOut.success(emptyObject));
     yield fork(doCheckSignOutAccount);
     yield fork(onSuccess);
 }
+
+export { doAutoStart, doRegister, doSignIn, doSignOut };

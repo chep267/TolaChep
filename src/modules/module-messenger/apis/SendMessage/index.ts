@@ -1,12 +1,13 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { fork } from 'redux-saga/effects';
 import { doSendMessageProps } from '@module-messenger/apis/inteface.message';
 import { FIREBASE_SET, FIREBASE_UPDATE } from '@module-global/apis';
+// @ts-ignore
 import { chatBotMessage, chatBotSay } from '@module-messenger/constants/Message';
 
 /** Api send message */

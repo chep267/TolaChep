@@ -1,10 +1,10 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 /** utils */
@@ -30,11 +30,11 @@ const Container = styled.div(({ theme }) => ({
     },
 }));
 
-// Man hinh loading:
-export default function LoadingScreen() {
-    return (
-        <Container>
-            <img alt="loading" src={Naruto} />
-        </Container>
-    );
-}
+const LoadingScreen = () => (
+    <Container>
+        <img alt="loading" src={Naruto} />
+    </Container>
+);
+
+LoadingScreen.displayName = 'LoadingScreen';
+export default LoadingScreen;

@@ -1,32 +1,27 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import React, { ReactNode, useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import React, { useState } from 'react';
 
-// Themes
-import { ThemeContext } from '@module-theme/utils/themeContext';
+/** components */
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 /** utils */
-import { localStorageBase } from '@module-base/storage';
+import { ThemeContext } from '@module-theme/utils';
+
+/** constants */
+import { localStorageBase } from '@module-base/utils';
 import { themeObject, themes } from '@module-theme/constants';
-import { TypeModeTheme } from '@module-theme/utils';
 
-/**
- * Note: Dam bao cau hinh themes lay tu server duoc tra va truoc khi mount component nay ra.
- * Component nay khong ho tro update theme de dam bao van de hieu nang.
- */
+/** types */
+import type { FC, ReactNode } from 'react';
+import type { ThemeModeType } from '@module-theme/utils';
 
-type Props = {
-    children: ReactNode | undefined;
-};
-
-function ThemeProviderBase({ children }: Props) {
-    // const modeRef = useRef(localStorageBase.get('theme')).current || 'os-default';
-    const [mode, setMode] = useState<TypeModeTheme>(themeObject.light);
+const ThemeProvider: FC<ReactNode> = ({ children }: { children: ReactNode }) => {
+    const [mode, setMode] = useState<ThemeModeType>(themeObject.light);
     const [theme, setTheme] = useState(themes[mode]);
 
     const toggleTheme = () => {
@@ -49,9 +44,10 @@ function ThemeProviderBase({ children }: Props) {
 
     return (
         <ThemeContext.Provider value={store}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
         </ThemeContext.Provider>
     );
-}
+};
 
-export default ThemeProviderBase;
+ThemeProvider.displayName = 'ThemeProvider';
+export default ThemeProvider;

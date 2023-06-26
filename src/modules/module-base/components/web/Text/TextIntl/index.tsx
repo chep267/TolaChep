@@ -1,28 +1,34 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
-import { MessageDescriptor } from '@formatjs/intl/src/types';
-import { FormatXMLElementFn, PrimitiveType } from 'intl-messageformat';
-import { Typography } from 'antd';
-import { TextProps } from 'antd/es/typography/Text';
 
-type TextIntlProps = {
+/** components */
+import Text from 'antd/es/typography/Text';
+
+/** types */
+import type { MessageDescriptor } from '@formatjs/intl/src/types';
+import type { TextProps } from 'antd/es/typography/Text';
+
+interface TextIntlProps extends TextProps {
     message: MessageDescriptor;
-    messageOption?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
-};
+    messageOption?: Record<string, any>;
+}
 
-export function getTextIntl(props: TextIntlProps) {
+export function getTextIntl(props: Pick<TextIntlProps, 'message' | 'messageOption'>) {
     const { message, messageOption } = props;
-    const intl = useIntl();
-    return intl.formatMessage(message, messageOption);
+    const { formatMessage } = useIntl();
+    return formatMessage(message, messageOption);
 }
 
-export default function TextIntl(props: TextIntlProps & TextProps) {
-    const { message, messageOption, ...spanProps } = props;
-    return <Typography.Text {...spanProps}>{getTextIntl({ message, messageOption })}</Typography.Text>;
+function TextIntl(props: TextIntlProps & TextProps) {
+    const { message, messageOption, ...textProps } = props;
+    return <Text {...textProps}>{getTextIntl({ message, messageOption })}</Text>;
 }
+
+export type { TextIntlProps };
+export default TextIntl;

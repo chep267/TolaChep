@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -8,12 +8,12 @@ import React, { ComponentPropsWithoutRef } from 'react';
 
 /** components */
 import { Container } from './Styles';
-import Icon, { IconsType } from '@module-base/components/web/IconBase';
+import Icon, { IconBaseType } from '@module-base/components/web/IconBase';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     text?: string;
     icon?: {
-        name: IconsType;
+        name: IconBaseType;
         size?: number;
         fill?: string;
         stroke?: string;

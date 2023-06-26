@@ -1,19 +1,28 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
+import React, { Component, lazy, Suspense } from 'react';
+
+/** types */
+import type { ReactNode } from 'react';
+
+type Props = {
+    children: ReactNode;
+    fallback?: ReactNode;
+    isAutoReload?: boolean;
+};
+type States = {
+    hasError: boolean;
+};
 
 /** components */
-import FallbackDefault from './FallbackDefault';
+const FallbackDefault = lazy(() => import('./FallbackDefault'));
 
-export default class ErrorBoundary extends React.Component<
-    { children: React.ReactNode; elementFallBack?: React.FunctionComponent; isAutoReload?: boolean },
-    { hasError: boolean }
-> {
-    constructor(props: any) {
+export default class ErrorBoundary extends Component<Props, States> {
+    constructor(props: Props) {
         super(props);
         this.state = { hasError: false };
     }
@@ -30,14 +39,9 @@ export default class ErrorBoundary extends React.Component<
     }
 
     render() {
+        const { children, fallback: FallBack = FallbackDefault, isAutoReload = true } = this.props;
         const { hasError } = this.state;
-        const { children, elementFallBack: FallBack = FallbackDefault, isAutoReload = true } = this.props;
 
-        if (hasError) {
-            // You can render any custom fallback UI
-            return <FallBack isAutoReload={isAutoReload} />;
-        }
-        // return <FallBack isAutoReload={isAutoReload} />;
-        return children;
+        return <Suspense fallback={null}>{hasError ? <FallBack isAutoReload={isAutoReload} /> : children}</Suspense>;
     }
 }

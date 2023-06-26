@@ -1,24 +1,26 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { all, call, fork, put } from 'redux-saga/effects';
 
 /** actions */
-import { globalAction, TYPE_GLOBAL_ACTION_PAYLOAD, GLOBAL_ACTION } from '@module-global/actions';
+import { globalAction, GLOBAL_ACTION_PAYLOAD_PROPS, GLOBAL_ACTION } from '@module-global/actions';
 
 /** selectors */
 import { getAvatarBase, getCoverBase } from '@module-global/selectors';
 
 /** utils */
-import { localStorageBase } from '@module-base/storage';
+import { localStorageBase } from '@module-base/utils';
 import { Decrypt, Encrypt } from '@module-base/utils';
+
+/** constants */
 import { emptyFunction } from '@module-base/constants';
 import { avatarLocalKey, coverLocalKey } from '@module-global/constants';
 
-export function* doStartApp(payload: TYPE_GLOBAL_ACTION_PAYLOAD[typeof GLOBAL_ACTION.START_APP.REQUEST]) {
+function* doStartApp(payload: GLOBAL_ACTION_PAYLOAD_PROPS[typeof GLOBAL_ACTION.START_APP.REQUEST]) {
     /** check avatar base, cover base */
     const { onSuccess = emptyFunction } = payload;
     let [avatarBase, coverBase]: [string, string] = yield all([
@@ -36,3 +38,5 @@ export function* doStartApp(payload: TYPE_GLOBAL_ACTION_PAYLOAD[typeof GLOBAL_AC
     yield put(globalAction.startApp.success({ avatar: avatarBase, cover: coverBase }));
     yield fork(onSuccess);
 }
+
+export { doStartApp };

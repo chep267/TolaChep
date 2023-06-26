@@ -1,30 +1,31 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 /** utils */
-import { createAction, createActionKey } from '@module-base/utils';
-import { TypeUser } from '@module-user/utils';
+import { createAction as createActionBase, createActionKey } from '@module-base/utils';
 
-const arrActionKey = ['GET', 'CREATE', 'UPDATE', 'DELETE'] as const;
-export const USER_ACTION = createActionKey('USER_ACTION', arrActionKey);
+/** types */
+import type { UserType } from '@module-user/utils';
 
-export type TypeUser_ACTION_PAYLOAD = {
+const USER_ACTION = createActionKey('USER_ACTION', ['GET', 'CREATE', 'UPDATE', 'DELETE'] as const);
+
+type UserActionPayloadType = {
     [USER_ACTION.GET.REQUEST]: {
         uid: string;
         onSuccess?(): void;
         onFailure?(): void;
     };
     [USER_ACTION.GET.SUCCESS]: {
-        user: TypeUser;
+        user: UserType;
     };
     [USER_ACTION.CREATE.REQUEST]: {
         uid: string;
     };
     [USER_ACTION.CREATE.SUCCESS]: {
-        user: TypeUser;
+        user: UserType;
     };
     [USER_ACTION.UPDATE.REQUEST]: {
         account: string;
@@ -33,7 +34,7 @@ export type TypeUser_ACTION_PAYLOAD = {
         onFailure(): void;
     };
     [USER_ACTION.UPDATE.SUCCESS]: {
-        user: TypeUser;
+        user: UserType;
     };
     [USER_ACTION.DELETE.REQUEST]: {
         account: string;
@@ -44,25 +45,28 @@ export type TypeUser_ACTION_PAYLOAD = {
     [USER_ACTION.DELETE.SUCCESS]: {};
 };
 
-function createUserAction<Type extends keyof TypeUser_ACTION_PAYLOAD>(type: Type) {
-    return createAction<Type, TypeUser_ACTION_PAYLOAD>(type);
+function createAction<Type extends Readonly<string>>(type: Type) {
+    return createActionBase<Type, UserActionPayloadType[Type]>(type);
 }
 
-export const userAction = Object.freeze({
+const userAction = Object.freeze({
     get: {
-        request: createUserAction(USER_ACTION.GET.REQUEST),
-        success: createUserAction(USER_ACTION.GET.SUCCESS),
+        request: createAction(USER_ACTION.GET.REQUEST),
+        success: createAction(USER_ACTION.GET.SUCCESS),
     },
     create: {
-        request: createUserAction(USER_ACTION.CREATE.REQUEST),
-        success: createUserAction(USER_ACTION.CREATE.SUCCESS),
+        request: createAction(USER_ACTION.CREATE.REQUEST),
+        success: createAction(USER_ACTION.CREATE.SUCCESS),
     },
     update: {
-        request: createUserAction(USER_ACTION.UPDATE.REQUEST),
-        success: createUserAction(USER_ACTION.UPDATE.SUCCESS),
+        request: createAction(USER_ACTION.UPDATE.REQUEST),
+        success: createAction(USER_ACTION.UPDATE.SUCCESS),
     },
     delete: {
-        request: createUserAction(USER_ACTION.DELETE.REQUEST),
-        success: createUserAction(USER_ACTION.DELETE.SUCCESS),
+        request: createAction(USER_ACTION.DELETE.REQUEST),
+        success: createAction(USER_ACTION.DELETE.SUCCESS),
     },
 });
+
+export type { UserActionPayloadType };
+export { userAction, USER_ACTION };

@@ -1,13 +1,13 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { call, put, fork } from 'redux-saga/effects';
 
 /** actions */
-import { TypeUser_ACTION_PAYLOAD, USER_ACTION, userAction } from '@module-user/actions';
+import { USER_ACTION, userAction } from '@module-user/actions';
 
 /** apis */
 import { FIREBASE_GET, FIREBASE_SET } from '@module-global/apis';
@@ -16,10 +16,13 @@ import { FIREBASE_GET, FIREBASE_SET } from '@module-global/apis';
 
 /** utils */
 import { PATH_USER_FIREBASE } from '@module-user/constants';
-import { TypeUser } from '@module-user/utils';
 import { emptyFunction } from '@module-base/constants';
 
-export function* doGetUser(payload: TypeUser_ACTION_PAYLOAD[typeof USER_ACTION.GET.REQUEST]): any {
+/** types */
+import type { UserActionPayloadType } from '@module-user/actions';
+import type { UserType } from '@module-user/utils';
+
+function* doGetUser(payload: UserActionPayloadType[typeof USER_ACTION.GET.REQUEST]): any {
     const { uid, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const response = yield call(FIREBASE_GET, { path: `${PATH_USER_FIREBASE}${uid}` });
     if (response.exists()) {
@@ -33,7 +36,7 @@ export function* doGetUser(payload: TypeUser_ACTION_PAYLOAD[typeof USER_ACTION.G
     return false;
 }
 
-export function* doCreateUser(payload: { user: TypeUser; onSuccess?: () => void; onFailure?: () => void }): any {
+function* doCreateUser(payload: UserActionPayloadType[typeof USER_ACTION.CREATE.REQUEST]): any {
     const { user, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
     const error = yield call(FIREBASE_SET, { path: `${PATH_USER_FIREBASE}${user.uid}`, data: user });
     if (error) {
@@ -46,3 +49,5 @@ export function* doCreateUser(payload: { user: TypeUser; onSuccess?: () => void;
     yield fork(onSuccess);
     return true;
 }
+
+export { doCreateUser, doGetUser };

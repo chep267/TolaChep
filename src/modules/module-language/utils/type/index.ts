@@ -1,9 +1,19 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-export type TypeLocale = 'vi' | 'en';
-export type TypeLocaleObject = Readonly<{ [key in TypeLocale]: key }>;
-export type TypeMessages = Readonly<{ [key in TypeLocale]: Record<string, string> }>;
+/** constants */
+import { localeObject } from '@module-language/constants';
+
+type LocaleType = keyof typeof localeObject;
+type LocaleObjectType = Readonly<{ [key in LocaleType]: key }>;
+type MessagesType = Readonly<{ [key in LocaleType]: Record<string, string> }>;
+type LanguageProps = {
+    locale: LocaleType;
+    messages: Record<string, string>;
+    toggleLanguage: (value: LocaleType) => void;
+};
+
+export type { LocaleType, LocaleObjectType, MessagesType, LanguageProps };

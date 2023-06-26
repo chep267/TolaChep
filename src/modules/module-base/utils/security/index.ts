@@ -1,13 +1,13 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 /**
  * func Encrypt
  *
- * return: mã hóa chuỗi
+ * return: chuỗi mã hóa
  */
 function Encrypt(value = ''): string {
     if (!value) return value;
@@ -32,7 +32,7 @@ function Encrypt(value = ''): string {
 /**
  * func Decrypt
  *
- * return: giải mã hóa chuỗi
+ * return: chuỗi giải mã hóa
  */
 function Decrypt(value: null | undefined | string = ''): string {
     if (!value) return '';

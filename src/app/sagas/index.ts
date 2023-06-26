@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -11,7 +11,7 @@ import moduleAuthSaga from '@module-auth/sagas/watchers';
 import moduleGlobalSaga from '@module-global/sagas/watchers';
 import moduleUserSaga from '@module-user/sagas/watchers';
 
-export default function* rootSaga() {
+const rootSaga = function* rootSaga() {
     const sagas = [...moduleAuthSaga, ...moduleGlobalSaga, ...moduleUserSaga];
     yield all(
         sagas.map((saga) =>
@@ -27,4 +27,6 @@ export default function* rootSaga() {
             })
         )
     );
-}
+};
+
+export default rootSaga;

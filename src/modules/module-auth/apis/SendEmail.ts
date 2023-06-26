@@ -1,24 +1,30 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import emailjs from '@emailjs/browser';
+import * as EmailJS from '@emailjs/browser';
+
+/** constants */
 import { emptyFunction } from '@module-base/constants';
 
-const templateParams = (name: string, code: string, email: string) => ({
-    name,
-    code,
-    email,
-});
+const doSendEmail = (payload: { code: number; email: string; onSuccess: () => void; onFailure: () => void }) => {
+    const {
+        code = 123456,
+        email = 'vuquangtu0906@gmail.com',
+        onSuccess = emptyFunction,
+        onFailure = emptyFunction,
+    } = payload;
 
-const doSendEmail = (payload: any) => {
-    const { code = 123456, email = 'vuquangtu0906@gmail.com', onFailure = emptyFunction } = payload;
-    // const email = 'vuquangtu0906@gmail.com';
     const name = email.split('@')[0];
-    const param = templateParams(name, code, email);
-    emailjs.send('gmail', 'template_qu3gm6k', param, 'Om5edOnUewEAJd_O5').then(emptyFunction, () => onFailure('server'));
+    const param = {
+        name,
+        code,
+        email,
+    };
+
+    EmailJS.send('gmail', 'template_qu3gm6k', param, 'Om5edOnUewEAJd_O5').then(onSuccess, onFailure);
 };
 
 export default doSendEmail;

@@ -1,10 +1,10 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
+import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 
 /** screens */
@@ -15,8 +15,10 @@ import { ThemeProvider } from '@module-theme/components/web';
 import { LanguageProvider } from '@module-language/components/web';
 import { UiProvider } from '@module-global/components/web';
 
-/** utils */
+/** redux store */
 import store from '@app/store';
+
+/** utils */
 import { messages } from '@app/utils';
 
 /** global styles */

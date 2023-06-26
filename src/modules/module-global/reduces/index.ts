@@ -1,20 +1,22 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 
 /** actions */
 import { GLOBAL_ACTION } from '@module-global/actions';
 
 /** utils */
 import { GLOBAL_STORE_KEY } from '@module-global/constants';
-import { TYPE_GLOBAL_STORE } from '@module-global/utils';
+import { GlobalStoreType } from '@module-global/utils';
 
-const startAppSuccess = (state: TYPE_GLOBAL_STORE, action: PayloadAction<{ avatar: string; cover: string }>) => {
+/** types */
+import type { PayloadAction } from '@reduxjs/toolkit';
+
+const startAppSuccess = (state: GlobalStoreType, action: PayloadAction<{ avatar: string; cover: string }>) => {
     const { avatar, cover } = action.payload;
     state.image = {
         avatar,
@@ -22,7 +24,7 @@ const startAppSuccess = (state: TYPE_GLOBAL_STORE, action: PayloadAction<{ avata
     };
 };
 
-const initialState: TYPE_GLOBAL_STORE = {
+const initialState: GlobalStoreType = {
     router: '/',
     image: {
         avatar: '',

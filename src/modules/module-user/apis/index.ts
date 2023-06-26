@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -14,22 +14,24 @@ interface TYPE_API_CREATE_USER {
 
 const getPathUserFirebase = (arrPath: string[]) => `${PATH_USER_FIREBASE}${arrPath.join('/')}`;
 
-export const createUser = (payload: TYPE_API_CREATE_USER) => {
+const createUser = (payload: TYPE_API_CREATE_USER) => {
     const { userId } = payload;
     FIREBASE_SET({ path: getPathUserFirebase([]), data: {} }).then();
 };
 
-export const getUser = (payload: TYPE_API_CREATE_USER) => {
+const getUser = (payload: TYPE_API_CREATE_USER) => {
     const { userId } = payload;
     FIREBASE_GET({ path: getPathUserFirebase([]), data: {} }).then();
 };
 
-export const deleteUser = (payload: TYPE_API_CREATE_USER) => {
+const deleteUser = (payload: TYPE_API_CREATE_USER) => {
     const { userId } = payload;
     FIREBASE_REMOVE({ path: getPathUserFirebase([]), data: {} }).then();
 };
 
-export const updateUser = (payload: TYPE_API_CREATE_USER) => {
+const updateUser = (payload: TYPE_API_CREATE_USER) => {
     const { userId } = payload;
     FIREBASE_REMOVE({ path: getPathUserFirebase([]), data: {} }).then();
 };
+
+export { createUser, getUser, updateUser, deleteUser };

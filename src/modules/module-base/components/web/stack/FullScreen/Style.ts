@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import SafeLayout from '@module-base/components/web/Layout/SafeLayout';
 import Button from '@module-base/components/web/stack/Button';
 
-export const Container = styled(SafeLayout)(({ theme }) => ({
+export const Container = styled.div(({ theme }) => ({
     position: 'fixed',
     zIndex: theme.zIndex.max,
     top: 0,

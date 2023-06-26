@@ -1,11 +1,15 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { call } from 'redux-saga/effects';
+
+/** apis */
 import { FIREBASE_GET } from '@module-global/apis';
+
+/** utils */
 import { Decrypt } from '@module-base/utils';
 
 // export function* doGetUser(payload: { meIdCookie: string }) {

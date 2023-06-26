@@ -1,18 +1,21 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
-import { TypeUser } from '@module-user/utils';
 
-export const PATH_USER_FIREBASE = '/users/';
-export const USER_STORE_KEY = Object.freeze({
+/** types */
+import type { UserType } from '@module-user/utils';
+
+const PATH_USER_FIREBASE = '/users/';
+
+const USER_STORE_KEY = Object.freeze({
     ROOT: 'StoreUser',
     USER: 'User',
     HAS_USER: 'HasUser',
-});
+} as const);
 
-export const emptyUser: TypeUser = {
+const emptyUser: UserType = Object.freeze({
     uid: 'uid-test',
     info: {
         account: 'chep.tola',
@@ -29,4 +32,6 @@ export const emptyUser: TypeUser = {
     config: {
         type: 'account',
     },
-};
+});
+
+export { PATH_USER_FIREBASE, USER_STORE_KEY, emptyUser };

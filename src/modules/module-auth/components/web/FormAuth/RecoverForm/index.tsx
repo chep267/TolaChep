@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -18,12 +18,12 @@ import { getTextIntl } from '@module-base/components/web';
 
 /** utils */
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
-import { authMessage, TypeAuthFormError } from '@module-auth/utils';
+import { authMessage, AuthFormErrorType } from '@module-auth/utils';
 import { useAppDispatch } from '@app/store';
 import { Decrypt } from '@module-base/utils';
-import { localStorageBase } from '@module-base/storage';
+import { localStorageBase } from '@module-base/utils';
 import { emailLocalKey } from '@module-global/constants';
-import { REG_PHONE, REGEX_EMAIL } from '@module-base/constants';
+import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
 
 function RecoverForm() {
     const dispatch = useAppDispatch();
@@ -33,9 +33,9 @@ function RecoverForm() {
     const passwordHillRef: React.Ref<InputRef> = React.useRef(null);
 
     const [status, setStatus] = React.useState<{
-        account: TypeAuthFormError;
-        password: TypeAuthFormError;
-        passwordHill: TypeAuthFormError;
+        account: AuthFormErrorType;
+        password: AuthFormErrorType;
+        passwordHill: AuthFormErrorType;
     }>({
         account: AUTH_FORM_ERROR.DEFAULT,
         password: AUTH_FORM_ERROR.DEFAULT,
@@ -56,7 +56,7 @@ function RecoverForm() {
         const password = passwordRef.current?.input?.value?.trim() || '';
         const passwordHill = passwordHillRef.current?.input?.value?.trim() || '';
         const isEmail = REGEX_EMAIL.test(account);
-        const isPhone = REG_PHONE.test(account);
+        const isPhone = REGEX_PHONE.test(account);
 
         switch (true) {
             case !account || status.account === AUTH_FORM_ERROR.ACCOUNT_EMPTY: {
@@ -132,7 +132,7 @@ function RecoverForm() {
                     setIsSubmit(false);
                 };
 
-                const onFailure = (value: TypeAuthFormError) => {
+                const onFailure = (value: AuthFormErrorType) => {
                     accountRef.current?.focus();
                     setStatus({
                         account: value,

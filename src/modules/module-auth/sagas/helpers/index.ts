@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -9,10 +9,14 @@ import { call } from 'redux-saga/effects';
 /** apis */
 import { FIREBASE_GET, registerAccount, signInAccount, signOutAccount } from '@module-global/apis';
 
-/** utils */
+/** constants */
 import { AUTH_FORM_ERROR, PATH_AUTH_FIREBASE } from '@module-auth/constants';
+
+/** utils */
 import { Encrypt } from '@module-base/utils';
-import { TYPE_ACCOUNT } from '@module-auth/utils';
+
+/** types */
+import type { AccountType } from '@module-auth/utils';
 
 /**
  * Hàm kiểm tra xác thực tài khoản
@@ -21,7 +25,7 @@ import { TYPE_ACCOUNT } from '@module-auth/utils';
  * AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED: tài khoản chưa được đăng ký
  * AUTH_FORM_ERROR.ACCOUNT_INCORRECT: tài khoản, mật khẩu không chính xác
  */
-export function* doCheckAuth(payload: { account: string; password: string; type?: TYPE_ACCOUNT }): any {
+function* doCheckAuth(payload: { account: string; password: string; type?: AccountType }): any {
     const { account, password, type = 'account' } = payload;
     const response = yield call(FIREBASE_GET, { path: `${PATH_AUTH_FIREBASE}${type}/${account}` });
     if (response.exists()) {
@@ -34,7 +38,7 @@ export function* doCheckAuth(payload: { account: string; password: string; type?
     return AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED;
 }
 
-export function* doCheckSignInAccount(payload: { account: string; password: string }) {
+function* doCheckSignInAccount(payload: { account: string; password: string }) {
     const { account, password } = payload;
     const { response, error } = yield call(signInAccount, account, password);
     if (error) {
@@ -51,7 +55,7 @@ export function* doCheckSignInAccount(payload: { account: string; password: stri
     return response;
 }
 
-export function* doCheckRegisterAccount(payload: { account: string; password: string }): any {
+function* doCheckRegisterAccount(payload: { account: string; password: string }): any {
     const { account, password } = payload;
     const { response, error } = yield call(registerAccount, account, password);
     if (error) {
@@ -62,7 +66,9 @@ export function* doCheckRegisterAccount(payload: { account: string; password: st
     return response;
 }
 
-export function* doCheckSignOutAccount(): any {
+function* doCheckSignOutAccount(): any {
     const { error } = yield call(signOutAccount);
     return !error;
 }
+
+export { doCheckAuth, doCheckRegisterAccount, doCheckSignInAccount, doCheckSignOutAccount };

@@ -1,16 +1,16 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-export const AUTH_STORE_KEY = Object.freeze({
+const AUTH_STORE_KEY = Object.freeze({
     ROOT: 'StoreAuth',
-});
+} as const);
 
-export const PATH_AUTH_FIREBASE = '/auths/';
+const PATH_AUTH_FIREBASE = '/auths/';
 
-export const AUTH_FORM_ERROR = Object.freeze({
+const AUTH_FORM_ERROR = Object.freeze({
     /**  không có lỗi */
     DEFAULT: '',
 
@@ -40,4 +40,6 @@ export const AUTH_FORM_ERROR = Object.freeze({
 
     /**  mật khẩu xác nhận không khớp */
     PASSWORD_DIFFERENT: 'passwordHill.different',
-});
+} as const);
+
+export { AUTH_STORE_KEY, PATH_AUTH_FIREBASE, AUTH_FORM_ERROR };

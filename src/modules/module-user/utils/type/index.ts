@@ -1,12 +1,13 @@
-import { USER_STORE_KEY } from '@module-user/constants';
-
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-export interface TypeUser {
+/** constants */
+import { USER_STORE_KEY } from '@module-user/constants';
+
+type UserType = {
     uid: string;
     info: {
         account: string;
@@ -23,22 +24,25 @@ export interface TypeUser {
     config: {
         type: string;
     };
-}
+};
 
-export type TypeUser_STORE_HAS_USER = {
+type HasUserType = {
     [key: string]: {
         itemIds: string[];
+        count: number;
         total: number;
     };
 };
 
-export type TypeUser_STORE_USER = {
+type UsersType = {
     [key: string]: {
-        data: TypeUser;
+        data: UserType;
     };
 };
 
-export type TypeUser_STORE = {
-    [USER_STORE_KEY.HAS_USER]: TypeUser_STORE_HAS_USER;
-    [USER_STORE_KEY.USER]: TypeUser_STORE_USER;
+type UserStoreType = {
+    [USER_STORE_KEY.HAS_USER]: HasUserType;
+    [USER_STORE_KEY.USER]: UsersType;
 };
+
+export type { UserTyp, HasUserType, UsersType, UserStoreType };

@@ -1,20 +1,26 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { TYPE_STORE_AUTH } from '@module-auth/utils';
+
+/** constants */
 import { emptyUser } from '@module-user/constants';
 
-export const signInSuccess = (state: TYPE_STORE_AUTH, action: PayloadAction<Pick<TYPE_STORE_AUTH, 'user'>>) => {
+/** types */
+import { StoreAuthType } from '@module-auth/utils';
+
+const signInSuccess = (state: StoreAuthType, action: PayloadAction<Pick<StoreAuthType, 'user'>>) => {
     const { user } = action.payload;
     state.user = user;
     state.meId = user.uid;
 };
 
-export const signOutSuccess = (state: TYPE_STORE_AUTH) => {
+const signOutSuccess = (state: StoreAuthType) => {
     state.user = emptyUser;
     state.meId = '';
 };
+
+export { signInSuccess, signOutSuccess };

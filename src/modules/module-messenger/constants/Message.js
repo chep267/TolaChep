@@ -1,9 +1,9 @@
-import { getIDbyTime } from '@module-global/selectors/time';
+import { genIdByTime } from '@module-global/selectors/time';
 import { Encrypt } from '@module-base/utils';
 import { emptyArray } from '@module-base/constants';
 
 const emptyMessage = ({ messageType = 'text', senderId = '', messageText = '', files = emptyArray }) => {
-    const createdTime = getIDbyTime();
+    const createdTime = genIdByTime();
     return {
         mid: `mid-${createdTime}`,
         type: messageType,
@@ -17,7 +17,7 @@ const emptyMessage = ({ messageType = 'text', senderId = '', messageText = '', f
 };
 
 const chatBotMessage = (messageType = 'text', messageText = '') => {
-    const createdTime = getIDbyTime();
+    const createdTime = genIdByTime();
     return {
         mid: `mid-${createdTime}`,
         type: messageType,

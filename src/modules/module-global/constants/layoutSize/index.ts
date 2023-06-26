@@ -1,20 +1,47 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-export const HEADER_HEIGHT = 60;
-export const HEADER_PADDING = 10;
-export const APP_BAR_WIDTH = 60;
-export const BODY_PADDING = 10;
-export const BODY_MAX_WIDTH = 2000;
-
-export const MESSENGER_LEFT_MAX_WIDTH = 360;
-export const MESSENGER_LEFT_MIN_WIDTH = 280;
-export const MESSENGER_LEFT_MAX_WIDTH_RESIZE = 90;
-export const MESSENGER_CENTER_MAX_WIDTH = 1300;
-export const MESSENGER_CENTER_NORMAL_WIDTH = 720;
-export const MESSENGER_CENTER_MIN_WIDTH = 480;
+export const AppSizeCustom = Object.freeze({
+    global: {
+        headerHeight: 60,
+        siderWidth: {
+            max: 250,
+            min: 70,
+        },
+        contentWidth: {
+            max: 2000,
+            min: 1300,
+            mini: 480,
+            hide: 0,
+        },
+        padding: 10,
+    },
+    messenger: {
+        leftWidth: {
+            max: 360,
+            min: 280,
+            mini: 90,
+            hide: 0,
+        },
+        centerWidth: {
+            max: 1300,
+            min: 720,
+            mini: 480,
+            hide: 0,
+        },
+    },
+    screen: {
+        xs: '480px',
+        sm: '576px',
+        md: '768px',
+        lg: '992px',
+        xl: '1200px',
+        xls: '1400px',
+        xxl: '1600px',
+    },
+});
 
 export const TIME_LOADING_APP = 1 || 1000;

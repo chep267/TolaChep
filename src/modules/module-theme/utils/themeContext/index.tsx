@@ -1,37 +1,32 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
+import React, { createContext, useContext } from 'react';
 
 /** utils */
 import { themeObject, themes } from '@module-theme/constants';
-import { TypeTheme, TypeModeTheme } from '@module-theme/utils';
 
-export type ThemeProps = {
-    mode: TypeModeTheme;
-    theme: TypeTheme;
-    toggleTheme: (value: TypeModeTheme) => void;
-};
+/** types */
+import type { FunctionComponent } from 'react';
+import type { ThemeProps } from '@module-theme/utils/type';
 
-const initialState = {
+const ThemeContext = createContext<ThemeProps>({
     mode: themeObject.light,
     theme: themes[themeObject.light],
     toggleTheme: () => null,
-};
+});
 
-const ThemeContext = React.createContext<ThemeProps>(initialState);
-ThemeContext.displayName = 'ThemeContext';
+const useTheme = () => useContext(ThemeContext);
 
-const useTheme = () => React.useContext<ThemeProps>(ThemeContext);
-
-function withTheme(WrappedComponent: React.ElementType) {
-    return function EnhancedComponent(props: any) {
+function withTheme(WrappedComponent: FunctionComponent) {
+    return function EnhancedComponent<Props>(props: Props) {
         const theme = useTheme();
         return <WrappedComponent {...props} theme={theme} />;
     };
 }
 
+ThemeContext.displayName = 'ThemeContext';
 export { ThemeContext, useTheme, withTheme };

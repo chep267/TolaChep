@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -20,12 +20,12 @@ import {
     DataSnapshot,
 } from 'firebase/database';
 
-// utils
+/** utils */
 import { firebaseApp } from '@module-global/utils';
 
 const realtimeDB = getDatabase(firebaseApp);
 
-export interface payloadPropsWithCallBack {
+interface payloadPropsWithCallBack {
     type?: string;
     path?: string;
     data?: object;
@@ -33,12 +33,15 @@ export interface payloadPropsWithCallBack {
     fnCallback(snapshot: DataSnapshot, previousChildName?: string | null | undefined): unknown;
 }
 
-export interface payloadPropsWithoutCallBack {
+interface payloadPropsWithoutCallBack {
     type?: string;
     path?: string;
     data?: object;
     queryConstraints?: QueryConstraint[];
 }
+
+const onSuccess = () => ({ response: true });
+const onError = (error: Error) => ({ error });
 
 const FIREBASE_GET = (payload: payloadPropsWithoutCallBack) => {
     const { path, queryConstraints } = payload;
@@ -46,8 +49,8 @@ const FIREBASE_GET = (payload: payloadPropsWithoutCallBack) => {
         return get(query(dbRef(realtimeDB, path)));
     }
     return get(query(dbRef(realtimeDB, path), ...queryConstraints))
-        .then(() => ({ response: true }))
-        .catch((error) => ({ error }));
+        .then(onSuccess)
+        .catch(onError);
 };
 
 const FIREBASE_ON_GET = (payload: payloadPropsWithCallBack) => {
@@ -60,23 +63,17 @@ const FIREBASE_ON_GET = (payload: payloadPropsWithCallBack) => {
 
 const FIREBASE_SET = (payload: payloadPropsWithoutCallBack) => {
     const { path, data } = payload;
-    return set(dbRef(realtimeDB, path), data)
-        .then(() => ({ response: true }))
-        .catch((error) => ({ error }));
+    return set(dbRef(realtimeDB, path), data).then(onSuccess).catch(onError);
 };
 
 const FIREBASE_UPDATE = (payload: payloadPropsWithoutCallBack) => {
     const { path, data = {} } = payload;
-    return update(dbRef(realtimeDB, path), data)
-        .then(() => ({ response: true }))
-        .catch((error) => ({ error }));
+    return update(dbRef(realtimeDB, path), data).then(onSuccess).catch(onError);
 };
 
 const FIREBASE_REMOVE = (payload: payloadPropsWithoutCallBack) => {
     const { path } = payload;
-    return remove(dbRef(realtimeDB, path))
-        .then(() => ({ response: true }))
-        .catch((error) => ({ error }));
+    return remove(dbRef(realtimeDB, path)).then(onSuccess).catch(onError);
 };
 
-export { FIREBASE_GET, FIREBASE_SET, FIREBASE_UPDATE, FIREBASE_REMOVE, FIREBASE_ON_GET };
+export { FIREBASE_GET, FIREBASE_ON_GET, FIREBASE_SET, FIREBASE_UPDATE, FIREBASE_REMOVE };

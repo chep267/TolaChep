@@ -1,36 +1,40 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { IntlProvider } from 'react-intl';
 
-/** constants */
-import { localeObject } from '@module-language/constants';
-import { localeLocalKey } from '@module-global/constants';
-
-// selectors
+/** selectors */
 import { getDeviceLanguage } from '@module-language/selectors';
 
 /** utils */
-import { LanguageContext, TypeMessages, TypeLocale } from '@module-language/utils';
-import { localStorageBase } from '@module-base/storage';
+import { LanguageContext } from '@module-language/utils';
 import { Encrypt, Decrypt } from '@module-base/utils';
 
-interface Props {
-    children: React.ReactNode;
-    messages: TypeMessages;
-}
+/** constants */
+import { localStorageBase } from '@module-base/utils';
+import { localeObject } from '@module-language/constants';
+import { localeLocalKey } from '@module-global/constants';
 
-function LanguageProvider({ children, messages }: Props) {
-    const [locale, setLocale] = React.useState<TypeLocale>(getDeviceLanguage());
+/** types */
+import type { FC, ReactNode } from 'react';
+import type { MessagesType, LocaleType, LanguageProps } from '@module-language/utils';
 
-    React.useEffect(() => {
+type Props = {
+    children: ReactNode;
+    messages: MessagesType;
+};
+
+const LanguageProvider: FC<ReactNode> = ({ children, messages }: Props) => {
+    const [locale, setLocale] = useState<LocaleType>(getDeviceLanguage());
+
+    useEffect(() => {
         const initLanguage = async () => {
             const lastLocale = (await localStorageBase.get(localeLocalKey)) || '';
-            const localeCookie = Decrypt(lastLocale) as TypeLocale;
+            const localeCookie = Decrypt(lastLocale) as LocaleType;
             if (localeCookie && localeCookie !== locale && !!localeObject[localeCookie]) {
                 setLocale(localeCookie);
             }
@@ -39,7 +43,7 @@ function LanguageProvider({ children, messages }: Props) {
         initLanguage().then();
     }, []);
 
-    const toggleLanguage = (value: TypeLocale) => {
+    const toggleLanguage = (value: LocaleType) => {
         if (locale === value) {
             return;
         }
@@ -47,7 +51,7 @@ function LanguageProvider({ children, messages }: Props) {
         setLocale(value);
     };
 
-    const store = React.useMemo(
+    const store: LanguageProps = useMemo(
         () => ({
             locale,
             messages: messages[locale],
@@ -63,6 +67,7 @@ function LanguageProvider({ children, messages }: Props) {
             </IntlProvider>
         </LanguageContext.Provider>
     );
-}
+};
 
+LanguageProvider.displayName = 'LanguageProvider';
 export default LanguageProvider;

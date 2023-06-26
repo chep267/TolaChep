@@ -1,19 +1,20 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { FIREBASE_SET } from '../realtimeDB';
 
-// utils
+/** utils */
 import { firebaseApp } from '@module-global/utils';
+
 const st = getStorage(firebaseApp);
 
-export const getUrlFile = (path: string) => getDownloadURL(ref(st, path));
+const getUrlFile = (path: string) => getDownloadURL(ref(st, path));
 
-export const apiSendFile = async (meId: string, threadId: string, mid: string, file: File) => {
+const apiSendFile = async (meId: string, threadId: string, mid: string, file: File) => {
     const { type = '', name } = file;
     const metadata = {
         contentType: type,
@@ -37,7 +38,7 @@ export const apiSendFile = async (meId: string, threadId: string, mid: string, f
     };
 };
 
-export const apiUploadAvatar = async (meId: string, key: 'avatar' | 'background', file: File) => {
+const apiUploadAvatar = async (meId: string, key: 'avatar' | 'background', file: File) => {
     const { type = 'jpg', name = `avatar.${type}` } = file;
     const metadata = {
         contentType: type,
@@ -53,3 +54,5 @@ export const apiUploadAvatar = async (meId: string, key: 'avatar' | 'background'
         fid: `fid-${Date.now()}`,
     };
 };
+
+export { getUrlFile, apiSendFile, apiUploadAvatar };

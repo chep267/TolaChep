@@ -1,14 +1,16 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import { TypeUser } from '@module-user/utils';
+/** types */
+import type { UserType } from '@module-user/utils';
+import type { AccountType } from '@module-auth/utils';
 
-export const genUid = (id = '') => `uid-${id || Date.now()}`;
+const genUid = (id = '') => `uid-${id || Date.now()}`;
 
-export const genNewUser = ({
+const genNewUser = ({
     uid = '',
     email = '',
     phone = '',
@@ -19,9 +21,9 @@ export const genNewUser = ({
     name?: string;
     phone?: string;
     contact?: string;
-    type: 'account' | 'facebook' | 'google';
+    type: AccountType;
 }) => {
-    const user: TypeUser = {
+    const user: UserType = {
         uid: uid || genUid(),
         info: {
             account: '',
@@ -42,3 +44,5 @@ export const genNewUser = ({
 
     return user;
 };
+
+export { genUid, genNewUser };

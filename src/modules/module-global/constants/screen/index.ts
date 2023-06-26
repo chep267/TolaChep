@@ -1,10 +1,10 @@
-import { IconsType } from '@module-base/components/web/IconBase';
-
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
+
+import { IconBaseType } from '@module-base/components/web/IconBase';
 
 export const SCREEN = Object.freeze({
     FEED: '/feed',
@@ -18,7 +18,7 @@ export const SCREEN = Object.freeze({
     RECOVER: '/recover',
 });
 
-export const ListAppBar: Array<{ name: string; path: (typeof SCREEN)[keyof typeof SCREEN]; icon: IconsType }> = [
+export const ListAppBar: Array<{ name: string; path: (typeof SCREEN)[keyof typeof SCREEN]; icon: IconBaseType }> = [
     {
         name: 'New Feed',
         path: '/feed',

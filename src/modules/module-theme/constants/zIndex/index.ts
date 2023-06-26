@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -22,6 +22,4 @@ export const Z_INDEX = {
     modal: 900,
     underMax: 998,
     max: 999,
-};
-
-export type Z_INDEX_TYPE = typeof Z_INDEX;
+} as const;

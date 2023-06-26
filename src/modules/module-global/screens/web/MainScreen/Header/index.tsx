@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -21,9 +21,9 @@ const HeaderLayout = styled(Header)`
         align-items: center;
         position: sticky;
         top: 0;
-        height: var(--HEADER_HEIGHT);
-        min-height: var(--HEADER_HEIGHT);
-        max-height: var(--HEADER_HEIGHT);
+        height: var(--header-height);
+        min-height: var(--header-height);
+        max-height: var(--header-height);
         overflow: hidden;
         -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
         -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);

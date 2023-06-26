@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -11,7 +11,7 @@ export const FONT_SIZE = {
     medium: '1rem',
     large: '1.125rem',
     huge: '1.5rem',
-};
+} as const;
 
 export const LIGHT_HEIGHT = {
     tiny: '1rem',
@@ -20,6 +20,4 @@ export const LIGHT_HEIGHT = {
     medium: '1.5rem',
     large: '1.625rem',
     huge: '2rem',
-};
-
-export type FONT_SIZE_TYPE = typeof FONT_SIZE;
+} as const;

@@ -1,39 +1,43 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
+import React, { lazy, Suspense, useEffect, useState, useCallback } from 'react';
+
+/** components */
+import { FallBackLayout, Container, ButtonRetry, TextAutoReload, Title, Content } from './styles';
+import { getTextIntl } from '@module-base/components/web';
 
 /** utils */
 import { errorMessage } from '@module-error/utils';
 import { getOptionStar } from '@module-base/constants';
 import Logo from '@module-error/assets/svg/error.jpeg';
 
-/** components */
-import { FallBackLayout, Container, ButtonRetry, TextAutoReload, Title, Content } from './styles';
-import { getTextIntl } from '@module-base/components/web';
-const ToLaParticle = React.lazy(() => import('@module-base/components/web/Particles'));
+/** components lazy */
+const ToLaParticle = lazy(() => import('@modules/module-base/components/web/Particles'));
 
-export default function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
-    const [second, setSecond] = React.useState(100);
+function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
+    const [second, setSecond] = useState(99);
 
-    React.useEffect(() => {
-        const timeOut = setInterval(() => {
+    useEffect(() => {
+        const timer = setInterval(() => {
             setSecond((s) => s - 1);
         }, 1000);
 
         return () => {
-            clearTimeout(timeOut);
+            clearInterval(timer);
         };
     }, []);
 
-    React.useEffect(() => {
-        if (second === 0) reloadWindow();
+    useEffect(() => {
+        if (second === 0) {
+            reloadWindow();
+        }
     }, [second]);
 
-    const reloadWindow = React.useCallback(() => {
+    const reloadWindow = useCallback(() => {
         window.location.reload();
     }, []);
 
@@ -53,9 +57,11 @@ export default function FallbackDefault({ isAutoReload }: { isAutoReload: boolea
                     messageOption={{ value: second }}
                 />
             ) : null}
-            <React.Suspense fallback={null}>
+            <Suspense fallback={null}>
                 <ToLaParticle options={getOptionStar()} />
-            </React.Suspense>
+            </Suspense>
         </FallBackLayout>
     );
 }
+
+export default FallbackDefault;

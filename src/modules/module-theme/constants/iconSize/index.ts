@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -11,6 +11,4 @@ export const ICON_SIZE = {
     large: 32,
     normal: 40,
     huge: 48,
-};
-
-export type ICON_SIZE_TYPE = typeof ICON_SIZE;
+} as const;

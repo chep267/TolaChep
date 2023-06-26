@@ -1,7 +1,7 @@
 import { call, select } from 'redux-saga/effects';
-import { FIREBASE_GET } from '../@module-global/apis/Firebase';
-import { getListUserFromServer } from '../../../login/sagas/helper/Login';
-import { getMeId } from '../../../login/selectors/user';
+import { getMeId } from '../../../module-auth/selectors';
+import { getListUserFromServer } from '../../../module-auth/sagas/helpers/SignIn';
+import { FIREBASE_GET } from '../../../module-global/apis';
 
 export function* getAllThreadFromServer(meId) {
     const response = yield call(FIREBASE_GET, { path: `/messengers/${meId}/` });

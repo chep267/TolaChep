@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -12,7 +12,7 @@ import { MenuInfo } from 'rc-menu/lib/interface';
 
 /** components */
 import { MenuBase } from '@module-base/components/web';
-import type { TypeMenuBase } from '@module-base/components/web';
+import type { MenuBaseType } from '@module-base/components/web';
 
 /** utils */
 import { localeObject } from '@module-language/constants';
@@ -39,7 +39,7 @@ function FormMenu() {
     const { toggleLanguage } = useLanguage();
     const { toggleTheme } = useTheme();
 
-    const items: TypeMenuBase[] = React.useMemo(
+    const items: MenuBaseType[] = React.useMemo(
         () => [
             {
                 key: 'lang',

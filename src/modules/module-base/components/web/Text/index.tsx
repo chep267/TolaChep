@@ -1,8 +1,9 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import TextIntl, { getTextIntl } from './TextIntl';
-export { TextIntl, getTextIntl };
+export { default as TextIntl } from './TextIntl';
+export { getTextIntl } from './TextIntl';
+export type { TextIntlProps } from './TextIntl';

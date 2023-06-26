@@ -1,57 +1,70 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import * as React from 'react';
-import { Menu } from 'antd';
+import React, { forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
-import { FormatXMLElementFn, PrimitiveType } from 'intl-messageformat';
-import { MessageDescriptor } from '@formatjs/intl/src/types';
-import type { MenuProps } from 'antd';
 
 /** components */
+import { Menu } from 'antd';
 import { TextIntl } from '@module-base/components/web';
 
-/** utils */
-import { textMedium, textSmall } from '@module-theme/constants';
+/** constants */
+import { getMixinTextStyle } from '@module-theme/constants';
 
-const Label = styled(TextIntl)({
-    ...textMedium,
-    padding: '10px 20px',
-});
+/** types */
+import type { ReactNode, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type { MenuProps, MenuRef } from 'antd';
+import type { FormatXMLElementFn, PrimitiveType } from 'intl-messageformat';
+import type { MessageDescriptor } from '@formatjs/intl/src/types';
 
-const SubLabel = styled(TextIntl)({
-    ...textSmall,
-    padding: '10px 20px',
-});
-
-type TypeMenuAntd = Required<MenuProps>['items'][number];
-export type TypeMenuBase =
+type MenuAntdType = Required<MenuProps>['items'][number];
+type MenuBaseRef = MenuRef;
+type MenuBaseType =
     | {
-          label: string | React.ReactNode;
+          label: ReactNode;
           key: string;
-          icon?: any;
-          children?: TypeMenuBase[];
+          icon?: ReactNode;
+          children?: MenuBaseType[];
           type?: 'group';
       }
     | {
           message: MessageDescriptor;
           messageOption?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
           key: string;
-          icon?: any;
-          children?: TypeMenuBase[];
+          icon?: ReactNode;
+          children?: MenuBaseType[];
           type: 'intl';
       }
     | {
           type: 'divider';
           key: string;
-          icon?: any;
+          icon?: ReactNode;
+          children?: MenuBaseType[];
       };
+interface MenuBaseProps extends Omit<MenuProps, 'items'> {
+    items: MenuBaseType[];
+}
 
-const createItem = (item: TypeMenuBase): TypeMenuAntd => {
-    const loop = (child: TypeMenuBase, isChild = true): TypeMenuAntd => {
+/** styles */
+const MenuBaseElement: ForwardRefExoticComponent<MenuBaseProps & RefAttributes<MenuBaseRef>> = styled(Menu)`
+    div[class*='ant-menu-item-icon'] {
+        height: 100% !important;
+    }
+`;
+const Label = styled(TextIntl)({
+    ...getMixinTextStyle('medium'),
+    padding: '10px 20px',
+});
+const SubLabel = styled(TextIntl)({
+    ...getMixinTextStyle('small'),
+    padding: '10px 20px',
+});
+
+const createItem = (item: MenuBaseType): MenuAntdType => {
+    const loop = (child: MenuBaseType, isChild = true): MenuAntdType => {
         const { type, key, icon } = child;
         if (type === 'divider') {
             return {
@@ -59,6 +72,7 @@ const createItem = (item: TypeMenuBase): TypeMenuAntd => {
                 type,
             };
         }
+
         if (type === 'intl') {
             const { key, icon, children, message, messageOption } = child;
             const Text = isChild ? SubLabel : Label;
@@ -66,7 +80,7 @@ const createItem = (item: TypeMenuBase): TypeMenuAntd => {
                 key,
                 label: <Text message={message} messageOption={messageOption} />,
                 icon,
-                children: !children ? undefined : children.map((child: TypeMenuBase) => loop(child)),
+                children: !children ? undefined : children.map((child) => loop(child)),
             };
         }
 
@@ -75,20 +89,20 @@ const createItem = (item: TypeMenuBase): TypeMenuAntd => {
             key,
             label,
             icon,
-            children: !children ? undefined : children.map((child: TypeMenuBase) => loop(child)),
+            children: !children ? undefined : children.map((child) => loop(child)),
         };
     };
     return loop(item, false);
 };
 
-interface MenuBaseProps extends Omit<MenuProps, 'items'> {
-    items: TypeMenuBase[];
-}
+const MenuBase = forwardRef((props: MenuBaseProps, ref: MenuBaseRef) => {
+    const { items, ...menuProps } = props;
 
-export default function MenuBase(props: MenuBaseProps) {
-    const { items, ...other } = props;
+    const itemsCustom: MenuProps['items'] = useMemo(() => items.map((item) => createItem(item)), [items]);
 
-    const getItems = (): MenuProps['items'] => items.map((item) => createItem(item));
+    return <MenuBaseElement ref={ref} items={itemsCustom} {...menuProps} />;
+});
 
-    return <Menu items={getItems()} {...other} />;
-}
+MenuBase.displayName = 'MenuBase';
+export type { MenuBaseProps, MenuBaseType, MenuBaseRef };
+export default MenuBase;

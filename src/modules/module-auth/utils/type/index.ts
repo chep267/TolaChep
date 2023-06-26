@@ -1,17 +1,22 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-import { TypeUser } from '@module-user/utils';
+/** constants */
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
 
-export type TYPE_STORE_AUTH = {
+/** types */
+import { UserType } from '@module-user/utils';
+
+type StoreAuthType = {
     meId: string;
-    user: TypeUser;
+    me: UserType;
 };
 
-export type TypeAuthFormError = (typeof AUTH_FORM_ERROR)[keyof typeof AUTH_FORM_ERROR];
+type AuthFormErrorType = (typeof AUTH_FORM_ERROR)[keyof typeof AUTH_FORM_ERROR];
 
-export type TYPE_ACCOUNT = 'account' | 'facebook' | 'google';
+type AccountType = 'account' | 'facebook' | 'google';
+
+export type { StoreAuthType, AuthFormErrorType, AccountType };

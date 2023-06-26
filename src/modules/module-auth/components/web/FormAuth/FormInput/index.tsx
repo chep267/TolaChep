@@ -1,6 +1,6 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
@@ -11,9 +11,9 @@ import { FormItemProps } from 'antd/es/form/FormItem';
 import { InputProps } from 'rc-input/lib/interface';
 
 /** utils */
-import { TypeAuthFormError } from '@module-auth/utils';
+import { AuthFormErrorType } from '@module-auth/utils';
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
-import { localStorageBase } from '@module-base/storage';
+import { localStorageBase } from '@module-base/utils';
 import { emailLocalKey } from '@module-global/constants';
 import { Decrypt } from '@module-base/utils';
 

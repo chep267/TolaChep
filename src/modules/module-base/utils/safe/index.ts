@@ -1,10 +1,10 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-export function* safeEffect(effect: any) {
+export function* safeEffect(effect: any): any {
     try {
         return { response: yield effect, error: null };
     } catch (error) {

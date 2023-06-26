@@ -1,13 +1,12 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
-/** utils */
-import { TypeLocaleObject } from '@module-language/utils';
-
-export const localeObject: TypeLocaleObject = Object.freeze({
+const localeObject = {
     vi: 'vi',
     en: 'en',
-});
+} as const;
+
+export { localeObject };

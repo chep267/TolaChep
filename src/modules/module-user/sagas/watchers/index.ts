@@ -1,15 +1,15 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 import { fork, take } from 'redux-saga/effects';
 
-// actions
+/** actions */
 import { USER_ACTION } from '@module-user/actions';
 
-// worker
+/** workers */
 import { doCreateUser, doGetUser } from '@module-user/sagas/workers';
 
 function* watchGetUser(): any {

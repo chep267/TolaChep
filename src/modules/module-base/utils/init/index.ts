@@ -1,68 +1,56 @@
 /**
  *
- * @author dongntd@bkav.com on 06/09/2022.
+ * @author dongntd267@gmail.com on 01/12/2022.
  *
  */
 
 /** hàm tạo message cho intl */
-export function createMessageIntl<messageType>(message: Readonly<messageType>) {
-    const msg = (Object.keys(message) as (keyof messageType)[]).reduce(
-        (obj, key) => {
-            obj[key] = {
-                id: key,
-                defaultMessage: message[key],
-            };
-            return obj;
-        },
-        {} as {
-            [key in keyof messageType]: {
-                id: key;
-                defaultMessage: messageType[key];
-            };
-        }
-    );
-    return Object.freeze(msg);
+export function createMessageIntl<
+    MessageType extends Readonly<Record<string, string>>,
+    ReturnType extends {
+        [key in keyof MessageType]: { id: key; defaultMessage: MessageType[key] };
+    }
+>(message: Readonly<MessageType>): Readonly<ReturnType> {
+    const result = {} as ReturnType;
+    Object.keys(message).forEach((key) => {
+        result[key] = {
+            id: key,
+            defaultMessage: message[key],
+        };
+    });
+    return Object.freeze(result);
 }
 
 /** hàm tạo action key cho module */
-export function createActionKey<Root extends Readonly<string>, ActionKey extends Readonly<string[]>>(
-    rootKey: Root,
-    arrActionKey: ActionKey
-) {
-    const action = arrActionKey.reduce(
-        (obj, key: ActionKey[number]) => {
-            obj[key] = {
-                REQUEST: `${rootKey}_${key}_REQUEST`,
-                SUCCESS: `${rootKey}_${key}_SUCCESS`,
-                FAILURE: `${rootKey}_${key}_FAILURE`,
-            };
-            return obj;
-        },
-        {} as {
-            [Key in ActionKey[number]]: {
-                REQUEST: `${Root}_${Key}_REQUEST`;
-                SUCCESS: `${Root}_${Key}_SUCCESS`;
-                FAILURE: `${Root}_${Key}_FAILURE`;
-            };
-        }
-    );
-    return Object.freeze(action);
+export function createActionKey<
+    RootKey extends Readonly<string>,
+    ActionKeys extends Readonly<string>,
+    StateKeys extends Readonly<['REQUEST', 'SUCCESS', 'FAILURE']>[number],
+    ReturnType extends {
+        [action in ActionKeys]: {
+            [state in StateKeys]: `${RootKey}_${action}_${state}`;
+        };
+    }
+>(rootKey: Readonly<RootKey>, actionKeys: Readonly<ActionKeys[]>): ReturnType {
+    const result = {} as ReturnType;
+    const stateKeys = ['REQUEST', 'SUCCESS', 'FAILURE'] as const;
+    actionKeys.forEach((action) => {
+        stateKeys.forEach((state) => {
+            if (!result[action]) {
+                result[action] = {};
+            }
+            result[action][state] = `${rootKey}_${action}_${state}` as 0[ActionKeys][StateKeys];
+        });
+    });
+    return Object.freeze(result);
 }
 
 /** hàm tạo action dispatch */
-export function createAction<Type extends keyof Action, Action extends Record<Type, object>>(type: Type) {
-    return function (payload: Action[Type]) {
+export function createAction<Type extends Readonly<string>, Payload extends object>(type: Readonly<Type>) {
+    return function (payload: Payload): {
+        type: Type;
+        payload: Payload;
+    } {
         return { type, payload };
     };
 }
-
-/** hàm tạo object */
-// export function createObject<Root extends string, Keys extends Readonly<string[]>>(rootKey: Root, arrKey: Keys) {
-//     const object = {} as Readonly<{
-//         [key in Keys[number]]: `${Root}_${key}`;
-//     }>;
-//     arrKey.forEach((key) => {
-//         object[key] = `${rootKey}_${key}`;
-//     });
-//     return object;
-// }
