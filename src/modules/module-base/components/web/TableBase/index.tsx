@@ -4,8 +4,8 @@
  *
  */
 
-import TableBase, { TableBaseProps } from './Table';
-import TableDrag, { TableDragProps } from './TableDrag';
+export { default as TableBase } from './Table';
+export type { TableBaseProps } from './Table';
 
-export type { TableBaseProps, TableDragProps };
-export { TableBase, TableDrag };
+export { default as TableDrag } from './TableDrag';
+export type { TableDragProps } from './TableDragProps';

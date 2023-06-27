@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState, useEffect, forwardRef } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 /** components */
@@ -19,6 +19,7 @@ import { baseMessage } from '@module-base/utils';
 /** types */
 import type { DataNode, TreeProps } from 'antd/lib/tree';
 import type { Ref, ReactNode, ForwardRefExoticComponent, RefAttributes } from 'react';
+
 type TreeBaseRef = Ref<RcTree>;
 
 interface TreeBaseProps extends TreeProps {
@@ -78,14 +79,14 @@ const TreeBaseElement: ForwardRefExoticComponent<TreeBaseProps & { iconColor: st
     }
 `;
 
-const TreeBase = forwardRef((props: TreeBaseProps, ref: TreeBaseRef) => {
+const TreeBase = React.forwardRef((props: TreeBaseProps, ref: TreeBaseRef) => {
     const { className, loading, empty, wrapClassName, onDragDrop, treeData, ...treeProps } = props;
-    const [gData, setGData] = useState<DataNode[] | undefined>(undefined);
+    const [gData, setGData] = React.useState<DataNode[] | undefined>(undefined);
     const {
         token: { colorPrimary },
     } = theme.useToken();
 
-    useEffect(() => {
+    React.useEffect(() => {
         setGData(treeData);
     }, [treeData]);
 

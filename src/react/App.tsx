@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import * as React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 
 /** screens */

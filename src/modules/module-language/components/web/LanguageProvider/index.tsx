@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
+import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 
 /** selectors */
@@ -29,9 +29,9 @@ type Props = {
 };
 
 const LanguageProvider: FC<ReactNode> = ({ children, messages }: Props) => {
-    const [locale, setLocale] = useState<LocaleType>(getDeviceLanguage());
+    const [locale, setLocale] = React.useState<LocaleType>(getDeviceLanguage());
 
-    useEffect(() => {
+    React.useEffect(() => {
         const initLanguage = async () => {
             const lastLocale = (await localStorageBase.get(localeLocalKey)) || '';
             const localeCookie = Decrypt(lastLocale) as LocaleType;
@@ -51,7 +51,7 @@ const LanguageProvider: FC<ReactNode> = ({ children, messages }: Props) => {
         setLocale(value);
     };
 
-    const store: LanguageProps = useMemo(
+    const store: LanguageProps = React.useMemo(
         () => ({
             locale,
             messages: messages[locale],

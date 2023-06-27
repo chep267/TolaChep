@@ -4,13 +4,17 @@
  *
  */
 
-import React, { ComponentPropsWithoutRef } from 'react';
+import * as React from 'react';
 
 /** components */
 import { Container } from './Styles';
-import Icon, { IconBaseType } from '@module-base/components/web/IconBase';
+import Icon from '@module-base/components/web/IconBase';
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+/** types */
+import type { HTMLAttributes } from 'react';
+import type { IconBaseType } from '@module-base/components/web/IconBase';
+
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     text?: string;
     icon?: {
         name: IconBaseType;
@@ -20,7 +24,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     };
 }
 
-export default function Button(props: ButtonProps) {
+function Button(props: ButtonProps) {
     const { text = '', icon, children, ...other } = props;
 
     return (
@@ -31,3 +35,5 @@ export default function Button(props: ButtonProps) {
         </Container>
     );
 }
+
+export default Button;

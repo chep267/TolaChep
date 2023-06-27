@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useContext, createContext } from 'react';
+import * as React from 'react';
 
 /** constants */
 import { localeObject } from '@module-language/constants';
@@ -14,13 +14,13 @@ import { emptyObject } from '@module-base/constants';
 import type { FunctionComponent } from 'react';
 import type { LocaleType, LanguageProps } from '@module-language/constants';
 
-const LanguageContext = createContext<LanguageProps>({
+const LanguageContext = React.createContext<LanguageProps>({
     locale: localeObject.vi,
     messages: emptyObject,
     toggleLanguage: (value: LocaleType) => value,
 });
 
-const useLanguage = () => useContext(LanguageContext);
+const useLanguage = () => React.useContext(LanguageContext);
 
 function withLanguage(WrappedComponent: FunctionComponent) {
     return function EnhancedComponent<Props>(props: Props) {

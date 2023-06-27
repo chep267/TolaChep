@@ -4,7 +4,7 @@
  *
  */
 
-import React, { forwardRef } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 /** components */
@@ -27,7 +27,7 @@ const InputBaseElement: ForwardRefExoticComponent<InputBaseProps & RefAttributes
     border-radius: 6px;
 `;
 
-const InputBase = forwardRef((props: InputBaseProps, ref: ForwardedRef<InputBaseRef>) => {
+const InputBase = React.forwardRef((props: InputBaseProps, ref: ForwardedRef<InputBaseRef>) => {
     const { placeholder, ...inputProps } = props;
 
     const placeholderCustom =

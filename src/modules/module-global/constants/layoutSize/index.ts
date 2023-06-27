@@ -6,7 +6,7 @@
 
 export const AppSizeCustom = Object.freeze({
     global: {
-        headerHeight: 60,
+        headerHeight: 64,
         siderWidth: {
             max: 250,
             min: 70,

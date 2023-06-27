@@ -5,19 +5,22 @@
  */
 
 import * as React from 'react';
-import { Layout, theme } from 'antd';
+import { Layout } from 'antd';
 import styled from 'styled-components';
 
 /** components */
 import { MenuApp } from '@module-global/components/web';
 
-/** utils */
+/** constants */
 import { comparePure } from '@module-base/constants';
 import { AppSizeCustom } from '@module-global/constants';
 
-const { Sider } = Layout;
+/** types */
+import type { SiderProps } from 'antd/lib/layout/Sider';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 
-const SiderLayout = styled(Sider)`
+const { Sider } = Layout;
+const SiderLayout: ForwardRefExoticComponent<SiderProps & RefAttributes<HTMLDivElement>> = styled(Sider)`
     &&& {
         position: sticky;
         height: calc(100vh - ${AppSizeCustom.global.headerHeight}px);
@@ -47,4 +50,5 @@ const TolaSider = React.memo(() => {
     );
 }, comparePure());
 
+TolaSider.displayName = 'TolaSider';
 export default TolaSider;

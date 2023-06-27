@@ -4,7 +4,7 @@
  *
  */
 
-import React, { lazy } from 'react';
+import * as React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 /** actions */
@@ -21,13 +21,15 @@ import { meIdLocalKey, routerLocalKey, SCREEN } from '@module-global/constants';
 import { getMeId } from '@module-auth/selectors';
 
 /** types */
+import type { ReactNode } from 'react';
+
 type PrivateRouteProps = {
     type?: string;
-    element: React.ReactNode;
+    element: ReactNode;
 };
 
 /** components */
-const StartScreen = lazy(() => import('@module-auth/screens/web/Start'));
+const StartScreen = React.lazy(() => import('@module-auth/screens/web/Start'));
 
 function PrivateRoute(props: PrivateRouteProps) {
     const { element, type } = props;

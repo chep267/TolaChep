@@ -4,10 +4,11 @@
  *
  */
 
-import React, { createContext, useContext } from 'react';
+import * as React from 'react';
 
 /** types */
 import type { FunctionComponent } from 'react';
+
 type UiProps = {
     appBar: {
         visible: boolean;
@@ -22,9 +23,9 @@ const initialState: UiProps = {
     },
 };
 
-const UiContext = createContext<UiProps>(initialState);
+const UiContext = React.createContext<UiProps>(initialState);
 
-const useGlobalUI = () => useContext<UiProps>(UiContext);
+const useGlobalUI = () => React.useContext(UiContext);
 
 function withGlobalUI(WrappedComponent: FunctionComponent) {
     return function EnhancedComponent<Props>(props: Props) {

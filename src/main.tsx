@@ -4,14 +4,14 @@
  *
  */
 
-import React, { StrictMode } from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 
 /** components */
 import App from '@src/react/App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <StrictMode>
+    <React.StrictMode>
         <App />
-    </StrictMode>
+    </React.StrictMode>
 );

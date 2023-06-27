@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState, useMemo } from 'react';
+import * as React from 'react';
 import enAntd from 'antd/locale/en_US';
 import viAntd from 'antd/locale/vi_VN';
 
@@ -30,7 +30,7 @@ import type { ThemeModeType, ThemeProps } from '@module-theme/utils';
 const ThemeProvider: FC<ReactNode> = ({ children }: { children: ReactNode }) => {
     const { locale } = useLanguage();
 
-    const [mode, setMode] = useState<ThemeModeType>(() => {
+    const [mode, setMode] = React.useState<ThemeModeType>(() => {
         const modeCookie = Decrypt(localStorageBase.get(themeLocalKey)) as ThemeModeType;
         if (modeCookie && !!themes[modeCookie]) {
             return modeCookie;
@@ -46,7 +46,7 @@ const ThemeProvider: FC<ReactNode> = ({ children }: { children: ReactNode }) => 
         setMode(value);
     };
 
-    const store: ThemeProps = useMemo(
+    const store: ThemeProps = React.useMemo(
         () => ({
             mode,
             theme: themes[mode],

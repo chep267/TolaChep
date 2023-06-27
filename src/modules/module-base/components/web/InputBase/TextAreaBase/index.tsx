@@ -4,7 +4,7 @@
  *
  */
 
-import React, { forwardRef } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 /** components */
@@ -29,7 +29,7 @@ const TextAreaBaseElem: ForwardRefExoticComponent<TextAreaBaseProps & RefAttribu
     border-radius: 6px;
 `;
 
-const TextAreaBase = forwardRef((props: TextAreaBaseProps, ref: ForwardedRef<TextAreaBaseRef>) => {
+const TextAreaBase = React.forwardRef((props: TextAreaBaseProps, ref: ForwardedRef<TextAreaBaseRef>) => {
     const { placeholder, ...inputProps } = props;
 
     const placeholderCustom =

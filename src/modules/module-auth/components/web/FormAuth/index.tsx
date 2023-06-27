@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { theme } from 'antd';
 import { useLocation } from 'react-router-dom';

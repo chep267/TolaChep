@@ -4,19 +4,20 @@
  *
  */
 
-import React, { ReactNode, useState } from 'react';
-
-// Themes
-import { UiContext } from '@module-global/utils';
+import * as React from 'react';
 
 /** utils */
+import { UiContext } from '@module-global/utils';
+
+/** types */
+import type { ReactNode } from 'react';
 
 type Props = {
     children: ReactNode | undefined;
 };
 
 function UiProvider({ children }: Props) {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = React.useState(true);
 
     const toggleVisible = () => setVisible((value) => !value);
 

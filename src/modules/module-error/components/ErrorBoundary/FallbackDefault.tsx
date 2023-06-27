@@ -4,7 +4,7 @@
  *
  */
 
-import React, { lazy, Suspense, useEffect, useState, useCallback } from 'react';
+import * as React from 'react';
 
 /** components */
 import { FallBackLayout, Container, ButtonRetry, TextAutoReload, Title, Content } from './styles';
@@ -16,12 +16,12 @@ import { getOptionStar } from '@module-base/constants';
 import Logo from '@module-error/assets/svg/error.jpeg';
 
 /** components lazy */
-const ToLaParticle = lazy(() => import('@modules/module-base/components/web/Particles'));
+const ToLaParticle = React.lazy(() => import('@modules/module-base/components/web/Particles'));
 
 function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
-    const [second, setSecond] = useState(99);
+    const [second, setSecond] = React.useState(99);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const timer = setInterval(() => {
             setSecond((s) => s - 1);
         }, 1000);
@@ -31,13 +31,13 @@ function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
         };
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (second === 0) {
             reloadWindow();
         }
     }, [second]);
 
-    const reloadWindow = useCallback(() => {
+    const reloadWindow = React.useCallback(() => {
         window.location.reload();
     }, []);
 
@@ -57,9 +57,9 @@ function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
                     messageOption={{ value: second }}
                 />
             ) : null}
-            <Suspense fallback={null}>
+            <React.Suspense fallback={null}>
                 <ToLaParticle options={getOptionStar()} />
-            </Suspense>
+            </React.Suspense>
         </FallBackLayout>
     );
 }

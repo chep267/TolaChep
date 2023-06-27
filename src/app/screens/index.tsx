@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import * as React from 'react';
 
 /** actions */
 import { globalAction } from '@module-global/actions';
@@ -18,15 +18,15 @@ import { ErrorBoundary } from '@module-error/components';
 import { TIME_LOADING_APP } from '@module-global/constants';
 
 /** screens */
-const LoadingScreen = lazy(() => import('@modules/module-global/screens/web/LoadingScreen'));
-const AppRouter = lazy(() => import('@app/screens/AppRouter'));
+const LoadingScreen = React.lazy(() => import('@modules/module-global/screens/web/LoadingScreen'));
+const AppRouter = React.lazy(() => import('@app/screens/AppRouter'));
 
 function ToLaApp() {
     const dispatch = useAppDispatch();
-    const [timer, setTimer] = useState(true);
-    const [isLoading, setLoading] = useState(true);
+    const [timer, setTimer] = React.useState(true);
+    const [isLoading, setLoading] = React.useState(true);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const onStartSuccess = () => {
             window.isToLaStart = true;
             setLoading(false);
@@ -45,9 +45,9 @@ function ToLaApp() {
     return (
         <ErrorBoundary isAutoReload>
             <App>
-                <Suspense fallback={null}>
+                <React.Suspense fallback={null}>
                     {!window.isToLaStart && (timer || isLoading) ? <LoadingScreen /> : <AppRouter />}
-                </Suspense>
+                </React.Suspense>
             </App>
         </ErrorBoundary>
     );

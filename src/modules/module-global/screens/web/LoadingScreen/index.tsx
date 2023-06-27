@@ -4,12 +4,14 @@
  *
  */
 
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
-/** utils */
-import Naruto from '@module-base/assets/images/nrt.jpg';
+/** constants */
 import { FlexBase } from '@module-theme/constants';
+
+/** logo */
+import Naruto from '@module-base/assets/images/nrt.jpg';
 
 const Container = styled.div(({ theme }) => ({
     ...FlexBase,

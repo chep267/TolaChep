@@ -4,12 +4,12 @@
  *
  */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 
 /** types */
 import type { HTMLAttributes } from 'react';
 
-class PureContainer extends Component<HTMLAttributes<HTMLDivElement>> {
+class PureContainer extends React.Component<HTMLAttributes<HTMLDivElement>> {
     shouldComponentUpdate() {
         return false;
     }

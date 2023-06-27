@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import * as React from 'react';
 
 /** components */
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
@@ -21,8 +21,8 @@ import type { FC, ReactNode } from 'react';
 import type { ThemeModeType } from '@module-theme/utils';
 
 const ThemeProvider: FC<ReactNode> = ({ children }: { children: ReactNode }) => {
-    const [mode, setMode] = useState<ThemeModeType>(themeObject.light);
-    const [theme, setTheme] = useState(themes[mode]);
+    const [mode, setMode] = React.useState<ThemeModeType>(themeObject.light);
+    const [theme, setTheme] = React.useState(themes[mode]);
 
     const toggleTheme = () => {
         const _mode = mode === themeObject.light ? themeObject.dark : themeObject.light;

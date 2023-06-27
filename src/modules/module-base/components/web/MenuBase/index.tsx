@@ -4,7 +4,7 @@
  *
  */
 
-import React, { forwardRef, useMemo } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 /** components */
@@ -95,10 +95,10 @@ const createItem = (item: MenuBaseType): MenuAntdType => {
     return loop(item, false);
 };
 
-const MenuBase = forwardRef((props: MenuBaseProps, ref: MenuBaseRef) => {
+const MenuBase = React.forwardRef((props: MenuBaseProps, ref: MenuBaseRef) => {
     const { items, ...menuProps } = props;
 
-    const itemsCustom: MenuProps['items'] = useMemo(() => items.map((item) => createItem(item)), [items]);
+    const itemsCustom: MenuProps['items'] = React.useMemo(() => items.map((item) => createItem(item)), [items]);
 
     return <MenuBaseElement ref={ref} items={itemsCustom} {...menuProps} />;
 });

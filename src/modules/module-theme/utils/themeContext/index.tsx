@@ -4,7 +4,7 @@
  *
  */
 
-import React, { createContext, useContext } from 'react';
+import * as React from 'react';
 
 /** utils */
 import { themeObject, themes } from '@module-theme/constants';
@@ -13,13 +13,13 @@ import { themeObject, themes } from '@module-theme/constants';
 import type { FunctionComponent } from 'react';
 import type { ThemeProps } from '@module-theme/utils/type';
 
-const ThemeContext = createContext<ThemeProps>({
+const ThemeContext = React.createContext<ThemeProps>({
     mode: themeObject.light,
     theme: themes[themeObject.light],
     toggleTheme: () => null,
 });
 
-const useTheme = () => useContext(ThemeContext);
+const useTheme = () => React.useContext(ThemeContext);
 
 function withTheme(WrappedComponent: FunctionComponent) {
     return function EnhancedComponent<Props>(props: Props) {

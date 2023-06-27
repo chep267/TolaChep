@@ -1,8 +1,14 @@
 /**
+ *
+ * @author dongntd267@gmail.com on 01/12/2022.
+ *
  */
 
-import React, { MouseEvent } from 'react';
+import * as React from 'react';
 // import iconDownload from '../../../messenger/assets/images/iconDownload.svg';
+
+/** types */
+import type { MouseEvent } from 'react';
 
 function FullScreen(props: any) {
     const { url, name, onClose } = props;

@@ -4,13 +4,14 @@
  *
  */
 
-import React, { lazy, memo, Suspense } from 'react';
+import * as React from 'react';
 
 /** utils */
 import { comparePure } from '@module-base/constants';
 
 /** types */
 import type { SVGProps, LazyExoticComponent } from 'react';
+
 type IconBaseType = keyof typeof Icons;
 
 interface IconBaseProps extends SVGProps<SVGSVGElement> {
@@ -20,23 +21,23 @@ interface IconBaseProps extends SVGProps<SVGSVGElement> {
 
 const Icons = Object.freeze({
     /** app bar icon */
-    feed: lazy(() => import('./svg/Feed')),
-    messenger: lazy(() => import('./svg/Messenger')),
-    task: lazy(() => import('./svg/Task')),
+    feed: React.lazy(() => import('./svg/Feed')),
+    messenger: React.lazy(() => import('./svg/Messenger')),
+    task: React.lazy(() => import('./svg/Task')),
 
     /** app icon */
-    menu: lazy(() => import('./svg/Menu')),
-    logoApp: lazy(() => import('./svg/LogoApp')),
+    menu: React.lazy(() => import('./svg/Menu')),
+    logoApp: React.lazy(() => import('./svg/LogoApp')),
 });
 
-const IconBase = memo((props: IconBaseProps) => {
+const IconBase = React.memo((props: IconBaseProps) => {
     const { name, size = 24, viewBox = '0 0 24 24', ...iconProps } = props;
     const Icon: LazyExoticComponent<(props: IconBaseProps) => JSX.Element> = Icons[name];
 
     return (
-        <Suspense fallback={null}>
+        <React.Suspense fallback={null}>
             <Icon name={name} width={size} viewBox={viewBox} height={size} {...iconProps} />
-        </Suspense>
+        </React.Suspense>
     );
 }, comparePure());
 

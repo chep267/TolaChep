@@ -4,10 +4,10 @@
  *
  */
 
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
-/** components */
+/** logo */
 import NF404 from '@module-base/assets/images/404.jpg';
 
 const View = styled.div`

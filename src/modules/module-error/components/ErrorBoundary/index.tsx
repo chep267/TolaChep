@@ -4,7 +4,7 @@
  *
  */
 
-import React, { Component, lazy, Suspense } from 'react';
+import * as React from 'react';
 
 /** types */
 import type { ReactNode } from 'react';
@@ -19,9 +19,9 @@ type States = {
 };
 
 /** components */
-const FallbackDefault = lazy(() => import('./FallbackDefault'));
+const FallbackDefault = React.lazy(() => import('./FallbackDefault'));
 
-export default class ErrorBoundary extends Component<Props, States> {
+export default class ErrorBoundary extends React.Component<Props, States> {
     constructor(props: Props) {
         super(props);
         this.state = { hasError: false };
@@ -42,6 +42,8 @@ export default class ErrorBoundary extends Component<Props, States> {
         const { children, fallback: FallBack = FallbackDefault, isAutoReload = true } = this.props;
         const { hasError } = this.state;
 
-        return <Suspense fallback={null}>{hasError ? <FallBack isAutoReload={isAutoReload} /> : children}</Suspense>;
+        return (
+            <React.Suspense fallback={null}>{hasError ? <FallBack isAutoReload={isAutoReload} /> : children}</React.Suspense>
+        );
     }
 }

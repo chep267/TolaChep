@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useId, useCallback, useMemo, memo } from 'react';
+import * as React from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 
@@ -20,9 +20,9 @@ import type { Container, Engine } from 'tsparticles-engine';
 
 function Particle({ options }: { options?: ISourceOptions }) {
     const { theme, mode } = useTheme();
-    const id = useId();
+    const id = React.useId();
 
-    const particlesInit = useCallback(async (engine: Engine) => {
+    const particlesInit = React.useCallback(async (engine: Engine) => {
         // console.log(engine);
 
         // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
@@ -31,13 +31,13 @@ function Particle({ options }: { options?: ISourceOptions }) {
         await loadFull(engine);
     }, []);
 
-    const particlesLoaded = useCallback(async (container: Container | undefined) => {
+    const particlesLoaded = React.useCallback(async (container: Container | undefined) => {
         // await console.log(container);
     }, []);
 
-    const option = options || useMemo(() => getOption(theme), [mode]);
+    const option = options || React.useMemo(() => getOption(theme), [mode]);
 
     return <Particles id={id} init={particlesInit} loaded={particlesLoaded} options={option} />;
 }
 
-export default memo(Particle, comparePure());
+export default React.memo(Particle, comparePure());

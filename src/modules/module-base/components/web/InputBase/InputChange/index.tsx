@@ -4,7 +4,7 @@
  *
  */
 
-import React, { forwardRef, useRef, useState, useEffect, useImperativeHandle, memo } from 'react';
+import * as React from 'react';
 
 /** components */
 import { SearchOutlined } from '@ant-design/icons';
@@ -29,7 +29,7 @@ interface InputChangeRef extends InputBaseRef {
     clear(): void;
 }
 
-const InputChange = forwardRef((props: InputChangeProps, ref: ForwardedRef<InputChangeRef>) => {
+const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef<InputChangeRef>) => {
     const {
         onChangeValue = emptyFunction,
         onLoading = emptyFunction,
@@ -40,11 +40,11 @@ const InputChange = forwardRef((props: InputChangeProps, ref: ForwardedRef<Input
         ...inputProps
     } = props;
 
-    const inputRef = useRef<InputRef>(null);
-    const prevValue = useRef('');
-    const [value, setValue] = useState('');
+    const inputRef = React.useRef<InputRef>(null);
+    const prevValue = React.useRef('');
+    const [value, setValue] = React.useState('');
 
-    useEffect(() => {
+    React.useEffect(() => {
         let timeout: NodeJS.Timeout;
         const nextValue = value.trim();
         if (nextValue === '') {
@@ -66,7 +66,7 @@ const InputChange = forwardRef((props: InputChangeProps, ref: ForwardedRef<Input
         return () => clearTimeout(timeout);
     }, [value]);
 
-    useImperativeHandle(
+    React.useImperativeHandle(
         ref,
         () =>
             ({
@@ -105,4 +105,4 @@ const InputChange = forwardRef((props: InputChangeProps, ref: ForwardedRef<Input
 
 InputChange.displayName = 'InputChange';
 export type { InputChangeProps, InputChangeRef };
-export default memo(InputChange);
+export default React.memo(InputChange);

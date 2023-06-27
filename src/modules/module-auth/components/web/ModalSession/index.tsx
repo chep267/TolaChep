@@ -4,13 +4,13 @@
  *
  */
 
-import React, { useState } from 'react';
+import * as React from 'react';
 
 /** components */
 import { ModalBase } from '@module-base/components/web';
 
 function ModalSession() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     const showModal = () => {
         setIsModalOpen(true);
