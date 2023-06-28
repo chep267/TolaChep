@@ -12,7 +12,7 @@ import { ThemeType } from '@module-theme/utils';
 export const getOption: (theme: ThemeType) => ISourceOptions = (theme) => ({
     background: {
         color: {
-            value: theme.color.particle,
+            value: 'red',
         },
     },
     fpsLimit: 120,

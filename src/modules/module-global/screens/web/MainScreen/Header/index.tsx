@@ -69,8 +69,6 @@ const TolaHeader = React.memo(() => {
         token: { colorBgElevated },
     } = theme.useToken();
 
-    console.log('TolaHeader render');
-
     return (
         <HeaderLayout colorBG={colorBgElevated}>
             <Left>

@@ -21,7 +21,7 @@ type States = {
 /** components */
 const FallbackDefault = React.lazy(() => import('./FallbackDefault'));
 
-export default class ErrorBoundary extends React.Component<Props, States> {
+class ErrorBoundary extends React.Component<Props, States> {
     constructor(props: Props) {
         super(props);
         this.state = { hasError: false };
@@ -47,3 +47,5 @@ export default class ErrorBoundary extends React.Component<Props, States> {
         );
     }
 }
+
+export default ErrorBoundary;

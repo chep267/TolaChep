@@ -11,6 +11,7 @@ import { UiContext } from '@module-global/utils';
 
 /** types */
 import type { ReactNode } from 'react';
+import type { UiProps } from '@module-global/utils';
 
 type Props = {
     children: ReactNode | undefined;
@@ -21,7 +22,7 @@ function UiProvider({ children }: Props) {
 
     const toggleVisible = () => setVisible((value) => !value);
 
-    const store = React.useMemo(
+    const store = React.useMemo<UiProps>(
         () => ({
             appBar: {
                 visible,

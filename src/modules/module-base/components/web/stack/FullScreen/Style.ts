@@ -1,4 +1,12 @@
+/**
+ *
+ * @author dongntd267@gmail.com on 01/12/2022.
+ *
+ */
+
 import styled from 'styled-components';
+
+/** components */
 import Button from '@module-base/components/web/stack/Button';
 
 export const Container = styled.div(({ theme }) => ({
