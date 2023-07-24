@@ -11,7 +11,6 @@ import { globalAction } from '@module-global/actions';
 import { useAppDispatch } from '@app/store';
 
 /** components */
-import { App } from 'antd';
 import { ErrorBoundary } from '@module-error/components';
 
 /** utils */
@@ -44,11 +43,9 @@ function ToLaApp() {
 
     return (
         <ErrorBoundary isAutoReload>
-            <App>
-                <React.Suspense fallback={null}>
-                    {!window.isToLaStart && (timer || isLoading) ? <LoadingScreen /> : <AppRouter />}
-                </React.Suspense>
-            </App>
+            <React.Suspense fallback={null}>
+                {!window.isToLaStart && (timer || isLoading) ? <LoadingScreen /> : <AppRouter />}
+            </React.Suspense>
         </ErrorBoundary>
     );
 }

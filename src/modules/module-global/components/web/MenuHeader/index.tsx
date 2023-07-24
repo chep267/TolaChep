@@ -85,6 +85,11 @@ export default function MenuHeader() {
                         type: 'intl',
                         message: themeMessage['module.theme.theme.dark'],
                     },
+                    {
+                        key: 'theme.purple',
+                        type: 'intl',
+                        message: themeMessage['module.theme.theme.purple'],
+                    },
                 ],
             },
             {
@@ -116,6 +121,10 @@ export default function MenuHeader() {
             }
             case 'theme.dark': {
                 toggleTheme(themeObject.dark);
+                break;
+            }
+            case 'theme.purple': {
+                toggleTheme(themeObject.purple);
                 break;
             }
             case 'signout': {

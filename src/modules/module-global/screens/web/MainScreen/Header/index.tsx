@@ -22,13 +22,13 @@ import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 /** components */
 const { Header } = Layout;
-const HeaderLayout: ForwardRefExoticComponent<BasicProps & { colorBG: string } & RefAttributes<HTMLElement>> = styled(Header)`
+const HeaderLayout: ForwardRefExoticComponent<BasicProps & { $colorBG: string } & RefAttributes<HTMLElement>> = styled(Header)`
     &&& {
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: sticky;
-        background-color: ${(props) => props.colorBG};
+        background-color: ${(props) => props.$colorBG};
         top: 0;
         height: ${AppSizeCustom.global.headerHeight}px;
         min-height: ${AppSizeCustom.global.headerHeight}px;
@@ -70,7 +70,7 @@ const TolaHeader = React.memo(() => {
     } = theme.useToken();
 
     return (
-        <HeaderLayout colorBG={colorBgElevated}>
+        <HeaderLayout $colorBG={colorBgElevated}>
             <Left>
                 <IconBase name="logoApp" />
                 <AppName />

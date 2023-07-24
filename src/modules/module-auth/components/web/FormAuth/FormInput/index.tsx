@@ -5,26 +5,17 @@
  */
 
 import * as React from 'react';
-import { Form, Input, InputRef } from 'antd';
+import { Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { FormItemProps } from 'antd/es/form/FormItem';
-import { InputProps } from 'rc-input/lib/interface';
-
-/** utils */
-import { AuthFormErrorType } from '@module-auth/utils';
-import { AUTH_FORM_ERROR } from '@module-auth/constants';
-import { localStorageBase } from '@module-base/utils';
-import { emailLocalKey } from '@module-global/constants';
-import { Decrypt } from '@module-base/utils';
-
-/** styles */
+import type { FormItemProps } from 'antd/es/form/FormItem';
+import type { InputProps, InputRef } from 'rc-input/lib/interface';
 
 type Props = {
     resetStatus?: () => void;
 };
 
 const FormInput = React.forwardRef((props: Props & FormItemProps & InputProps, forwardRef) => {
-    const { name, hasFeedback, rules, type, placeholder, autoFocus, resetStatus, validateStatus, help } = props;
+    const { name, hasFeedback, rules, type, autoFocus, resetStatus, validateStatus, help, ...inputProps } = props;
     const inputRef: React.Ref<InputRef> = React.useRef(null);
     const [value, setValue] = React.useState('');
 
@@ -50,9 +41,8 @@ const FormInput = React.forwardRef((props: Props & FormItemProps & InputProps, f
                     value={value}
                     allowClear
                     onChange={onChange}
-                    autoFocus={autoFocus}
                     addonBefore={<LockOutlined className="site-form-item-icon" />}
-                    placeholder={placeholder}
+                    {...inputProps}
                 />
             ) : (
                 <Input
@@ -62,13 +52,13 @@ const FormInput = React.forwardRef((props: Props & FormItemProps & InputProps, f
                     value={value}
                     allowClear
                     onChange={onChange}
-                    autoFocus={autoFocus}
                     addonBefore={<UserOutlined className="site-form-item-icon" />}
-                    placeholder={placeholder}
+                    {...inputProps}
                 />
             )}
         </Form.Item>
     );
 });
 
+FormInput.displayName = 'FormInput';
 export default FormInput;

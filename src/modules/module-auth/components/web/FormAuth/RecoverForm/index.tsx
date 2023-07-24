@@ -150,7 +150,7 @@ function RecoverForm() {
     const checkPassword = () => {
         const password = passwordRef.current?.input?.value?.trim() || '';
         const passwordHill = passwordHillRef.current?.input?.value?.trim() || '';
-        return passwordHill && password === passwordHill;
+        return passwordHill.length > 5 && password === passwordHill;
     };
 
     const success = checkPassword();
@@ -181,6 +181,7 @@ function RecoverForm() {
             <FormInput
                 ref={passwordRef}
                 name="password"
+                autoComplete="on"
                 validateStatus={success ? 'success' : status.password ? 'error' : undefined}
                 help={
                     status.password
@@ -196,6 +197,7 @@ function RecoverForm() {
             <FormInput
                 ref={passwordHillRef}
                 name="passwordHill"
+                autoComplete="on"
                 validateStatus={success ? 'success' : status.passwordHill ? 'error' : undefined}
                 help={
                     status.passwordHill

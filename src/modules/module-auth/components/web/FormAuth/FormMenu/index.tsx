@@ -8,17 +8,20 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Button, Dropdown } from 'antd';
 import { MenuOutlined, SettingOutlined } from '@ant-design/icons';
-import { MenuInfo } from 'rc-menu/lib/interface';
 
 /** components */
 import { MenuBase } from '@module-base/components/web';
-import type { MenuBaseType } from '@module-base/components/web';
 
 /** utils */
 import { localeObject } from '@module-language/constants';
 import { FlexBase, FlexCustom, themeObject } from '@module-theme/constants';
 import { useLanguage, langMessage } from '@module-language/utils';
 import { useTheme, themeMessage } from '@module-theme/utils';
+
+/** type */
+import type { MenuInfo } from 'rc-menu/lib/interface';
+import type { MenuBaseType } from '@module-base/components/web';
+
 
 const LayoutMenu = styled.div(({ theme }) => ({
     ...FlexCustom({ flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-start' }),

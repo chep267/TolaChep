@@ -19,7 +19,7 @@ import RecoverForm from '@module-auth/components/web/FormAuth/RecoverForm';
 import { SCREEN } from '@module-global/constants';
 import { FlexBase } from '@module-theme/constants';
 
-const LayoutForm = styled.div<{ colorBG: string }>((props) => {
+const LayoutForm = styled.div<{ $colorBG: string }>((props) => {
     const styleForm = window.isMobile
         ? {
               width: 'calc(100% - 30px)',
@@ -36,7 +36,7 @@ const LayoutForm = styled.div<{ colorBG: string }>((props) => {
         height: 'auto',
         flexDirection: 'column',
         borderRadius: 12,
-        backgroundColor: props.colorBG,
+        backgroundColor: props.$colorBG,
         zIndex: props.theme.zIndex.layout,
         ...styleForm,
     };
@@ -49,7 +49,7 @@ export default function FormAuth() {
     } = theme.useToken();
 
     return (
-        <LayoutForm colorBG={colorBgElevated}>
+        <LayoutForm $colorBG={colorBgElevated}>
             <FormMenu />
             {pathname === SCREEN.SIGN_IN ? <SignInForm /> : pathname === SCREEN.REGISTER ? <RegisterForm /> : <RecoverForm />}
         </LayoutForm>

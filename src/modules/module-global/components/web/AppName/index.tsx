@@ -5,10 +5,11 @@
  */
 
 import * as React from 'react';
+import { Typography } from 'antd';
 
 /** components */
 
 export default function AppName() {
-    const appName = 'dong ne';
-    return <span>{appName}</span>;
+    const appName = 'Tola';
+    return <Typography.Text>{appName}</Typography.Text>;
 }

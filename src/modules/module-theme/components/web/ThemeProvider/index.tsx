@@ -10,7 +10,7 @@ import viAntd from 'antd/locale/vi_VN';
 
 /** components */
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { ConfigProvider, theme as antdTheme } from 'antd';
+import { ConfigProvider, theme as antdTheme, App } from 'antd';
 
 /** utils */
 import { ThemeContext } from '@module-theme/utils';
@@ -70,7 +70,9 @@ const ThemeProvider: FC<ReactNode> = ({ children }: { children: ReactNode }) => 
                                 : {},
                         hashed: false,
                     }}>
-                    {children}
+                    <App>
+                        {children}
+                    </App>
                 </ConfigProvider>
             </StyledThemeProvider>
         </ThemeContext.Provider>

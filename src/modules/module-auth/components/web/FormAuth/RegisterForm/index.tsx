@@ -152,7 +152,7 @@ function RegisterForm() {
     const checkPassword = () => {
         const password = passwordRef.current?.input?.value?.trim() || '';
         const passwordHill = passwordHillRef.current?.input?.value?.trim() || '';
-        return passwordHill && passwordHill.length > 5 && password === passwordHill;
+        return passwordHill.length > 5 && password === passwordHill;
     };
 
     const success = checkPassword();
@@ -183,6 +183,7 @@ function RegisterForm() {
             <FormInput
                 ref={passwordRef}
                 name="password"
+                autoComplete="on"
                 validateStatus={status.password ? 'error' : success ? 'success' : undefined}
                 help={
                     status.password
@@ -198,6 +199,7 @@ function RegisterForm() {
             <FormInput
                 ref={passwordHillRef}
                 name="passwordHill"
+                autoComplete="on"
                 validateStatus={status.passwordHill ? 'error' : success ? 'success' : undefined}
                 help={
                     status.passwordHill

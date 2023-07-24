@@ -49,6 +49,6 @@ export const Content = styled(TextIntl)(({ theme }) => ({
 
 export const TextAutoReload = styled(TextIntl)(({ theme }) => ({
     zIndex: theme.zIndex.max,
-    color: `${theme.color.default.light} !important`,
+    color: `#fff !important`,
     fontSize: theme.fontSize.large,
 }));

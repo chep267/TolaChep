@@ -141,6 +141,7 @@ function SignInForm() {
             <FormInput
                 ref={passwordRef}
                 name="password"
+                autoComplete="on"
                 validateStatus={status.password ? 'error' : undefined}
                 help={
                     status.password

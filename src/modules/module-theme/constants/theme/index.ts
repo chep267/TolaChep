@@ -17,18 +17,27 @@ const themeObject = {
 
 const themes = {
     [themeObject.light]: {
+        color: {
+            particle: '#038cf5',
+        },
         zIndex: Z_INDEX,
         fontSize: FONT_SIZE,
         iconSize: ICON_SIZE,
     },
 
     [themeObject.purple]: {
+        color: {
+            particle: '#000',
+        },
         zIndex: Z_INDEX,
         fontSize: FONT_SIZE,
         iconSize: ICON_SIZE,
     },
 
     [themeObject.dark]: {
+        color: {
+            particle: '#141414',
+        },
         zIndex: Z_INDEX,
         fontSize: FONT_SIZE,
         iconSize: ICON_SIZE,

@@ -5,7 +5,7 @@
  */
 
 /** text base */
-export * from './Text';
+export * from './TextBase';
 
 /** icon base */
 export { default as IconBase } from './IconBase';

@@ -15,8 +15,7 @@ import { comparePure, getOption } from '@module-base/constants';
 import { useTheme } from '@module-theme/utils';
 
 /** types */
-import type { ISourceOptions } from 'tsparticles-engine';
-import type { Container, Engine } from 'tsparticles-engine';
+import type { Container, Engine, ISourceOptions } from 'tsparticles-engine';
 
 function Particle({ options }: { options?: ISourceOptions }) {
     const { theme, mode } = useTheme();

@@ -7,12 +7,12 @@
 import styled from 'styled-components';
 import { Form, Button } from 'antd';
 
-export const FormStyle = styled(Form)(({ theme }) => ({
+export const FormStyle = styled(Form)({
     width: '100%',
     height: '100%',
-}));
+});
 
-export const ButtonSubmit = styled(Button)(({ theme }) => ({
+export const ButtonSubmit = styled(Button)({
     float: 'right',
     minWidth: 100,
-}));
+});

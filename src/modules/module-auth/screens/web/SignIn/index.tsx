@@ -6,6 +6,7 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
+import { theme } from 'antd';
 
 /** utils */
 import { FlexBase } from '@module-theme/constants';
@@ -14,23 +15,28 @@ import { FlexBase } from '@module-theme/constants';
 const ToLaParticle = React.lazy(() => import('@modules/module-base/components/web/Particles'));
 const FormAuth = React.lazy(() => import('@modules/module-auth/components/web/FormAuth'));
 
-const LayoutScreen = styled.div({
+const LayoutScreen = styled.div<{ $colorBG: string }>((props) => ({
     ...FlexBase,
     flexDirection: 'column',
     width: '100vw',
     height: '100vh',
     overflow: 'hidden',
-});
+    backgroundColor: props.$colorBG,
+}));
 
 function SignInScreen() {
+    const {
+        token: { colorBgBase },
+    } = theme.useToken();
+
     return (
-        <LayoutScreen>
+        <LayoutScreen $colorBG={colorBgBase}>
             <React.Suspense fallback={null}>
                 <FormAuth />
             </React.Suspense>
-            <React.Suspense fallback={null}>
-                <ToLaParticle />
-            </React.Suspense>
+            {/*<React.Suspense fallback={null}>*/}
+            {/*    <ToLaParticle />*/}
+            {/*</React.Suspense>*/}
         </LayoutScreen>
     );
 }
