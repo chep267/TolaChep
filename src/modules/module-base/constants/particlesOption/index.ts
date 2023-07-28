@@ -4,12 +4,15 @@
  *
  */
 
+/** types */
 import type { ISourceOptions } from 'tsparticles-engine';
-
-/** utils */
-import { ThemeType } from '@module-theme/utils';
+import type { ThemeType } from '@module-theme/utils';
 
 export const getOption: (theme: ThemeType) => ISourceOptions = (theme) => ({
+    fullScreen: {
+        enable: true,
+        zIndex: 1
+    },
     background: {
         color: {
             value: theme.color.particle,
@@ -17,6 +20,7 @@ export const getOption: (theme: ThemeType) => ISourceOptions = (theme) => ({
     },
     fpsLimit: 120,
     interactivity: {
+        detectsOn: 'window',
         events: {
             onClick: {
                 enable: true,
@@ -83,6 +87,10 @@ export const getOption: (theme: ThemeType) => ISourceOptions = (theme) => ({
 });
 
 export const getOptionStar: (theme?: ThemeType) => ISourceOptions = (theme) => ({
+    fullScreen: {
+        enable: true,
+        zIndex: 1
+    },
     autoPlay: true,
     background: {
         color: {

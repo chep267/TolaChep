@@ -26,17 +26,15 @@ const LayoutScreen = styled.div<{ $colorBG: string }>((props) => ({
 
 function SignInScreen() {
     const {
-        token: { colorBgBase },
+        token: { colorBgLayout },
     } = theme.useToken();
 
     return (
-        <LayoutScreen $colorBG={colorBgBase}>
+        <LayoutScreen $colorBG={colorBgLayout}>
             <React.Suspense fallback={null}>
                 <FormAuth />
+                <ToLaParticle />
             </React.Suspense>
-            {/*<React.Suspense fallback={null}>*/}
-            {/*    <ToLaParticle />*/}
-            {/*</React.Suspense>*/}
         </LayoutScreen>
     );
 }

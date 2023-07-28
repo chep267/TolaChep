@@ -7,6 +7,7 @@
 import * as React from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
+import { loadSlim } from 'tsparticles-slim';
 
 /** constants */
 import { comparePure, getOption } from '@module-base/constants';
@@ -28,15 +29,16 @@ function Particle({ options }: { options?: ISourceOptions }) {
         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
         // starting from v2 you can add only the features you need reducing the bundle size
         await loadFull(engine);
+        // await loadSlim(engine);
     }, []);
 
     const particlesLoaded = React.useCallback(async (container: Container | undefined) => {
         // await console.log(container);
     }, []);
 
-    const option = options || React.useMemo(() => getOption(theme), [mode]);
+    const optionsFinal = options || React.useMemo(() => getOption(theme), [mode]);
 
-    return <Particles id={id} init={particlesInit} loaded={particlesLoaded} options={option} />;
+    return <Particles id={id} init={particlesInit} loaded={particlesLoaded} options={optionsFinal} />;
 }
 
 export default React.memo(Particle, comparePure());
