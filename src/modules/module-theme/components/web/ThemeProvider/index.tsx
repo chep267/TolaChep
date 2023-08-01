@@ -14,11 +14,10 @@ import { ConfigProvider, theme as antdTheme, App } from 'antd';
 
 /** utils */
 import { ThemeContext } from '@module-theme/utils';
-import { Decrypt, Encrypt } from '@module-base/utils';
+import { Decrypt, Encrypt, localStorageBase } from '@module-base/utils';
 import { useLanguage } from '@module-language/utils';
 
 /** constants */
-import { localStorageBase } from '@module-base/utils';
 import { localeObject } from '@module-language/constants';
 import { themeLocalKey } from '@module-global/constants';
 import { themeObject, themes } from '@module-theme/constants';
@@ -27,7 +26,10 @@ import { themeObject, themes } from '@module-theme/constants';
 import type { FC, ReactNode } from 'react';
 import type { ThemeModeType, ThemeProps } from '@module-theme/utils';
 
-const ThemeProvider: FC<ReactNode> = ({ children }: { children: ReactNode }) => {
+type Props = {
+    children: ReactNode;
+};
+const ThemeProvider: FC<Props> = ({ children }: Props) => {
     const { locale } = useLanguage();
 
     const [mode, setMode] = React.useState<ThemeModeType>(() => {
@@ -70,9 +72,7 @@ const ThemeProvider: FC<ReactNode> = ({ children }: { children: ReactNode }) => 
                                 : {},
                         hashed: false,
                     }}>
-                    <App>
-                        {children}
-                    </App>
+                    <App>{children}</App>
                 </ConfigProvider>
             </StyledThemeProvider>
         </ThemeContext.Provider>

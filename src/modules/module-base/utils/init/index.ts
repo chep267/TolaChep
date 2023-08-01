@@ -9,10 +9,11 @@ export function createMessageIntl<
     MessageType extends Readonly<Record<string, string>>,
     ReturnType extends {
         [key in keyof MessageType]: { id: key; defaultMessage: MessageType[key] };
-    }
->(message: Readonly<MessageType>): Readonly<ReturnType> {
+    },
+>(message: MessageType): Readonly<ReturnType> {
     const result = {} as ReturnType;
     Object.keys(message).forEach((key) => {
+        // @ts-ignore
         result[key] = {
             id: key,
             defaultMessage: message[key],
@@ -24,22 +25,24 @@ export function createMessageIntl<
 /** hàm tạo action key cho module */
 export function createActionKey<
     RootKey extends Readonly<string>,
-    ActionKeys extends Readonly<string>,
-    StateKeys extends Readonly<['REQUEST', 'SUCCESS', 'FAILURE']>[number],
+    ActionKey extends Readonly<string>,
+    StateKey extends Readonly<['REQUEST', 'SUCCESS', 'FAILURE']>[number],
     ReturnType extends {
-        [action in ActionKeys]: {
-            [state in StateKeys]: `${RootKey}_${action}_${state}`;
+        [action in ActionKey]: {
+            [state in StateKey]: `${RootKey}_${action}_${state}`;
         };
-    }
->(rootKey: Readonly<RootKey>, actionKeys: Readonly<ActionKeys[]>): ReturnType {
+    },
+>(rootKey: RootKey, actionKeys: Readonly<ActionKey[]>): ReturnType {
     const result = {} as ReturnType;
     const stateKeys = ['REQUEST', 'SUCCESS', 'FAILURE'] as const;
     actionKeys.forEach((action) => {
         stateKeys.forEach((state) => {
             if (!result[action]) {
+                // @ts-ignore
                 result[action] = {};
             }
-            result[action][state] = `${rootKey}_${action}_${state}` as 0[ActionKeys][StateKeys];
+            // @ts-ignore
+            result[action][state] = `${rootKey}_${action}_${state}`;
         });
     });
     return Object.freeze(result);

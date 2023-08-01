@@ -29,7 +29,7 @@ export default defineConfig({
     plugins: [react()],
     server: {
         https: false,
-        host: 'dongntd.bkav.com',
+        host: 'tolachep.com',
         port: 8080,
     },
     resolve: {

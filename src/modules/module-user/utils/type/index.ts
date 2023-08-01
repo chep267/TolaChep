@@ -45,4 +45,4 @@ type UserStoreType = {
     [USER_STORE_KEY.USER]: UsersType;
 };
 
-export type { UserTyp, HasUserType, UsersType, UserStoreType };
+export type { UserType, HasUserType, UsersType, UserStoreType };

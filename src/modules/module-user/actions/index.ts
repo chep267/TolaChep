@@ -46,7 +46,7 @@ type UserActionPayloadType = {
 };
 
 function createAction<Type extends Readonly<string>>(type: Type) {
-    return createActionBase<Type, UserActionPayloadType[Type]>(type);
+    return createActionBase<Type, UserActionPayloadType>(type);
 }
 
 const userAction = Object.freeze({

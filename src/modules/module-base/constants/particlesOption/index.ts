@@ -6,18 +6,131 @@
 
 /** types */
 import type { ISourceOptions } from 'tsparticles-engine';
-import type { ThemeType } from '@module-theme/utils';
 
-export const getOption: (theme: ThemeType) => ISourceOptions = (theme) => ({
+export const getOption: () => ISourceOptions = () => ({
+    themes: [
+        {
+            name: 'light',
+            default: {
+                value: true,
+                mode: 'light',
+            },
+            options: {
+                background: {
+                    color: '#ffffff',
+                },
+                particles: {
+                    color: {
+                        value: ['#000000', '#0000ff'],
+                    },
+                },
+            },
+        },
+        {
+            name: 'dark',
+            default: {
+                value: true,
+                mode: 'dark',
+            },
+            options: {
+                background: {
+                    color: '#000000',
+                },
+                particles: {
+                    color: {
+                        value: ['#ffffff', '#ff0000'],
+                    },
+                },
+            },
+        },
+        {
+            name: 'red',
+            options: {
+                background: {
+                    color: '#ff0000',
+                },
+                particles: {
+                    color: {
+                        value: ['#ffffff', '#000000'],
+                    },
+                },
+            },
+        },
+        {
+            name: 'green',
+            options: {
+                background: {
+                    color: '#00ff00',
+                },
+                particles: {
+                    color: {
+                        value: ['#000000', '#0000ff'],
+                    },
+                },
+            },
+        },
+        {
+            name: 'blue',
+            options: {
+                background: {
+                    color: '#0000ff',
+                },
+                particles: {
+                    color: {
+                        value: ['#ffffff', '#00ff00'],
+                    },
+                },
+            },
+        },
+        {
+            name: 'yellow',
+            options: {
+                background: {
+                    color: '#ffff00',
+                },
+                particles: {
+                    color: {
+                        value: ['#000000', '#ff0000'],
+                    },
+                },
+            },
+        },
+        {
+            name: 'cyan',
+            options: {
+                background: {
+                    color: '#00ffff',
+                },
+                particles: {
+                    color: {
+                        value: ['#000000', '#ff00ff'],
+                    },
+                },
+            },
+        },
+        {
+            name: 'grey',
+            options: {
+                background: {
+                    color: '#777777',
+                },
+                particles: {
+                    color: {
+                        value: ['#ffffff', '#000000'],
+                    },
+                },
+            },
+        },
+    ],
     fullScreen: {
         enable: true,
-        zIndex: 1
+        zIndex: 1,
     },
-    background: {
-        color: {
-            value: theme.color.particle,
-        },
-    },
+    // background: {
+    //     color: {
+    //         value: 'red'
+    //     },
+    // },
     fpsLimit: 120,
     interactivity: {
         detectsOn: 'window',
@@ -86,10 +199,10 @@ export const getOption: (theme: ThemeType) => ISourceOptions = (theme) => ({
     detectRetina: true,
 });
 
-export const getOptionStar: (theme?: ThemeType) => ISourceOptions = (theme) => ({
+export const getOptionStar: () => ISourceOptions = () => ({
     fullScreen: {
         enable: true,
-        zIndex: 1
+        zIndex: 1,
     },
     autoPlay: true,
     background: {

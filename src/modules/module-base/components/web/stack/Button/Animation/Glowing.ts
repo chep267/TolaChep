@@ -4,7 +4,10 @@
  *
  */
 import { BorderRadiusCustom } from '@module-theme/constants';
-import { CSSObject, keyframes, css } from 'styled-components';
+import { keyframes, css } from 'styled-components';
+
+/** types */
+import type { CSSObject } from 'styled-components';
 
 const glowing = keyframes`
     0% { background-position: 0 0; }
@@ -12,10 +15,9 @@ const glowing = keyframes`
     100% { background-position: 0 0; }
 `;
 
-const animationGlowing = () =>
-    css`
-        ${glowing} 20s linear infinite
-    `;
+const animationGlowing = () => css`
+    ${glowing} 20s linear infinite
+`;
 
 const Glowing: ({ background, borderRadius }: { background?: string; borderRadius?: number | string }) => CSSObject = ({
     background = 'gray',

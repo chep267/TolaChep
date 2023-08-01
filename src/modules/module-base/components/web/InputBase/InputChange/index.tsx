@@ -16,7 +16,7 @@ import { emptyFunction } from '@module-base/constants';
 import { baseMessage } from '@module-base/utils';
 
 /** types */
-import type { ForwardedRef } from 'react';
+import type { ForwardedRef, ChangeEvent } from 'react';
 import type { InputBaseRef, InputBaseProps } from '../Input';
 
 interface InputChangeProps extends InputBaseProps {
@@ -40,7 +40,7 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
         ...inputProps
     } = props;
 
-    const inputRef = React.useRef<InputRef>(null);
+    const inputRef = React.useRef<InputBaseRef>(null);
     const prevValue = React.useRef('');
     const [value, setValue] = React.useState('');
 
@@ -72,7 +72,7 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
             ({
                 ...inputRef.current,
                 clear: () => setValue(''),
-            } as InputChangeRef),
+            }) as InputChangeRef,
         [inputRef]
     );
 
@@ -89,7 +89,7 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
               })
             : undefined);
 
-    const prefixCustom = useMemo(() => prefix || (mode === 'search' ? <SearchOutlined /> : undefined), [prefix, mode]);
+    const prefixCustom = React.useMemo(() => prefix || (mode === 'search' ? <SearchOutlined /> : undefined), [prefix, mode]);
 
     return (
         <InputBase

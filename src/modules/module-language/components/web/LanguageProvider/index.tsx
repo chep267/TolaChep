@@ -12,10 +12,9 @@ import { getDeviceLanguage } from '@module-language/selectors';
 
 /** utils */
 import { LanguageContext } from '@module-language/utils';
-import { Encrypt, Decrypt } from '@module-base/utils';
+import { Encrypt, Decrypt, localStorageBase } from '@module-base/utils';
 
 /** constants */
-import { localStorageBase } from '@module-base/utils';
 import { localeObject } from '@module-language/constants';
 import { localeLocalKey } from '@module-global/constants';
 
@@ -28,19 +27,19 @@ type Props = {
     messages: MessagesType;
 };
 
-const LanguageProvider: FC<ReactNode> = ({ children, messages }: Props) => {
+const LanguageProvider: FC<Props> = ({ children, messages }: Props) => {
     const [locale, setLocale] = React.useState<LocaleType>(getDeviceLanguage());
 
     React.useEffect(() => {
-        const initLanguage = async () => {
-            const lastLocale = (await localStorageBase.get(localeLocalKey)) || '';
+        const initLanguage = () => {
+            const lastLocale = localStorageBase.get(localeLocalKey) || '';
             const localeCookie = Decrypt(lastLocale) as LocaleType;
             if (localeCookie && localeCookie !== locale && !!localeObject[localeCookie]) {
                 setLocale(localeCookie);
             }
         };
 
-        initLanguage().then();
+        initLanguage();
     }, []);
 
     const toggleLanguage = (value: LocaleType) => {

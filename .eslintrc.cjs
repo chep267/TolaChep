@@ -46,6 +46,8 @@ module.exports = {
         'react/react-in-jsx-scope': 'off',
         // Cảnh báo khi thẻ <a target='_blank'> mà không có rel="noreferrer"
         'react/jsx-no-target-blank': 'warn',
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
         // Tăng cường một số rule prettier (copy từ file .prettierrc qua)
         'prettier/prettier': [
             'warn',

@@ -11,8 +11,8 @@ import { localeObject } from '@module-language/constants';
 import { emptyObject } from '@module-base/constants';
 
 /** types */
-import type { FunctionComponent } from 'react';
-import type { LocaleType, LanguageProps } from '@module-language/constants';
+import type { ComponentType } from 'react';
+import type { LocaleType, LanguageProps } from '@module-language/utils/type';
 
 const LanguageContext = React.createContext<LanguageProps>({
     locale: localeObject.vi,
@@ -22,8 +22,8 @@ const LanguageContext = React.createContext<LanguageProps>({
 
 const useLanguage = () => React.useContext(LanguageContext);
 
-function withLanguage(WrappedComponent: FunctionComponent) {
-    return function EnhancedComponent<Props>(props: Props) {
+function withLanguage<Props>(WrappedComponent: ComponentType<Props>) {
+    return function EnhancedComponent(props: Props) {
         const language = useLanguage();
         return <WrappedComponent {...props} useLanguage={language} />;
     };

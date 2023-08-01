@@ -7,7 +7,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 
-/** components */
+/** App */
 import App from '@src/react/App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

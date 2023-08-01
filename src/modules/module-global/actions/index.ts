@@ -22,7 +22,7 @@ const arrActionKey = ['START_APP'] as const;
 const GLOBAL_ACTION = createActionKey('GLOBAL_ACTION', arrActionKey);
 
 function createAction<Type extends Readonly<string>>(type: Type) {
-    return createActionBase<Type, GLOBAL_ACTION_PAYLOAD_PROPS[Type]>(type);
+    return createActionBase<Type, GLOBAL_ACTION_PAYLOAD_PROPS>(type);
 }
 
 const globalAction = Object.freeze({

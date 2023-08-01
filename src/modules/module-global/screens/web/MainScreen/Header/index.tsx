@@ -22,7 +22,9 @@ import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 /** components */
 const { Header } = Layout;
-const HeaderLayout: ForwardRefExoticComponent<BasicProps & { $colorBG: string } & RefAttributes<HTMLElement>> = styled(Header)`
+const HeaderLayout: ForwardRefExoticComponent<BasicProps & { $colorBG: string } & RefAttributes<HTMLElement>> = styled(
+    Header
+)`
     &&& {
         display: flex;
         justify-content: space-between;

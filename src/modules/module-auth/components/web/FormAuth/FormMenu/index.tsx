@@ -22,7 +22,6 @@ import { useTheme, themeMessage } from '@module-theme/utils';
 import type { MenuInfo } from 'rc-menu/lib/interface';
 import type { MenuBaseType } from '@module-base/components/web';
 
-
 const LayoutMenu = styled.div(({ theme }) => ({
     ...FlexCustom({ flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-start' }),
     zIndex: theme.zIndex.max,

@@ -51,7 +51,10 @@ const LeftRight = styled(Sider)`
     display: flex;
     ${resize()};
     height: 100%;
-    transition: width 0.35s, min-width 0.35s, max-width 0.35s;
+    transition:
+        width 0.35s,
+        min-width 0.35s,
+        max-width 0.35s;
     border-radius: 12px;
     overflow: hidden;
     overscroll-behavior: none;

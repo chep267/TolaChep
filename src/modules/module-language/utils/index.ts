@@ -5,4 +5,5 @@
  */
 
 export * from './msg';
+export * from './type';
 export * from './languageContext';
