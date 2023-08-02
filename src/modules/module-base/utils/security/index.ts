@@ -6,7 +6,6 @@
 
 /**
  * func Encrypt
- *
  * return: chuỗi mã hóa
  */
 function Encrypt(value = ''): string {
@@ -31,7 +30,6 @@ function Encrypt(value = ''): string {
 
 /**
  * func Decrypt
- *
  * return: chuỗi giải mã hóa
  */
 function Decrypt(value: null | undefined | string = ''): string {
@@ -39,9 +37,9 @@ function Decrypt(value: null | undefined | string = ''): string {
     let result = '';
 
     try {
-        const array: any[] = window.atob(value).split('-');
+        const array: string[] = window.atob(value).split('-');
         for (let i = 0, length = array.length; i < length; i += 1) {
-            result += String.fromCharCode(array[i] - 10);
+            result += String.fromCharCode(Number(array[i]) - 10);
         }
         return window.atob(result);
     } catch (e) {

@@ -8,6 +8,7 @@
 import { emptyArray } from '@module-base/constants';
 
 type StorageName = 'localStorage' | 'sessionStorage';
+type StoreValueType = string | null;
 
 class StorageBase {
     constructor(storageName: StorageName) {
@@ -18,15 +19,15 @@ class StorageBase {
 
     get = (key: string) => window[this.storageName].getItem(key);
     getList = (keys: string[] = emptyArray) => {
-        const results: Record<string, any> = {};
+        const results: Record<string, StoreValueType> = {};
         keys.forEach((key) => {
             results[key] = this.get(key);
         });
         return results;
     };
 
-    set = (key: string, data: string) => window[this.storageName].setItem(key, data);
-    setList = (keys: string[] = emptyArray, data: any[] = emptyArray) =>
+    set = (key: string, data: StoreValueType) => window[this.storageName].setItem(key, `${data}`);
+    setList = (keys: string[] = emptyArray, data: StoreValueType[] = emptyArray) =>
         keys.forEach((key, index) => {
             this.set(key, data[index]);
         });

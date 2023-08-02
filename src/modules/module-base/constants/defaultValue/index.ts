@@ -4,13 +4,13 @@
  *
  */
 
-const emptyFunction = Object.freeze(() => undefined) as () => void;
-const emptyObject = Object.freeze({}) as {};
+const emptyFunction = Object.freeze(() => {});
+const emptyObject = Object.freeze({}) as object;
 const emptyArray = Object.freeze([]) as [];
 
 const comparePure =
     (type: 'pure' | 'check' | 'ignore' = 'pure', keys: string[] = emptyArray) =>
-    (prev: Record<string, any>, next: Record<string, any>) => {
+    (prev: Record<string, unknown>, next: Record<string, unknown>) => {
         if (type === 'pure') {
             return true;
         }
@@ -18,7 +18,7 @@ const comparePure =
         /** bỏ qua check key trong keys */
         if (type === 'ignore') {
             for (const key in prev) {
-                if (prev.hasOwnProperty(key)) {
+                if (Object.hasOwn(prev, key)) {
                     if (keys.includes(key)) {
                         continue;
                     }
@@ -32,7 +32,7 @@ const comparePure =
 
         /** chỉ check key trong keys */
         for (const key of keys) {
-            if (prev[key] !== next[key]) {
+            if (Object.hasOwn(prev, key) && prev[key] !== next[key]) {
                 return false;
             }
         }

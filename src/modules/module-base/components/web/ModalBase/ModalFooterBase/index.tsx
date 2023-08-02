@@ -5,20 +5,20 @@
  */
 
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 
 /** components */
 import { Button } from 'antd';
 
 /** utils */
 import { emptyObject } from '@module-base/constants';
-import { getTextIntl } from '@module-base/components/web';
 import { baseMessage } from '@module-base/utils';
 
 /** types */
 import type { ButtonProps } from 'antd';
-import type { MouseEvent } from 'react';
+import type { MouseEventHandler } from 'react';
 
-type Event = MouseEvent<HTMLElement, MouseEvent>;
+type Event = MouseEventHandler<HTMLElement> | undefined;
 
 type ModalFooterProps = {
     onlyButton?: 'cancel' | 'ok';
@@ -28,9 +28,9 @@ type ModalFooterProps = {
     disabled?: boolean;
     loading?: boolean;
     buttonProps?: ButtonProps;
-    onCancel?: (e: Event) => void;
-    onOk?: (e: Event) => void;
-    onContinue?: (e: Event) => void;
+    onCancel?: Event;
+    onOk?: Event;
+    onContinue?: Event;
 };
 
 function ModalFooter(props: ModalFooterProps) {
@@ -46,11 +46,12 @@ function ModalFooter(props: ModalFooterProps) {
         loading,
         buttonProps = emptyObject,
     } = props;
+    const { formatMessage } = useIntl();
 
     if (onlyButton === 'ok') {
         return (
             <Button type="primary" key="ok" onClick={onOk} disabled={disabled} loading={loading} {...buttonProps}>
-                {okText || getTextIntl({ message: baseMessage['module.base.component.button.ok.text'] })}
+                {okText || formatMessage(baseMessage['module.base.component.button.ok.text'])}
             </Button>
         );
     }
@@ -58,7 +59,7 @@ function ModalFooter(props: ModalFooterProps) {
     if (onlyButton === 'cancel') {
         return (
             <Button key="cancel" onClick={onCancel} {...buttonProps}>
-                {cancelText || getTextIntl({ message: baseMessage['module.base.component.button.cancel.text'] })}
+                {cancelText || formatMessage(baseMessage['module.base.component.button.cancel.text'])}
             </Button>
         );
     }
@@ -66,10 +67,10 @@ function ModalFooter(props: ModalFooterProps) {
     return (
         <>
             <Button key="cancel" onClick={onCancel} {...buttonProps}>
-                {cancelText || getTextIntl({ message: baseMessage['module.base.component.button.cancel.text'] })}
+                {cancelText || formatMessage(baseMessage['module.base.component.button.cancel.text'])}
             </Button>
             <Button key="ok" type="primary" onClick={onOk} disabled={disabled} loading={loading} {...buttonProps}>
-                {okText || getTextIntl({ message: baseMessage['module.base.component.button.ok.text'] })}
+                {okText || formatMessage(baseMessage['module.base.component.button.ok.text'])}
             </Button>
             {typeof onContinue === 'function' ? (
                 <Button
@@ -79,7 +80,7 @@ function ModalFooter(props: ModalFooterProps) {
                     disabled={disabled}
                     loading={loading}
                     {...buttonProps}>
-                    {continueText || getTextIntl({ message: baseMessage['module.base.component.button.continue.text'] })}
+                    {continueText || formatMessage(baseMessage['module.base.component.button.continue.text'])}
                 </Button>
             ) : null}
         </>

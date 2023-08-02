@@ -7,11 +7,8 @@
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 
-/** selectors */
-import { getDeviceLanguage } from '@module-language/selectors';
-
 /** utils */
-import { LanguageContext } from '@module-language/utils';
+import { LanguageContext, getDeviceLanguage } from '@module-language/utils';
 import { Encrypt, Decrypt, localStorageBase } from '@module-base/utils';
 
 /** constants */
@@ -20,7 +17,7 @@ import { localeLocalKey } from '@module-global/constants';
 
 /** types */
 import type { FC, ReactNode } from 'react';
-import type { MessagesType, LocaleType, LanguageProps } from '@module-language/utils';
+import type { MessagesType, LocaleType, LanguageContextProps } from '@module-language/models';
 
 type Props = {
     children: ReactNode;
@@ -50,7 +47,7 @@ const LanguageProvider: FC<Props> = ({ children, messages }: Props) => {
         setLocale(value);
     };
 
-    const store: LanguageProps = React.useMemo(
+    const store: LanguageContextProps = React.useMemo(
         () => ({
             locale,
             messages: messages[locale],

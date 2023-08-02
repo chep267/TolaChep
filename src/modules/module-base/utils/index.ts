@@ -4,9 +4,9 @@
  *
  */
 
-export * from './deepObject';
 export * from './security';
 export * from './timer';
 export * from './init';
 export * from './msg';
 export * from './storages';
+export * from './hooks';

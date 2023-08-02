@@ -11,23 +11,14 @@ import { useIntl } from 'react-intl';
 import Text from 'antd/es/typography/Text';
 
 /** types */
-import type { MessageDescriptor } from '@formatjs/intl/src/types';
 import type { TextProps } from 'antd/es/typography/Text';
-
-interface TextIntlProps extends TextProps {
-    message: MessageDescriptor;
-    messageOption?: Record<string, any>;
-}
-
-export function getTextIntl(props: Pick<TextIntlProps, 'message' | 'messageOption'>) {
-    const { message, messageOption } = props;
-    const { formatMessage } = useIntl();
-    return formatMessage(message, messageOption);
-}
+import type { TextIntlProps } from '@module-base/models';
 
 function TextIntl(props: TextIntlProps & TextProps) {
     const { message, messageOption, ...textProps } = props;
-    return <Text {...textProps}>{getTextIntl({ message, messageOption })}</Text>;
+    const { formatMessage } = useIntl();
+
+    return <Text {...textProps}>{formatMessage(message, messageOption)}</Text>;
 }
 
 export type { TextIntlProps };

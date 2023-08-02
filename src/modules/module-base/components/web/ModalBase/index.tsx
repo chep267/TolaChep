@@ -6,12 +6,12 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 
 /** components */
 import { Modal } from 'antd';
 
 /** utils */
-import { getTextIntl } from '@module-base/components/web';
 import { baseMessage } from '@module-base/utils';
 
 /** types */
@@ -66,13 +66,14 @@ const ModalBaseElement: FunctionComponent<ModalBaseProps> = styled(Modal)`
 
 function ModalBase(props: ModalBaseProps) {
     const { okText, cancelText, ...modalProps } = props;
+    const { formatMessage } = useIntl();
 
     return (
         <ModalBaseElement
             centered
             closable
-            okText={okText || getTextIntl({ message: baseMessage['module.base.component.button.ok.text'] })}
-            cancelText={cancelText || getTextIntl({ message: baseMessage['module.base.component.button.cancel.text'] })}
+            okText={okText || formatMessage(baseMessage['module.base.component.button.ok.text'])}
+            cancelText={cancelText || formatMessage(baseMessage['module.base.component.button.cancel.text'])}
             {...modalProps}
         />
     );

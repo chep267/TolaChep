@@ -7,7 +7,7 @@
 /** types */
 import type { ISourceOptions } from 'tsparticles-engine';
 
-export const getOption: () => ISourceOptions = () => ({
+export const getOption = (): ISourceOptions => ({
     themes: [
         {
             name: 'light',
@@ -199,7 +199,7 @@ export const getOption: () => ISourceOptions = () => ({
     detectRetina: true,
 });
 
-export const getOptionStar: () => ISourceOptions = () => ({
+export const getOptionStar = (): ISourceOptions => ({
     fullScreen: {
         enable: true,
         zIndex: 1,

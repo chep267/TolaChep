@@ -4,5 +4,4 @@
  *
  */
 
-export * from './msg';
-export * from './hooks';
+export * from './useTheme';

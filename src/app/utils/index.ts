@@ -5,4 +5,3 @@
  */
 
 export * from './msg';
-export * from './type';

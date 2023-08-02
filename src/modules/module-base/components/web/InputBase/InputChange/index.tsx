@@ -5,11 +5,11 @@
  */
 
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 
 /** components */
 import { SearchOutlined } from '@ant-design/icons';
 import InputBase from '../Input';
-import { getTextIntl } from '@module-base/components/web';
 
 /** utils */
 import { emptyFunction } from '@module-base/constants';
@@ -39,6 +39,7 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
         timing = mode === 'search' ? 300 : 0,
         ...inputProps
     } = props;
+    const { formatMessage } = useIntl();
 
     const inputRef = React.useRef<InputBaseRef>(null);
     const prevValue = React.useRef('');
@@ -83,11 +84,7 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
 
     const placeholderCustom =
         placeholder ||
-        (mode === 'search'
-            ? getTextIntl({
-                  message: baseMessage[`module.base.component.input.search.placeholder`],
-              })
-            : undefined);
+        (mode === 'search' ? formatMessage(baseMessage[`module.base.component.input.search.placeholder`]) : undefined);
 
     const prefixCustom = React.useMemo(() => prefix || (mode === 'search' ? <SearchOutlined /> : undefined), [prefix, mode]);
 

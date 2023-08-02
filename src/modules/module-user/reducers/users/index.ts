@@ -24,6 +24,7 @@ const addUser = (state: UserStoreType, { payload }: { payload: any }) => {
         state[USER_STORE_KEY.HAS_USER][parentId] = {
             itemIds: [user.uid],
             total: 1,
+            count: 1,
         };
     }
 };

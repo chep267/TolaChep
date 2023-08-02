@@ -9,6 +9,7 @@ import { FONT_SIZE, LIGHT_HEIGHT } from '@module-theme/constants/fontSize';
 import { emptyObject } from '@module-base/constants';
 
 /** types */
+// @ts-ignore
 import type { CSSObject } from 'styled-components';
 
 const getMixinTextStyle = (type: keyof typeof FONT_SIZE, isBold = false): CSSObject => ({

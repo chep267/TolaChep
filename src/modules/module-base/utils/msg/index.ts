@@ -4,7 +4,7 @@
  *
  */
 
-import { createMessageIntl } from '@module-base/utils';
+import { createMessageIntl } from '@module-base/utils/init';
 
 export const EN_BASE = {
     'module.base.component.input.change.placeholder': 'Aa...',

@@ -6,11 +6,11 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 
 /** components */
 import RcTree from 'rc-tree';
-import { Tree, Spin, theme } from 'antd';
-import { getTextIntl } from '@module-base/components/web';
+import { Tree, Spin, theme, Typography } from 'antd';
 
 /** utils */
 import { onDropTree } from './utils';
@@ -23,7 +23,6 @@ import type { Ref, ReactNode, ForwardRefExoticComponent, RefAttributes } from 'r
 type TreeBaseRef = Ref<RcTree>;
 
 interface TreeBaseProps extends TreeProps {
-    wrapClassName?: string;
     loading?: boolean;
     empty?: ReactNode;
     onDragDrop?(data: { id: string; parentId: string; afterId: string; beforeId: string; treeData: DataNode[] }): void;
@@ -79,12 +78,13 @@ const TreeBaseElement: ForwardRefExoticComponent<TreeBaseProps & { iconColor: st
     }
 `;
 
-const TreeBase = React.forwardRef((props: TreeBaseProps, ref: TreeBaseRef) => {
-    const { className, loading, empty, wrapClassName, onDragDrop, treeData, ...treeProps } = props;
+const TreeBase = React.forwardRef<TreeBaseRef, TreeBaseProps>((props, ref) => {
+    const { loading, empty, onDragDrop, treeData, ...treeProps } = props;
     const [gData, setGData] = React.useState<DataNode[] | undefined>(undefined);
     const {
         token: { colorPrimary },
     } = theme.useToken();
+    const { formatMessage } = useIntl();
 
     React.useEffect(() => {
         setGData(treeData);
@@ -96,9 +96,9 @@ const TreeBase = React.forwardRef((props: TreeBaseProps, ref: TreeBaseRef) => {
         return (
             <TreeLoading>
                 <Spin />
-                <span className="text-loading">
-                    {getTextIntl({ message: baseMessage['module.base.component.tree.text.loading'] })}
-                </span>
+                <Typography.Text className="text-loading">
+                    {formatMessage(baseMessage['module.base.component.tree.text.loading'])}
+                </Typography.Text>
             </TreeLoading>
         );
     }
@@ -108,9 +108,9 @@ const TreeBase = React.forwardRef((props: TreeBaseProps, ref: TreeBaseRef) => {
             empty
         ) : (
             <TreeLoading>
-                <span className="text-empty">
-                    {empty || getTextIntl({ message: baseMessage['module.base.component.tree.text.empty'] })}
-                </span>
+                <Typography.Text className="text-empty">
+                    {empty || formatMessage(baseMessage['module.base.component.tree.text.empty'])}
+                </Typography.Text>
             </TreeLoading>
         );
     }

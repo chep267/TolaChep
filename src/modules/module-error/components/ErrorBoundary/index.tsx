@@ -7,11 +7,11 @@
 import * as React from 'react';
 
 /** types */
-import type { ReactNode } from 'react';
+import type { ReactNode, FunctionComponent, ErrorInfo } from 'react';
 
 type Props = {
     children: ReactNode;
-    fallback?: ReactNode;
+    fallback?: FunctionComponent;
     isAutoReload?: boolean;
 };
 type States = {
@@ -32,7 +32,7 @@ class ErrorBoundary extends React.Component<Props, States> {
         return { hasError: true };
     }
 
-    componentDidCatch(error: any, errorInfo: any) {
+    componentDidCatch(error: Error, errorInfo: ErrorInfo) {
         // You can also log the error to an error reporting service
         // logErrorToMyService(error, errorInfo);
         console.log('Tola - error: ', error, '\n--\n', errorInfo, '\n--');

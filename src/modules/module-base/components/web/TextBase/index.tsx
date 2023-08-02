@@ -5,5 +5,3 @@
  */
 
 export { default as TextIntl } from './TextIntl';
-export { getTextIntl } from './TextIntl';
-export type { TextIntlProps } from './TextIntl';

@@ -15,7 +15,7 @@ import { VI_USER, EN_USER } from '@module-user/utils';
 import { localeObject } from '@module-language/constants';
 
 /** types */
-import type { MessagesType } from '@module-language/utils';
+import type { MessagesType } from '@module-language/models';
 
 export const messages: MessagesType = {
     [localeObject.vi]: Object.assign({}, VI_BASE, VI_GLOBAL, VI_LANG, VI_THEME, VI_ERROR, VI_AUTH, VI_USER),

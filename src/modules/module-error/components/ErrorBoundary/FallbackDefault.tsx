@@ -5,10 +5,10 @@
  */
 
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 /** components */
 import { FallBackLayout, Container, ButtonRetry, TextAutoReload, Title, Content } from './styles';
-import { getTextIntl } from '@module-base/components/web';
 
 /** utils */
 import { errorMessage } from '@module-error/utils';
@@ -48,7 +48,7 @@ function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
                 <Title type="danger" strong message={errorMessage['module.error.fallback.title']} />
                 <Content type="danger" strong message={errorMessage['module.error.fallback.content']} />
                 <ButtonRetry onClick={reloadWindow} type="primary" danger size="large">
-                    {getTextIntl({ message: errorMessage['module.error.fallback.retry'] })}
+                    <FormattedMessage {...errorMessage['module.error.fallback.retry']} />
                 </ButtonRetry>
             </Container>
             {isAutoReload ? (

@@ -12,7 +12,7 @@ export function createMessageIntl<
     },
 >(message: MessageType): Readonly<ReturnType> {
     const result = {} as ReturnType;
-    Object.keys(message).forEach((key) => {
+    Object.keys(message).forEach((key: keyof MessageType) => {
         // @ts-ignore
         result[key] = {
             id: key,
@@ -49,10 +49,12 @@ export function createActionKey<
 }
 
 /** hàm tạo action dispatch */
-export function createAction<Type extends Readonly<string>, Payload extends object>(type: Readonly<Type>) {
-    return function (payload: Payload): {
+export function createAction<Type extends Readonly<string>, Payload extends Record<Readonly<string>, unknown>>(
+    type: Readonly<Type>
+) {
+    return function (payload: Payload[Type]): {
         type: Type;
-        payload: Payload;
+        payload: Payload[Type];
     } {
         return { type, payload };
     };

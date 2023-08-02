@@ -5,6 +5,7 @@
  */
 
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 import { Form, Checkbox, InputRef, App } from 'antd';
 
 /** actions */
@@ -14,7 +15,6 @@ import { authAction } from '@module-auth/actions';
 import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/SignInForm/styles';
 import FormInput from '@module-auth/components/web/FormAuth/FormInput';
 import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
-import { getTextIntl } from '@module-base/components/web';
 
 /** utils */
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
@@ -27,7 +27,7 @@ import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
 function RegisterForm() {
     const dispatch = useAppDispatch();
     const { message } = App.useApp();
-    const msgSuccess = getTextIntl({ message: authMessage['module.auth.form.message.success.register'] });
+    const { formatMessage } = useIntl();
 
     const accountRef: React.Ref<InputRef> = React.useRef(null);
     const passwordRef: React.Ref<InputRef> = React.useRef(null);
@@ -129,7 +129,7 @@ function RegisterForm() {
             default:
                 setIsSubmit(true);
                 const onSuccess = () => {
-                    message.success(msgSuccess, 2).then();
+                    message.success(formatMessage(authMessage['module.auth.form.message.success.register']), 2).then();
                     onResetStatus();
                     setIsSubmit(false);
                 };
@@ -168,14 +168,12 @@ function RegisterForm() {
                 name="username"
                 validateStatus={status.account ? 'error' : undefined}
                 help={
-                    status.account
-                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.account}`] })
-                        : undefined
+                    status.account ? formatMessage(authMessage[`module.auth.form.input.error.${status.account}`]) : undefined
                 }
                 hasFeedback={!!status.account}
                 type="text"
-                autoFocus
-                placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.account'] })}
+                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.account'])}
                 resetStatus={onResetStatus}
             />
 
@@ -186,12 +184,12 @@ function RegisterForm() {
                 validateStatus={status.password ? 'error' : success ? 'success' : undefined}
                 help={
                     status.password
-                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.password}`] })
+                        ? formatMessage(authMessage[`module.auth.form.input.error.${status.password}`])
                         : undefined
                 }
                 hasFeedback={success || !!status.password}
                 type="password"
-                placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.password'] })}
+                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.password'])}
                 resetStatus={onResetStatus}
             />
 
@@ -202,22 +200,21 @@ function RegisterForm() {
                 validateStatus={status.passwordHill ? 'error' : success ? 'success' : undefined}
                 help={
                     status.passwordHill
-                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.passwordHill}`] })
+                        ? formatMessage(authMessage[`module.auth.form.input.error.${status.passwordHill}`])
                         : undefined
                 }
                 hasFeedback={success || !!status.passwordHill}
                 type="password"
-                placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.passwordHill'] })}
+                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.passwordHill'])}
                 resetStatus={onResetStatus}
             />
 
             <Form.Item>
                 <Form.Item name="remember_username" valuePropName="checked" noStyle>
-                    <Checkbox>{getTextIntl({ message: authMessage['module.auth.form.checkbox.giveMe'] })}</Checkbox>
+                    <Checkbox>{formatMessage(authMessage['module.auth.form.checkbox.giveMe'])}</Checkbox>
                 </Form.Item>
-
                 <ButtonSubmit type="primary" size="large" htmlType="submit" onClick={onSubmit} loading={isSubmit}>
-                    {getTextIntl({ message: authMessage['module.auth.form.title.register'] })}
+                    {formatMessage(authMessage['module.auth.form.title.register'])}
                 </ButtonSubmit>
             </Form.Item>
 

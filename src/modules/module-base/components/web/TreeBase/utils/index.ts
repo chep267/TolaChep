@@ -65,13 +65,17 @@ export const getPreviousNode: (tree: DataNode[], nodeId: string | number, parent
 
 /** hàm kéo thả tree */
 export const onDropTree = (
-    info: NodeDragEventParams<TreeDataType> & {
-        dragNode: EventDataNode<TreeDataType>;
+    info: NodeDragEventParams<DataNode> & {
+        dragNode: EventDataNode<DataNode>;
         dragNodesKeys: Key[];
         dropPosition: number;
         dropToGap: boolean;
     },
-    option: { gData: DataNode[]; setGData: (gData: DataNode[]) => void; onSuccess?: () => void }
+    option: {
+        gData: DataNode[] | undefined;
+        setGData: (gData: DataNode[]) => void;
+        onSuccess?: (data: { id: string; parentId: string; afterId: string; beforeId: string; treeData: DataNode[] }) => void;
+    }
 ) => {
     const { gData, setGData, onSuccess } = option;
     if (!gData) {
@@ -118,7 +122,9 @@ export const onDropTree = (
             item.children.unshift(dragObj);
         });
     } else if (
+        // eslint-disable-next-line
         ((info.node as any).props.children || []).length > 0 && // Has children
+        // eslint-disable-next-line
         (info.node as any).props.expanded && // Is expanded
         dropPosition === 1 // On the bottom gap
     ) {

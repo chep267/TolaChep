@@ -24,7 +24,7 @@ import { themeObject, themes } from '@module-theme/constants';
 
 /** types */
 import type { FC, ReactNode } from 'react';
-import type { ThemeModeType, ThemeProps } from '@module-theme/utils';
+import type { ThemeModeType, ThemeContextProps } from '@module-theme/models';
 
 type Props = {
     children: ReactNode;
@@ -48,7 +48,7 @@ const ThemeProvider: FC<Props> = ({ children }: Props) => {
         setMode(value);
     };
 
-    const store: ThemeProps = React.useMemo(
+    const store: ThemeContextProps = React.useMemo(
         () => ({
             mode,
             theme: themes[mode],

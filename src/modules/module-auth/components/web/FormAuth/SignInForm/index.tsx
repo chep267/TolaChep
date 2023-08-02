@@ -6,6 +6,7 @@
 
 import * as React from 'react';
 import { Form, Checkbox, InputRef } from 'antd';
+import { useIntl } from 'react-intl';
 
 /** actions */
 import { authAction } from '@module-auth/actions';
@@ -14,7 +15,6 @@ import { authAction } from '@module-auth/actions';
 import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/SignInForm/styles';
 import FormInput from '@module-auth/components/web/FormAuth/FormInput';
 import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
-import { getTextIntl } from '@module-base/components/web';
 
 /** utils */
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
@@ -26,6 +26,7 @@ import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
 
 function SignInForm() {
     const dispatch = useAppDispatch();
+    const { formatMessage } = useIntl();
 
     const accountRef: React.Ref<InputRef> = React.useRef(null);
     const passwordRef: React.Ref<InputRef> = React.useRef(null);
@@ -126,14 +127,12 @@ function SignInForm() {
                 name="username"
                 validateStatus={status.account ? 'error' : undefined}
                 help={
-                    status.account
-                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.account}`] })
-                        : undefined
+                    status.account ? formatMessage(authMessage[`module.auth.form.input.error.${status.account}`]) : undefined
                 }
                 hasFeedback={!!status.account}
                 type="text"
-                autoFocus
-                placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.account'] })}
+                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.account'])}
                 resetStatus={onResetStatus}
             />
 
@@ -144,22 +143,21 @@ function SignInForm() {
                 validateStatus={status.password ? 'error' : undefined}
                 help={
                     status.password
-                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.password}`] })
+                        ? formatMessage(authMessage[`module.auth.form.input.error.${status.password}`])
                         : undefined
                 }
                 hasFeedback={!!status.password}
                 type="password"
-                placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.password'] })}
+                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.password'])}
                 resetStatus={onResetStatus}
             />
 
             <Form.Item>
                 <Form.Item name="remember_username" valuePropName="checked" noStyle>
-                    <Checkbox>{getTextIntl({ message: authMessage['module.auth.form.checkbox.giveMe'] })}</Checkbox>
+                    <Checkbox>{formatMessage(authMessage['module.auth.form.checkbox.giveMe'])}</Checkbox>
                 </Form.Item>
-
                 <ButtonSubmit type="primary" size="large" htmlType="submit" onClick={onSubmit} loading={isSubmit}>
-                    {getTextIntl({ message: authMessage['module.auth.form.title.signin'] })}
+                    {formatMessage(authMessage['module.auth.form.title.signin'])}
                 </ButtonSubmit>
             </Form.Item>
 

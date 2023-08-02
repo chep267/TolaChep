@@ -37,7 +37,7 @@ type AuthActionPayloadType = {
         onSuccess?(): void;
         onFailure?(): void;
     };
-    [AUTH_ACTION.SIGN_OUT.SUCCESS]: {};
+    [AUTH_ACTION.SIGN_OUT.SUCCESS]: object;
     [AUTH_ACTION.REGISTER.REQUEST]: {
         account: string;
         password: string;
@@ -45,7 +45,7 @@ type AuthActionPayloadType = {
         onSuccess?(): void;
         onFailure?(value: AuthFormErrorType): void;
     };
-    [AUTH_ACTION.REGISTER.SUCCESS]: {};
+    [AUTH_ACTION.REGISTER.SUCCESS]: object;
 };
 
 function createAction<Type extends keyof AuthActionPayloadType>(type: Type) {

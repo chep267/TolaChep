@@ -48,6 +48,8 @@ module.exports = {
         'react/jsx-no-target-blank': 'warn',
         "@typescript-eslint/ban-ts-ignore": "off",
         "@typescript-eslint/ban-ts-comment": "off",
+        "import/no-named-as-default": "off",
+        "no-case-declarations": "off",
         // Tăng cường một số rule prettier (copy từ file .prettierrc qua)
         'prettier/prettier': [
             'warn',
@@ -60,7 +62,7 @@ module.exports = {
                 useTabs: false,
                 singleQuote: true,
                 printWidth: 126,
-                jsxSingleQuote: true,
+                jsxSingleQuote: false,
             },
         ],
     },

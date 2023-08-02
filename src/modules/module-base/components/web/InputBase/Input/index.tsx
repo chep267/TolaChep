@@ -6,12 +6,12 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
+import { useIntl } from 'react-intl';
 
 /** components */
 import { Input } from 'antd';
 
 /** utils */
-import { getTextIntl } from '@module-base/components/web';
 import { baseMessage } from '@module-base/utils';
 
 /** types */
@@ -29,9 +29,9 @@ const InputBaseElement: ForwardRefExoticComponent<InputBaseProps & RefAttributes
 
 const InputBase = React.forwardRef((props: InputBaseProps, ref: ForwardedRef<InputBaseRef>) => {
     const { placeholder, ...inputProps } = props;
+    const { formatMessage } = useIntl();
 
-    const placeholderCustom =
-        placeholder || getTextIntl({ message: baseMessage['module.base.component.input.change.placeholder'] });
+    const placeholderCustom = placeholder || formatMessage(baseMessage['module.base.component.input.change.placeholder']);
 
     return <InputBaseElement ref={ref} placeholder={placeholderCustom} spellCheck={false} allowClear {...inputProps} />;
 });

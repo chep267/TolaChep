@@ -14,18 +14,19 @@ import { authAction } from '@module-auth/actions';
 import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/SignInForm/styles';
 import FormInput from '@module-auth/components/web/FormAuth/FormInput';
 import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
-import { getTextIntl } from '@module-base/components/web';
 
 /** utils */
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
+import { Decrypt, localStorageBase } from '@module-base/utils';
 import { authMessage, AuthFormErrorType } from '@module-auth/utils';
 import { useAppDispatch } from '@app/store';
-import { Decrypt, localStorageBase } from '@module-base/utils';
 import { emailLocalKey } from '@module-global/constants';
 import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
+import { useIntl } from 'react-intl';
 
 function RecoverForm() {
     const dispatch = useAppDispatch();
+    const { formatMessage } = useIntl();
 
     const accountRef: React.Ref<InputRef> = React.useRef(null);
     const passwordRef: React.Ref<InputRef> = React.useRef(null);
@@ -166,14 +167,12 @@ function RecoverForm() {
                 name="username"
                 validateStatus={status.account ? 'error' : undefined}
                 help={
-                    status.account
-                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.account}`] })
-                        : undefined
+                    status.account ? formatMessage(authMessage[`module.auth.form.input.error.${status.account}`]) : undefined
                 }
                 hasFeedback={!!status.account}
                 type="text"
-                autoFocus
-                placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.account'] })}
+                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.account'])}
                 resetStatus={onResetStatus}
             />
 
@@ -184,12 +183,12 @@ function RecoverForm() {
                 validateStatus={success ? 'success' : status.password ? 'error' : undefined}
                 help={
                     status.password
-                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.password}`] })
+                        ? formatMessage(authMessage[`module.auth.form.input.error.${status.password}`])
                         : undefined
                 }
                 hasFeedback={success || !!status.password}
                 type="password"
-                placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.password'] })}
+                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.password'])}
                 resetStatus={onResetStatus}
             />
 
@@ -200,21 +199,21 @@ function RecoverForm() {
                 validateStatus={success ? 'success' : status.passwordHill ? 'error' : undefined}
                 help={
                     status.passwordHill
-                        ? getTextIntl({ message: authMessage[`module.auth.form.input.error.${status.passwordHill}`] })
+                        ? formatMessage(authMessage[`module.auth.form.input.error.${status.passwordHill}`])
                         : undefined
                 }
                 hasFeedback={success || !!status.passwordHill}
                 type="password"
-                placeholder={getTextIntl({ message: authMessage['module.auth.form.input.placeholder.passwordHill'] })}
+                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.passwordHill'])}
                 resetStatus={onResetStatus}
             />
 
             <Form.Item>
                 <Form.Item name="remember_username" valuePropName="checked" noStyle>
-                    <Checkbox>{getTextIntl({ message: authMessage['module.auth.form.checkbox.giveMe'] })}</Checkbox>
+                    <Checkbox>{formatMessage(authMessage['module.auth.form.checkbox.giveMe'])}</Checkbox>
                 </Form.Item>
                 <ButtonSubmit type="primary" size="large" htmlType="submit" onClick={onSubmit} loading={isSubmit}>
-                    {getTextIntl({ message: authMessage['module.auth.form.title.recover'] })}
+                    {formatMessage(authMessage['module.auth.form.title.recover'])}
                 </ButtonSubmit>
             </Form.Item>
 

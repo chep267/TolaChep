@@ -10,12 +10,7 @@ import * as EmailJS from '@emailjs/browser';
 import { emptyFunction } from '@module-base/constants';
 
 const doSendEmail = (payload: { code: number; email: string; onSuccess: () => void; onFailure: () => void }) => {
-    const {
-        code = 123456,
-        email = 'vuquangtu0906@gmail.com',
-        onSuccess = emptyFunction,
-        onFailure = emptyFunction,
-    } = payload;
+    const { code = 123456, email = 'dongntd267@gmail.com', onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
 
     const name = email.split('@')[0];
     const param = {
