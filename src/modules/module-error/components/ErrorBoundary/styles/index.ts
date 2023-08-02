@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 
 /** components */
-import { PureContainer, TextIntl } from '@module-base/components/web';
+import { PureContainer, TextBase } from '@module-base/components/web';
 
 /** utils */
 import { FlexBase } from '@module-theme/constants';
@@ -36,18 +36,18 @@ export const ButtonRetry = styled(Button)({
     margin: '40px 0 20px',
 });
 
-export const Title = styled(TextIntl)(({ theme }) => ({
+export const Title = styled(TextBase)(({ theme }) => ({
     zIndex: theme.zIndex.max,
     fontSize: theme.fontSize.huge,
     margin: '20px 0 10px 0',
 }));
 
-export const Content = styled(TextIntl)(({ theme }) => ({
+export const Content = styled(TextBase)(({ theme }) => ({
     zIndex: theme.zIndex.max,
     fontSize: theme.fontSize.medium,
 }));
 
-export const TextAutoReload = styled(TextIntl)(({ theme }) => ({
+export const TextAutoReload = styled(TextBase)(({ theme }) => ({
     zIndex: theme.zIndex.max,
     color: `#fff !important`,
     fontSize: theme.fontSize.large,

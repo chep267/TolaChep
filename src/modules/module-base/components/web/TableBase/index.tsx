@@ -8,4 +8,4 @@ export { default as TableBase } from './Table';
 export type { TableBaseProps } from './Table';
 
 export { default as TableDrag } from './TableDrag';
-export type { TableDragProps } from './TableDragProps';
+export type { TableDragProps } from './TableDrag';

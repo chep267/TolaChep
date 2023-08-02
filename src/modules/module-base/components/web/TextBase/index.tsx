@@ -4,4 +4,26 @@
  *
  */
 
-export { default as TextIntl } from './TextIntl';
+import * as React from 'react';
+import { useIntl } from 'react-intl';
+
+/** components */
+import Text from 'antd/es/typography/Text';
+
+/** types */
+import type { TextProps } from 'antd/es/typography/Text';
+import type { MessageDescriptor } from '@formatjs/intl/src/types';
+import type { FormatXMLElementFn, PrimitiveType } from 'intl-messageformat';
+
+type TextBaseProps = {
+    message: MessageDescriptor;
+    messageOption?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
+};
+function TextBase(props: TextBaseProps & TextProps) {
+    const { message, messageOption, ...textProps } = props;
+    const { formatMessage } = useIntl();
+
+    return <Text {...textProps}>{formatMessage(message, messageOption)}</Text>;
+}
+
+export default TextBase;

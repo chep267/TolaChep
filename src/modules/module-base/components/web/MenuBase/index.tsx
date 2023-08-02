@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 /** components */
 import { Menu } from 'antd';
-import { TextIntl } from '@module-base/components/web';
+import { TextBase } from '@module-base/components/web';
 
 /** constants */
 import { getMixinTextStyle } from '@module-theme/constants';
@@ -54,11 +54,11 @@ const MenuBaseElement: ForwardRefExoticComponent<MenuBaseProps & RefAttributes<M
         height: 100% !important;
     }
 `;
-const Label = styled(TextIntl)({
+const Label = styled(TextBase)({
     ...getMixinTextStyle('medium'),
     padding: '10px 20px',
 });
-const SubLabel = styled(TextIntl)({
+const SubLabel = styled(TextBase)({
     ...getMixinTextStyle('small'),
     padding: '10px 20px',
 });
