@@ -13,7 +13,6 @@ import tsPaths from './tsconfig.path.json';
 
 /**
  * Resolve tsconfig.json paths to aliases
- * @return {object Alias} - Alias config
  */
 function resolveTsconfigPathsToAlias() {
     const paths = tsPaths.compilerOptions.paths;
