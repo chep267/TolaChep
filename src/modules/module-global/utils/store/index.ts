@@ -9,8 +9,8 @@ import createSagaMiddleware from 'redux-saga';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** redux - saga app */
-import rootReducer from '@app/reducers';
-import rootSaga from '@app/sagas';
+import rootReducer from '@module-global/reducers';
+import rootSaga from '@module-global/sagas';
 
 /** types */
 import type { TypedUseSelectorHook } from 'react-redux';

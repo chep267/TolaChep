@@ -9,7 +9,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 /** actions */
 import { authAction } from '@module-auth/actions';
-import { useAppDispatch, useAppSelector } from '@app/store';
+import { useAppDispatch, useAppSelector } from '@module-global/utils';
 
 /** utils */
 import { localStorageBase, sessionStorageBase, Decrypt, Encrypt } from '@module-base/utils';

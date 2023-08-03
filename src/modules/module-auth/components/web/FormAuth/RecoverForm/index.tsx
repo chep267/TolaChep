@@ -19,7 +19,7 @@ import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
 import { Decrypt, localStorageBase } from '@module-base/utils';
 import { authMessage, AuthFormErrorType } from '@module-auth/utils';
-import { useAppDispatch } from '@app/store';
+import { useAppDispatch } from '@module-global/utils';
 import { emailLocalKey } from '@module-global/constants';
 import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
 import { useIntl } from 'react-intl';

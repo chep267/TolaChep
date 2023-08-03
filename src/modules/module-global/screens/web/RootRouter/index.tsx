@@ -14,11 +14,11 @@ import { PrivateRoute } from '@module-auth/components/web';
 import { SCREEN } from '@module-global/constants';
 
 /** screens */
-const SignInScreen = React.lazy(() => import('@modules/module-auth/screens/web/SignIn'));
-const MainScreen = React.lazy(() => import('@modules/module-global/screens/web/MainScreen'));
-const FeedScreen = React.lazy(() => import('@modules/module-feed/screens/NewFeed'));
-const MessengerScreen = React.lazy(() => import('@modules/module-messenger/screens/MessengerApp'));
-const NotFoundScreen = React.lazy(() => import('@modules/module-global/screens/web/NotFound'));
+const SignInScreen = React.lazy(() => import('@module-auth/screens/web/SignIn'));
+const MainScreen = React.lazy(() => import('@module-global/screens/web/HomeScreen'));
+const FeedScreen = React.lazy(() => import('@module-feed/screens/NewFeed'));
+const MessengerScreen = React.lazy(() => import('@module-messenger/screens/MessengerApp'));
+const NotFoundScreen = React.lazy(() => import('@module-global/screens/web/NotFound'));
 
 function HomeRouter() {
     return (

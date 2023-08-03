@@ -18,7 +18,7 @@ import { MenuBase } from '@module-base/components/web';
 import type { MenuBaseType } from '@module-base/components/web';
 
 /** utils */
-import { useAppDispatch } from '@app/store';
+import { useAppDispatch } from '@module-global/utils';
 import { localeObject } from '@module-language/constants';
 import { FlexBase, FlexCustom, themeObject } from '@module-theme/constants';
 import { authMessage } from '@module-auth/utils';

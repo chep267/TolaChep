@@ -16,8 +16,8 @@ import { ErrorBoundary } from '@module-error/components';
 import { TIME_LOADING_APP } from '@module-global/constants';
 
 /** screens */
-const LoadingScreen = React.lazy(() => import('@modules/module-global/screens/web/LoadingScreen'));
-const AppRouter = React.lazy(() => import('@app/screens/AppRouter'));
+const LoadingScreen = React.lazy(() => import('@module-global/screens/web/LoadingScreen'));
+const RootRouter = React.lazy(() => import('@module-global/screens/web/RootRouter'));
 
 function ToLaApp() {
     const appStart = useAppStart();
@@ -26,7 +26,7 @@ function ToLaApp() {
     return (
         <ErrorBoundary isAutoReload>
             <React.Suspense fallback={null}>
-                {isTiming || appStart.isLoading ? <LoadingScreen /> : <AppRouter />}
+                {isTiming || appStart.isLoading ? <LoadingScreen /> : <RootRouter />}
             </React.Suspense>
         </ErrorBoundary>
     );
