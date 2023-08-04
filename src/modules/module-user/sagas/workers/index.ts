@@ -20,7 +20,6 @@ import { emptyFunction } from '@module-base/constants';
 
 /** types */
 import type { UserActionPayloadType } from '@module-user/actions';
-import type { UserType } from '@module-user/utils';
 
 function* doGetUser(payload: UserActionPayloadType[typeof USER_ACTION.GET.REQUEST]): any {
     const { uid, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;

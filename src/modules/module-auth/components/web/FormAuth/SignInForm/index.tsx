@@ -5,16 +5,14 @@
  */
 
 import * as React from 'react';
-import { Form, Checkbox, InputRef } from 'antd';
+import { Form, Checkbox } from 'antd';
 import { useIntl } from 'react-intl';
 
 /** actions */
 import { authAction } from '@module-auth/actions';
 
 /** components */
-import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/SignInForm/styles';
-import FormInput from '@module-auth/components/web/FormAuth/FormInput';
-import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
+import { FormWrap, ButtonSubmit, FormInput, FormFooter } from '@module-auth/components/web/FormAuth/components';
 
 /** constants */
 import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
@@ -28,13 +26,14 @@ import { Decrypt, localStorageBase } from '@module-base/utils';
 
 /** types */
 import type { AuthFormErrorType } from '@module-auth/models';
+import type { InputBaseRef } from '@module-base/models';
 
 function SignInForm() {
     const dispatch = useAppDispatch();
     const { formatMessage } = useIntl();
 
-    const accountRef: React.Ref<InputRef> = React.useRef(null);
-    const passwordRef: React.Ref<InputRef> = React.useRef(null);
+    const accountRef = React.useRef<InputBaseRef>(null);
+    const passwordRef = React.useRef<InputBaseRef>(null);
 
     const [status, setStatus] = React.useState<{
         account: AuthFormErrorType;
@@ -114,14 +113,13 @@ function SignInForm() {
                     });
                     setIsSubmit(false);
                 };
-
                 dispatch(authAction.signIn.request({ account, password, onSuccess, onFailure }));
                 return;
         }
     };
 
     return (
-        <FormStyle
+        <FormWrap
             name="tola_signin_form"
             initialValues={{
                 remember_username: true,
@@ -170,7 +168,7 @@ function SignInForm() {
             </Form.Item>
 
             <FormFooter />
-        </FormStyle>
+        </FormWrap>
     );
 }
 

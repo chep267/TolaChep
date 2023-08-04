@@ -12,9 +12,7 @@ import { Form, Checkbox, InputRef } from 'antd';
 import { authAction } from '@module-auth/actions';
 
 /** components */
-import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/SignInForm/styles';
-import FormInput from '@module-auth/components/web/FormAuth/FormInput';
-import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
+import { FormWrap, ButtonSubmit, FormInput, FormFooter } from '@module-auth/components/web/FormAuth/components';
 
 /** constants */
 import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
@@ -161,7 +159,7 @@ function RecoverForm() {
     const success = checkPassword();
 
     return (
-        <FormStyle
+        <FormWrap
             name="tola_register_form"
             initialValues={{
                 remember_username: true,
@@ -227,7 +225,7 @@ function RecoverForm() {
             </Form.Item>
 
             <FormFooter />
-        </FormStyle>
+        </FormWrap>
     );
 }
 

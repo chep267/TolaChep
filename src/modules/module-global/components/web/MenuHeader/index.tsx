@@ -132,7 +132,7 @@ export default function MenuHeader() {
                 break;
             }
             case 'signout': {
-                dispatch(authAction.signOut.request({}));
+                dispatch(authAction.signOut.request(null));
                 break;
             }
             default:

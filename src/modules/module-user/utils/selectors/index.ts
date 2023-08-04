@@ -8,7 +8,7 @@
 import type { UserType } from '@module-user/models';
 import type { AccountType } from '@module-auth/models';
 
-const genUid = (id = '') => `uid-${id || Date.now()}`;
+const genUid = (id = `${Date.now()}`) => `uid-${id}`;
 
 const genNewUser = (payload: {
     uid?: string;

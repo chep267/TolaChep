@@ -7,7 +7,7 @@
 import useSWR from 'swr';
 
 /** selectors */
-import { getAvatarBase, getCoverBase } from '@module-global/utils';
+import { getAvatarBase, getCoverBase } from '@module-global/apis';
 
 /** constants */
 import { avatarLocalKey, coverLocalKey } from '@module-global/constants';

@@ -50,6 +50,7 @@ module.exports = {
         "@typescript-eslint/ban-ts-comment": "off",
         "import/no-named-as-default": "off",
         "no-case-declarations": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         // Tăng cường một số rule prettier (copy từ file .prettierrc qua)
         'prettier/prettier': [
             'warn',

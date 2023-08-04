@@ -4,8 +4,8 @@
  *
  */
 
-export * from './firebase';
+export * from './firebaseConfig';
+export * from './reduxStoreConfig';
 export * from './msg';
-export * from './reduxStore';
 export * from './selectors';
 export * from './hooks';

@@ -10,14 +10,7 @@ import { fork, take } from 'redux-saga/effects';
 import { AUTH_ACTION } from '@module-auth/actions';
 
 /** workers */
-import { doSignIn, doSignOut, doAutoStart, doRegister } from '@module-auth/sagas/workers';
-
-function* watchAutoStart(): any {
-    while (true) {
-        const result = yield take(AUTH_ACTION.AUTO_START.REQUEST);
-        yield fork(doAutoStart, result.payload);
-    }
-}
+import { doSignIn, doSignOut, doRegister } from '@module-auth/sagas/workers';
 
 function* watchSignIn(): any {
     while (true) {
@@ -40,5 +33,5 @@ function* watchSignOut(): any {
     }
 }
 
-const AuthSaga = Object.freeze([watchAutoStart, watchSignIn, watchRegister, watchSignOut]);
+const AuthSaga = Object.freeze([watchSignIn, watchRegister, watchSignOut]);
 export default AuthSaga;

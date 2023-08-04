@@ -7,7 +7,7 @@
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 /** utils */
-import { firebaseApp } from '@module-global/utils/firebase';
+import { firebaseApp } from '@module-global/utils';
 
 const st = getStorage(firebaseApp);
 

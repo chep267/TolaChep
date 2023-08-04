@@ -5,6 +5,4 @@
  */
 
 export * from './realtimeDB';
-export * from './authentication';
-export * from './useAppStart';
-export * from '../utils/hooks/useTimer';
+export * from './firebase';

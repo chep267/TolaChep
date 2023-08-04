@@ -7,7 +7,9 @@
 import { call } from 'redux-saga/effects';
 
 /** apis */
-import { FIREBASE_GET, registerAccount, signInAccount, signOutAccount } from '@module-global/apis';
+import { FIREBASE_GET } from '@module-global/apis';
+
+import { registerAccount, signInAccount, signOutAccount } from '@module-auth/apis';
 
 /** constants */
 import { AUTH_FORM_ERROR, PATH_AUTH_FIREBASE } from '@module-auth/constants';
@@ -16,7 +18,7 @@ import { AUTH_FORM_ERROR, PATH_AUTH_FIREBASE } from '@module-auth/constants';
 import { Encrypt } from '@module-base/utils';
 
 /** types */
-import type { AccountType } from '@module-auth/utils';
+import type { AccountType } from '@module-auth/models';
 
 /**
  * Hàm kiểm tra xác thực tài khoản

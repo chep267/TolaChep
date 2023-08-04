@@ -4,4 +4,4 @@
  *
  */
 
-export type { RootState, AppDispatch } from '@module-global/utils';
+export type { RootState, AppDispatch } from '@module-global/utils/reduxStoreConfig';

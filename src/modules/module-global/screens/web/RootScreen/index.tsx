@@ -6,14 +6,14 @@
 
 import * as React from 'react';
 
-/** apis */
-import { useAppStart, useTimer } from '@module-global/apis';
-
 /** components */
 import { ErrorBoundary } from '@module-error/components';
 
-/** utils */
+/** constants */
 import { TIME_LOADING_APP } from '@module-global/constants';
+
+/** utils */
+import { useAppStart, useTimer } from '@module-global/utils';
 
 /** screens */
 const LoadingScreen = React.lazy(() => import('@module-global/screens/web/LoadingScreen'));

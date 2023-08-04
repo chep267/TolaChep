@@ -6,17 +6,18 @@
 
 import * as React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 /** actions */
 import { authAction } from '@module-auth/actions';
-import { useAppDispatch, useAppSelector } from '@module-global/utils';
 
 /** utils */
-import { localStorageBase, sessionStorageBase, Decrypt, Encrypt } from '@module-base/utils';
+import { sessionStorageBase, Decrypt, Encrypt } from '@module-base/utils';
 import { getMeId } from '@module-auth/utils';
+import { useAppDispatch, useAppSelector } from '@module-global/utils';
 
 /** constants */
-import { meIdLocalKey, routerLocalKey, SCREEN } from '@module-global/constants';
+import { meIdCookieKey, routerLocalKey, SCREEN } from '@module-global/constants';
 
 /** types */
 import type { ReactNode } from 'react';
@@ -36,18 +37,18 @@ function PrivateRoute(props: PrivateRouteProps) {
     const location = useLocation();
 
     const meId = useAppSelector(getMeId);
-    const meIdLocal = Decrypt(localStorageBase.get(meIdLocalKey));
+    const meIdCookie = Cookies.get(meIdCookieKey) || '';
 
     React.useEffect(() => {
         runEffectRoute();
-    }, [meId, meIdLocal]);
+    }, [meId, meIdCookie]);
 
     const runEffectRoute = () => {
-        if (!meIdLocal) {
+        if (!meIdCookie) {
             // chưa đăng nhập, trở về đăng nhập
             return goSignIn();
         }
-        // có meIdLocal là đã đăng nhập
+        // có meIdCookie là đã đăng nhập
         if (meId) {
             // có meId là đã start xong -> chuyển vào home
             return goHome();
@@ -58,7 +59,7 @@ function PrivateRoute(props: PrivateRouteProps) {
 
     const doStart = () => {
         saveRoute();
-        dispatch(authAction.autoStart.request({ uid: meIdLocal }));
+        dispatch(authAction.signIn.success({ meId: meIdCookie }));
     };
 
     const goSignIn = () => {

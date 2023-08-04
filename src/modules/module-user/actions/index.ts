@@ -8,7 +8,7 @@
 import { createAction as createActionBase, createActionKey } from '@module-base/utils';
 
 /** types */
-import type { UserType } from '@module-user/utils';
+import type { UserType } from '@module-user/models';
 
 const USER_ACTION = createActionKey('USER_ACTION', ['GET', 'CREATE', 'UPDATE', 'DELETE'] as const);
 

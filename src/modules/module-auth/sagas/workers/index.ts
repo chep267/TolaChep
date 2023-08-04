@@ -5,6 +5,7 @@
  */
 
 import { call, put, all, fork, delay } from 'redux-saga/effects';
+import Cookies from 'js-cookie';
 
 /** actions */
 import { AUTH_ACTION, authAction, AuthActionPayloadType } from '@module-auth/actions';
@@ -14,42 +15,35 @@ import { genNewUser, genUid } from '@module-user/utils';
 
 /** workers */
 import { doCreateUser } from '@module-user/sagas/workers';
-import { doCheckRegisterAccount, doCheckSignInAccount, doCheckSignOutAccount } from '@module-auth/sagas/helpers';
+import { doCheckRegisterAccount } from '@module-auth/sagas/helpers';
 
 /** utils */
 import { Encrypt, localStorageBase } from '@module-base/utils';
 import { emptyFunction, emptyObject } from '@module-base/constants';
-import { emailLocalKey, meIdLocalKey } from '@module-global/constants';
+import { emailLocalKey, meIdCookieKey } from '@module-global/constants';
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
 
 /** types */
-import type { UserType } from '@module-user/models';
-
-/** hàm tự động đăng nhập lại khi mở web */
-function* doAutoStart(payload: AuthActionPayloadType[typeof AUTH_ACTION.AUTO_START.REQUEST]) {}
+import { signInAccount, signOutAccount } from '@module-auth/apis';
 
 /** hàm đăng nhập */
 function* doSignIn(payload: AuthActionPayloadType[typeof AUTH_ACTION.SIGN_IN.REQUEST]) {
     const { account, password, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
-    const { uid }: { uid: string } = yield call(doCheckSignInAccount, { account, password });
+    const { response, error } = yield call(signInAccount, account, password);
 
     /** Failure */
-    if (uid === AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED || uid === AUTH_FORM_ERROR.ACCOUNT_INCORRECT) {
+    if (error) {
+        const { code } = error;
         yield delay(500);
-        yield fork(onFailure, uid);
-        return false;
+        onFailure(code === 'auth/wrong-password' ? AUTH_FORM_ERROR.ACCOUNT_INCORRECT : AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED);
+        return;
     }
 
     /** Success */
-    const userId = genUid(uid);
-    yield fork(localStorageBase.setList, [meIdLocalKey, emailLocalKey], [Encrypt(userId), Encrypt(account)]);
-    const user: UserType = yield call(doGetUser, { uid: userId });
-    if (!user) {
-        /** Failure */
-        yield fork(onFailure, AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED);
-        return false;
-    }
-    yield put(authAction.signIn.success({ user }));
+    const meId = genUid(response.uid);
+    Cookies.set(meIdCookieKey, meId, { expires: 1, path: '' });
+    localStorageBase.set(emailLocalKey, Encrypt(account));
+    yield put(authAction.signIn.success({ meId }));
     yield fork(onSuccess);
 }
 
@@ -76,12 +70,10 @@ function* doRegister(payload: AuthActionPayloadType[typeof AUTH_ACTION.REGISTER.
 }
 
 /** hàm đăng xuất */
-function* doSignOut(payload: AuthActionPayloadType[typeof AUTH_ACTION.SIGN_OUT.REQUEST]): any {
-    const { onSuccess = emptyFunction } = payload;
-    yield fork(localStorageBase.remove, meIdLocalKey);
-    yield put(authAction.signOut.success(emptyObject));
-    yield fork(doCheckSignOutAccount);
-    yield fork(onSuccess);
+function* doSignOut(payload = null) {
+    yield fork(signOutAccount);
+    Cookies.remove(meIdCookieKey, { path: '' });
+    yield put(authAction.signOut.success(payload));
 }
 
-export { doAutoStart, doRegister, doSignIn, doSignOut };
+export { doRegister, doSignIn, doSignOut };

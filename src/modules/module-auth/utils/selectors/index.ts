@@ -16,6 +16,6 @@ import type { UserType } from '@module-user/models';
 
 const getMe = (state: object): UserType => getState(state, [AUTH_STORE_KEY.ROOT, 'me']) || emptyUser;
 const getMeId = (state: object): string => getState(state, [AUTH_STORE_KEY.ROOT, 'meId']);
-const getMeName = (state: object) => getMe(state).meId.info.name;
+// const getMeName = (state: object) => getMe(state).meId.info.name;
 
-export { getMeId, getMe, getMeName };
+export { getMeId, getMe };
