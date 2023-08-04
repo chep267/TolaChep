@@ -16,10 +16,7 @@ import { baseMessage } from '@module-base/utils';
 
 /** types */
 import type { ForwardRefExoticComponent, RefAttributes, ForwardedRef } from 'react';
-import type { TextAreaProps, InputRef } from 'antd/es/input';
-
-type TextAreaBaseRef = InputRef;
-type TextAreaBaseProps = TextAreaProps;
+import type { TextAreaBaseProps, TextAreaBaseRef } from '@module-base/models';
 
 /** styles */
 const TextAreaBaseElem: ForwardRefExoticComponent<TextAreaBaseProps & RefAttributes<TextAreaBaseRef>> = styled(
@@ -39,5 +36,4 @@ const TextAreaBase = React.forwardRef((props: TextAreaBaseProps, ref: ForwardedR
 });
 
 TextAreaBase.displayName = 'TextAreaBase';
-export type { TextAreaBaseRef, TextAreaBaseProps };
 export default TextAreaBase;

@@ -15,7 +15,7 @@ import { AUTH_STORE_KEY } from '@module-auth/constants';
 import { AUTH_ACTION } from '@module-auth/actions';
 
 /** types */
-import type { StoreAuthType } from '@module-auth/utils';
+import type { StoreAuthType } from '@module-auth/models';
 
 const initialState: StoreAuthType = {
     meId: '',

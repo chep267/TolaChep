@@ -17,7 +17,7 @@ import { onDropTree } from './utils';
 import { baseMessage } from '@module-base/utils';
 
 /** types */
-import type { DataNode, TreeProps } from 'antd/lib/tree';
+import type { DataNode, TreeProps } from 'antd/es/tree';
 import type { Ref, ReactNode, ForwardRefExoticComponent, RefAttributes } from 'react';
 
 type TreeBaseRef = Ref<RcTree>;

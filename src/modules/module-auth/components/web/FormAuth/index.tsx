@@ -15,7 +15,7 @@ import SignInForm from '@module-auth/components/web/FormAuth/SignInForm';
 import RegisterForm from '@module-auth/components/web/FormAuth/RegisterForm';
 import RecoverForm from '@module-auth/components/web/FormAuth/RecoverForm';
 
-/** styles */
+/** constants */
 import { SCREEN } from '@module-global/constants';
 import { FlexBase } from '@module-theme/constants';
 

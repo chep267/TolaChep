@@ -17,7 +17,7 @@ import { AppSizeCustom } from '@module-global/constants';
 import { comparePure } from '@module-base/constants';
 
 /** types */
-import type { BasicProps } from 'antd/lib/layout/layout';
+import type { BasicProps } from 'antd/es/layout/layout';
 import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 /** components */

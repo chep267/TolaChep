@@ -12,41 +12,32 @@ import { FallBackLayout, Container, ButtonRetry, TextAutoReload, Title, Content 
 
 /** utils */
 import { errorMessage } from '@module-error/utils';
-import { getOptionStar } from '@module-base/constants';
 import Logo from '@module-error/assets/svg/error.jpeg';
+import { useCountDown } from '@module-global/utils';
+
+/** constants */
+import { SECOND_COUNT_DOWN_ERROR } from '@module-error/constants';
+import { getOptionStar } from '@module-base/constants';
 
 /** components lazy */
 const ToLaParticle = React.lazy(() => import('@modules/module-base/components/web/Particles'));
 
 function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
-    const [second, setSecond] = React.useState(99);
-
-    React.useEffect(() => {
-        const timer = setInterval(() => {
-            setSecond((s) => s - 1);
-        }, 1000);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
-
-    React.useEffect(() => {
-        if (second === 0) {
-            reloadWindow();
-        }
-    }, [second]);
-
     const reloadWindow = React.useCallback(() => {
         window.location.reload();
     }, []);
+
+    const { second } = useCountDown({ callback: reloadWindow, numberCountDown: SECOND_COUNT_DOWN_ERROR });
 
     return (
         <FallBackLayout>
             <Container>
                 <img src={Logo} alt="err" />
-                <Title type="danger" strong message={errorMessage['module.error.fallback.title']} />
-                <Content type="danger" strong message={errorMessage['module.error.fallback.content']} />
+                <Title message={errorMessage['module.error.fallback.title']} textProps={{ type: 'danger', strong: true }} />
+                <Content
+                    message={errorMessage['module.error.fallback.content']}
+                    textProps={{ type: 'danger', strong: true }}
+                />
                 <ButtonRetry onClick={reloadWindow} type="primary" danger size="large">
                     <FormattedMessage {...errorMessage['module.error.fallback.retry']} />
                 </ButtonRetry>
@@ -54,7 +45,7 @@ function FallbackDefault({ isAutoReload }: { isAutoReload: boolean }) {
             {isAutoReload ? (
                 <TextAutoReload
                     message={errorMessage['module.error.fallback.autoReload']}
-                    messageOption={{ value: second }}
+                    messageOption={{ value: `${second}` }}
                 />
             ) : null}
             <React.Suspense fallback={null}>

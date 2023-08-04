@@ -16,7 +16,7 @@ import { comparePure } from '@module-base/constants';
 import { AppSizeCustom } from '@module-global/constants';
 
 /** types */
-import type { SiderProps } from 'antd/lib/layout/Sider';
+import type { SiderProps } from 'antd/es/layout/Sider';
 import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 const { Sider } = Layout;

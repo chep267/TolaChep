@@ -11,23 +11,15 @@ import { useIntl } from 'react-intl';
 import { SearchOutlined } from '@ant-design/icons';
 import InputBase from '../Input';
 
-/** utils */
+/** constants */
 import { emptyFunction } from '@module-base/constants';
+
+/** utils */
 import { baseMessage } from '@module-base/utils';
 
 /** types */
-import type { ForwardedRef, ChangeEvent } from 'react';
-import type { InputBaseRef, InputBaseProps } from '../Input';
-
-interface InputChangeProps extends InputBaseProps {
-    mode?: 'change' | 'search';
-    timing?: number;
-    onChangeValue?(value: string): void;
-    onLoading?(loading: boolean): void;
-}
-interface InputChangeRef extends InputBaseRef {
-    clear(): void;
-}
+import type { ForwardedRef } from 'react';
+import type { InputChangeProps, InputChangeRef, InputBaseRef } from '@module-base/models';
 
 const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef<InputChangeRef>) => {
     const {
@@ -77,11 +69,6 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
         [inputRef]
     );
 
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const text = event.target.value || '';
-        setValue(text);
-    };
-
     const placeholderCustom =
         placeholder ||
         (mode === 'search' ? formatMessage(baseMessage[`module.base.component.input.search.placeholder`]) : undefined);
@@ -92,7 +79,7 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
         <InputBase
             ref={inputRef}
             value={value}
-            onChange={onChange}
+            onChange={(event) => setValue(event.target.value)}
             prefix={prefixCustom}
             placeholder={placeholderCustom}
             {...inputProps}
@@ -101,5 +88,4 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
 });
 
 InputChange.displayName = 'InputChange';
-export type { InputChangeProps, InputChangeRef };
 export default React.memo(InputChange);

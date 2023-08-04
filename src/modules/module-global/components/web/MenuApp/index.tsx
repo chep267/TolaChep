@@ -7,15 +7,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { MenuInfo } from 'rc-menu/lib/interface';
 
 /** components */
 import { IconBase, MenuBase } from '@module-base/components/web';
-import type { MenuBaseType } from '@module-base/components/web';
 
 /** utils */
 import { ListAppBar } from '@module-global/constants';
 import { comparePure } from '@module-base/constants';
+
+/** types */
+import type { MenuInfo } from 'rc-menu/lib/interface';
+import type { MenuBaseType } from '@module-base/models';
 
 const MenuCustom = styled(MenuBase)`
     &&& {
@@ -66,9 +68,7 @@ const AppName = styled.div`
 const MenuApp = React.memo(() => {
     const navigate = useNavigate();
 
-    const onClickItem = ({ key }: MenuInfo) => {
-        navigate(key);
-    };
+    const onClickItem = ({ key }: MenuInfo) => navigate(key);
 
     const items: MenuBaseType[] = React.useMemo(
         () =>
@@ -87,4 +87,5 @@ const MenuApp = React.memo(() => {
     return <MenuCustom mode="inline" items={items} onClick={onClickItem} />;
 }, comparePure());
 
+MenuApp.displayName = 'MenuApp';
 export default MenuApp;

@@ -20,7 +20,6 @@ export { default as PureContainer } from './PureContainer';
 
 /** menu base */
 export { default as MenuBase } from './MenuBase';
-export type { MenuBaseProps, MenuBaseType, MenuBaseRef } from './MenuBase';
 
 /** modal base */
 export { default as ModalBase } from './ModalBase';

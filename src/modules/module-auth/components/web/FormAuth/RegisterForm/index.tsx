@@ -16,13 +16,18 @@ import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/Si
 import FormInput from '@module-auth/components/web/FormAuth/FormInput';
 import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
 
-/** utils */
+/** constants */
+import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
-import { authMessage, AuthFormErrorType } from '@module-auth/utils';
+import { emailLocalKey } from '@module-global/constants';
+
+/** utils */
+import { authMessage } from '@module-auth/utils';
 import { useAppDispatch } from '@module-global/utils';
 import { Decrypt, localStorageBase } from '@module-base/utils';
-import { emailLocalKey } from '@module-global/constants';
-import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
+
+/** types */
+import type { AuthFormErrorType } from '@module-auth/models';
 
 function RegisterForm() {
     const dispatch = useAppDispatch();
@@ -171,16 +176,17 @@ function RegisterForm() {
                     status.account ? formatMessage(authMessage[`module.auth.form.input.error.${status.account}`]) : undefined
                 }
                 hasFeedback={!!status.account}
-                type="text"
-                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.account'])}
                 resetStatus={onResetStatus}
+                inputProps={{
+                    type: 'text',
+                    placeholder: formatMessage(authMessage['module.auth.form.input.placeholder.account']),
+                    autoFocus: true, // eslint-disable-line jsx-a11y/no-autofocus
+                }}
             />
 
             <FormInput
                 ref={passwordRef}
                 name="password"
-                autoComplete="on"
                 validateStatus={status.password ? 'error' : success ? 'success' : undefined}
                 help={
                     status.password
@@ -188,15 +194,16 @@ function RegisterForm() {
                         : undefined
                 }
                 hasFeedback={success || !!status.password}
-                type="password"
-                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.password'])}
                 resetStatus={onResetStatus}
+                inputProps={{
+                    type: 'password',
+                    placeholder: formatMessage(authMessage['module.auth.form.input.placeholder.password']),
+                }}
             />
 
             <FormInput
                 ref={passwordHillRef}
                 name="passwordHill"
-                autoComplete="on"
                 validateStatus={status.passwordHill ? 'error' : success ? 'success' : undefined}
                 help={
                     status.passwordHill
@@ -204,9 +211,11 @@ function RegisterForm() {
                         : undefined
                 }
                 hasFeedback={success || !!status.passwordHill}
-                type="password"
-                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.passwordHill'])}
                 resetStatus={onResetStatus}
+                inputProps={{
+                    type: 'password',
+                    placeholder: formatMessage(authMessage['module.auth.form.input.placeholder.passwordHill']),
+                }}
             />
 
             <Form.Item>

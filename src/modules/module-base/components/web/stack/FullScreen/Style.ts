@@ -5,9 +5,9 @@
  */
 
 import styled from 'styled-components';
+import { Button } from 'antd';
 
 /** components */
-import Button from '@module-base/components/web/stack/Button';
 
 export const Container = styled.div(({ theme }) => ({
     position: 'fixed',
@@ -22,17 +22,17 @@ export const Container = styled.div(({ theme }) => ({
 }));
 
 export const BtnClose = styled(Button)(({ theme }) => ({
-    position: 'absolute',
-    right: 20,
-    top: 20,
-    width: 50,
-    height: 50,
-    fontSize: 25,
-    backgroundColor: 'gray',
-    transition: 'all 0.2s ease',
-    zIndex: theme.zIndex.max,
+    // position: 'absolute',
+    // right: 20,
+    // top: 20,
+    // width: 50,
+    // height: 50,
+    // fontSize: 25,
+    // backgroundColor: 'gray',
+    // transition: 'all 0.2s ease',
+    // zIndex: theme.zIndex.max,
 }));
 
 export const BtnDownLoad = styled(BtnClose)({
-    right: 80,
+    // right: 80,
 });

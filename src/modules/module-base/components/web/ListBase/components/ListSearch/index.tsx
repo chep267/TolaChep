@@ -5,25 +5,17 @@
  */
 
 import * as React from 'react';
-import classnames from 'classnames';
 
-// components
-import { InputSearch } from '@snw-components/web-antd-custom/InputBase';
+/** components */
+import { InputChange } from '@module-base/components/web';
 
-// styles
-import styles from '@snw-components/web-antd-custom/ListBase/styles/index.local.less';
-
-// utils
-import type { ListSearchProps } from '@snw-components/web-antd-custom/ListBase/utils/type';
+/** types */
+import type { ListSearchProps } from '@module-base/models';
 
 const ListSearch = React.memo((props: ListSearchProps) => {
-    const { visible, className, ...otherProps } = props;
+    const { visible, ...otherProps } = props;
 
-    if (!visible) {
-        return null;
-    }
-
-    return <InputSearch className={classnames(styles['list-base-search'], className, 'list-base-search')} {...otherProps} />;
+    return visible ? null : <InputChange {...otherProps} />;
 });
 
 ListSearch.displayName = 'ListSearch';

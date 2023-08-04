@@ -15,41 +15,12 @@ import { TextBase } from '@module-base/components/web';
 import { getMixinTextStyle } from '@module-theme/constants';
 
 /** types */
-import type { ReactNode, ForwardRefExoticComponent, RefAttributes } from 'react';
-import type { MenuProps, MenuRef } from 'antd';
-import type { FormatXMLElementFn, PrimitiveType } from 'intl-messageformat';
-import type { MessageDescriptor } from '@formatjs/intl/src/types';
-
-type MenuAntdType = Required<MenuProps>['items'][number];
-type MenuBaseRef = MenuRef;
-type MenuBaseType =
-    | {
-          label: ReactNode;
-          key: string;
-          icon?: ReactNode;
-          children?: MenuBaseType[];
-          type?: 'group';
-      }
-    | {
-          message: MessageDescriptor;
-          messageOption?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
-          key: string;
-          icon?: ReactNode;
-          children?: MenuBaseType[];
-          type: 'intl';
-      }
-    | {
-          type: 'divider';
-          key: string;
-          icon?: ReactNode;
-          children?: MenuBaseType[];
-      };
-interface MenuBaseProps extends Omit<MenuProps, 'items'> {
-    items: MenuBaseType[];
-}
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
+import type { MenuProps } from 'antd';
+import type { MenuAntdType, MenuBaseProps, MenuBaseType, MenuBaseRef } from '@module-base/models';
 
 /** styles */
-const MenuBaseElement: ForwardRefExoticComponent<MenuBaseProps & RefAttributes<MenuBaseRef>> = styled(Menu)`
+const MenuBaseElement: ForwardRefExoticComponent<MenuProps & RefAttributes<MenuBaseRef>> = styled(Menu)`
     div[class*='ant-menu-item-icon'] {
         height: 100% !important;
     }
@@ -95,7 +66,7 @@ const createItem = (item: MenuBaseType): MenuAntdType => {
     return loop(item, false);
 };
 
-const MenuBase = React.forwardRef((props: MenuBaseProps, ref: MenuBaseRef) => {
+const MenuBase = React.forwardRef<MenuBaseRef, MenuBaseProps>((props, ref) => {
     const { items, ...menuProps } = props;
 
     const itemsCustom: MenuProps['items'] = React.useMemo(() => items.map((item) => createItem(item)), [items]);
@@ -104,5 +75,4 @@ const MenuBase = React.forwardRef((props: MenuBaseProps, ref: MenuBaseRef) => {
 });
 
 MenuBase.displayName = 'MenuBase';
-export type { MenuBaseProps, MenuBaseType, MenuBaseRef };
 export default MenuBase;

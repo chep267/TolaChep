@@ -1,5 +1,5 @@
 import { call, select } from 'redux-saga/effects';
-import { getMeId } from '../../../module-auth/selectors';
+import { getMeId } from '../../../module-auth/utils/selectors';
 import { getListUserFromServer } from '../../../module-auth/sagas/helpers/SignIn';
 import { FIREBASE_GET } from '../../../module-global/apis';
 

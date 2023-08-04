@@ -5,6 +5,7 @@
  */
 
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 import { Form, Checkbox, InputRef } from 'antd';
 
 /** actions */
@@ -15,14 +16,18 @@ import { ButtonSubmit, FormStyle } from '@module-auth/components/web/FormAuth/Si
 import FormInput from '@module-auth/components/web/FormAuth/FormInput';
 import FormFooter from '@module-auth/components/web/FormAuth/FormFooter';
 
-/** utils */
-import { AUTH_FORM_ERROR } from '@module-auth/constants';
-import { Decrypt, localStorageBase } from '@module-base/utils';
-import { authMessage, AuthFormErrorType } from '@module-auth/utils';
-import { useAppDispatch } from '@module-global/utils';
-import { emailLocalKey } from '@module-global/constants';
+/** constants */
 import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
-import { useIntl } from 'react-intl';
+import { AUTH_FORM_ERROR } from '@module-auth/constants';
+import { emailLocalKey } from '@module-global/constants';
+
+/** utils */
+import { authMessage } from '@module-auth/utils';
+import { useAppDispatch } from '@module-global/utils';
+import { Decrypt, localStorageBase } from '@module-base/utils';
+
+/** types */
+import type { AuthFormErrorType } from '@module-auth/models';
 
 function RecoverForm() {
     const dispatch = useAppDispatch();
@@ -170,16 +175,17 @@ function RecoverForm() {
                     status.account ? formatMessage(authMessage[`module.auth.form.input.error.${status.account}`]) : undefined
                 }
                 hasFeedback={!!status.account}
-                type="text"
-                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.account'])}
                 resetStatus={onResetStatus}
+                inputProps={{
+                    type: 'text',
+                    placeholder: formatMessage(authMessage['module.auth.form.input.placeholder.account']),
+                    autoFocus: true, // eslint-disable-line jsx-a11y/no-autofocus
+                }}
             />
 
             <FormInput
                 ref={passwordRef}
                 name="password"
-                autoComplete="on"
                 validateStatus={success ? 'success' : status.password ? 'error' : undefined}
                 help={
                     status.password
@@ -187,15 +193,16 @@ function RecoverForm() {
                         : undefined
                 }
                 hasFeedback={success || !!status.password}
-                type="password"
-                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.password'])}
                 resetStatus={onResetStatus}
+                inputProps={{
+                    type: 'password',
+                    placeholder: formatMessage(authMessage['module.auth.form.input.placeholder.password']),
+                }}
             />
 
             <FormInput
                 ref={passwordHillRef}
                 name="passwordHill"
-                autoComplete="on"
                 validateStatus={success ? 'success' : status.passwordHill ? 'error' : undefined}
                 help={
                     status.passwordHill
@@ -203,9 +210,11 @@ function RecoverForm() {
                         : undefined
                 }
                 hasFeedback={success || !!status.passwordHill}
-                type="password"
-                placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.passwordHill'])}
                 resetStatus={onResetStatus}
+                inputProps={{
+                    type: 'password',
+                    placeholder: formatMessage(authMessage['module.auth.form.input.placeholder.passwordHill']),
+                }}
             />
 
             <Form.Item>

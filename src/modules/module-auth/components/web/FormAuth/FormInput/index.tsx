@@ -7,19 +7,22 @@
 import * as React from 'react';
 import { Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+
+/** types */
 import type { FormItemProps } from 'antd/es/form/FormItem';
 import type { InputProps, InputRef } from 'rc-input/lib/interface';
 
-type Props = {
+interface FormInputProps extends FormItemProps {
     resetStatus?: () => void;
-};
+    inputProps: InputProps;
+}
 
-const FormInput = React.forwardRef((props: Props & FormItemProps & InputProps, forwardRef) => {
-    const { name, hasFeedback, rules, type, autoFocus, resetStatus, validateStatus, help, ...inputProps } = props;
+const FormInput = React.forwardRef((props: FormInputProps, ref) => {
+    const { name, hasFeedback, rules, resetStatus, validateStatus, help, inputProps } = props;
     const inputRef: React.Ref<InputRef> = React.useRef(null);
     const [value, setValue] = React.useState('');
 
-    React.useImperativeHandle(forwardRef, () => {
+    React.useImperativeHandle(ref, () => {
         return {
             focus: () => inputRef.current?.focus({ cursor: 'end' }),
             input: inputRef.current?.input,
@@ -33,26 +36,26 @@ const FormInput = React.forwardRef((props: Props & FormItemProps & InputProps, f
 
     return (
         <Form.Item name={name} validateStatus={validateStatus} hasFeedback={hasFeedback} help={help} rules={rules}>
-            {type === 'password' ? (
+            {inputProps.type === 'password' ? (
                 <Input.Password
                     ref={inputRef}
                     size="large"
-                    type={type}
                     value={value}
                     allowClear
                     onChange={onChange}
                     addonBefore={<LockOutlined className="site-form-item-icon" />}
+                    autoComplete="on"
                     {...inputProps}
                 />
             ) : (
                 <Input
                     ref={inputRef}
                     size="large"
-                    type={type}
                     value={value}
                     allowClear
                     onChange={onChange}
                     addonBefore={<UserOutlined className="site-form-item-icon" />}
+                    autoComplete="on"
                     {...inputProps}
                 />
             )}

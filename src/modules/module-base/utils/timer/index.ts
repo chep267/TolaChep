@@ -6,7 +6,6 @@
 
 /**
  * func getDuration
- *
  * return: thời gian hh:mm:ss
  */
 export const getDuration = (time: string | number) => {

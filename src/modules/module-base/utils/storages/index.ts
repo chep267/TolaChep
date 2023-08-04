@@ -17,7 +17,7 @@ class StorageBase {
 
     private storageName;
 
-    get = (key: string) => window[this.storageName].getItem(key);
+    get = (key: string) => window[this.storageName].getItem(key) || '';
     getList = (keys: string[] = emptyArray) => {
         const results: Record<string, StoreValueType> = {};
         keys.forEach((key) => {
@@ -26,7 +26,7 @@ class StorageBase {
         return results;
     };
 
-    set = (key: string, data: StoreValueType) => window[this.storageName].setItem(key, `${data}`);
+    set = (key: string, data: StoreValueType) => window[this.storageName].setItem(key, `${data || ''}`);
     setList = (keys: string[] = emptyArray, data: StoreValueType[] = emptyArray) =>
         keys.forEach((key, index) => {
             this.set(key, data[index]);

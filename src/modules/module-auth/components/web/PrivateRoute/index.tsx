@@ -13,12 +13,10 @@ import { useAppDispatch, useAppSelector } from '@module-global/utils';
 
 /** utils */
 import { localStorageBase, sessionStorageBase, Decrypt, Encrypt } from '@module-base/utils';
+import { getMeId } from '@module-auth/utils';
 
 /** constants */
 import { meIdLocalKey, routerLocalKey, SCREEN } from '@module-global/constants';
-
-/** selectors */
-import { getMeId } from '@module-auth/selectors';
 
 /** types */
 import type { ReactNode } from 'react';
@@ -29,7 +27,7 @@ type PrivateRouteProps = {
 };
 
 /** components */
-const StartScreen = React.lazy(() => import('@module-auth/screens/web/Start'));
+const StartScreen = React.lazy(() => import('@module-auth/screens/web/StartScreen'));
 
 function PrivateRoute(props: PrivateRouteProps) {
     const { element, type } = props;

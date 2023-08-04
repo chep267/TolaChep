@@ -10,29 +10,23 @@ import { call, put, all, fork, delay } from 'redux-saga/effects';
 import { AUTH_ACTION, authAction, AuthActionPayloadType } from '@module-auth/actions';
 
 /** selectors */
-import { genNewUser, genUid } from '@module-user/selectors';
+import { genNewUser, genUid } from '@module-user/utils';
 
 /** workers */
-import { doCreateUser, doGetUser } from '@module-user/sagas/workers';
+import { doCreateUser } from '@module-user/sagas/workers';
 import { doCheckRegisterAccount, doCheckSignInAccount, doCheckSignOutAccount } from '@module-auth/sagas/helpers';
 
 /** utils */
-import { Encrypt } from '@module-base/utils';
-import { localStorageBase } from '@module-base/utils';
+import { Encrypt, localStorageBase } from '@module-base/utils';
 import { emptyFunction, emptyObject } from '@module-base/constants';
 import { emailLocalKey, meIdLocalKey } from '@module-global/constants';
 import { AUTH_FORM_ERROR } from '@module-auth/constants';
 
 /** types */
-import type { UserType } from '@module-user/utils';
+import type { UserType } from '@module-user/models';
 
 /** hàm tự động đăng nhập lại khi mở web */
-function* doAutoStart(payload: AuthActionPayloadType[typeof AUTH_ACTION.AUTO_START.REQUEST]) {
-    const user: false | UserType = yield call(doGetUser, payload);
-    if (user) {
-        yield put(authAction.signIn.success({ user }));
-    }
-}
+function* doAutoStart(payload: AuthActionPayloadType[typeof AUTH_ACTION.AUTO_START.REQUEST]) {}
 
 /** hàm đăng nhập */
 function* doSignIn(payload: AuthActionPayloadType[typeof AUTH_ACTION.SIGN_IN.REQUEST]) {

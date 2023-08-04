@@ -4,13 +4,8 @@
  *
  */
 
-/** types */
-import type { MessageDescriptor } from '@formatjs/intl/src/types';
-import type { FormatXMLElementFn, PrimitiveType } from 'intl-messageformat';
-
-type TextBaseProps = {
-    message: MessageDescriptor;
-    messageOption?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
-};
-
-export type { TextBaseProps };
+export * from './InputBase';
+export * from './TextBase';
+export * from './MenuBase';
+export * from './IconBase';
+export * from './ListBase';

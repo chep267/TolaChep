@@ -5,4 +5,4 @@
  */
 
 export * from './msg';
-export * from './type';
+export * from './selectors';

@@ -43,7 +43,7 @@ interface payloadPropsWithoutCallBack {
 const onSuccess = () => ({ response: true });
 const onError = (error: Error) => ({ error });
 
-const FIREBASE_GET = (payload: payloadPropsWithoutCallBack) => {
+const FIREBASE_GET = async (payload: payloadPropsWithoutCallBack) => {
     const { path, queryConstraints } = payload;
     if (!queryConstraints || queryConstraints.length === 0) {
         return get(query(dbRef(realtimeDB, path)));
@@ -61,17 +61,17 @@ const FIREBASE_ON_GET = (payload: payloadPropsWithCallBack) => {
     return onValue(dbRef(realtimeDB, path), fnCallback);
 };
 
-const FIREBASE_SET = (payload: payloadPropsWithoutCallBack) => {
+const FIREBASE_SET = async (payload: payloadPropsWithoutCallBack) => {
     const { path, data } = payload;
     return set(dbRef(realtimeDB, path), data).then(onSuccess).catch(onError);
 };
 
-const FIREBASE_UPDATE = (payload: payloadPropsWithoutCallBack) => {
+const FIREBASE_UPDATE = async (payload: payloadPropsWithoutCallBack) => {
     const { path, data = {} } = payload;
     return update(dbRef(realtimeDB, path), data).then(onSuccess).catch(onError);
 };
 
-const FIREBASE_REMOVE = (payload: payloadPropsWithoutCallBack) => {
+const FIREBASE_REMOVE = async (payload: payloadPropsWithoutCallBack) => {
     const { path } = payload;
     return remove(dbRef(realtimeDB, path)).then(onSuccess).catch(onError);
 };

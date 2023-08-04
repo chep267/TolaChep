@@ -5,7 +5,7 @@
  */
 
 /** types */
-import type { UserType } from '@module-user/utils';
+import type { UserType } from '@module-user/models';
 
 const PATH_USER_FIREBASE = '/users/';
 
@@ -34,4 +34,22 @@ const emptyUser: UserType = Object.freeze({
     },
 });
 
-export { PATH_USER_FIREBASE, USER_STORE_KEY, emptyUser };
+const AVATAR_SIZE = {
+    MINI: 'mini',
+    SMALL: 'small',
+    NORMAL: 'normal',
+    LARGE: 'large',
+    HUGE: 'huge',
+};
+
+export type AVATAR_TYPE = keyof typeof AVATAR_SIZE;
+
+const avatarSize = {
+    mini: 26,
+    small: 32,
+    normal: 40,
+    large: 56,
+    huge: 150,
+};
+
+export { avatarSize, AVATAR_SIZE, PATH_USER_FIREBASE, USER_STORE_KEY, emptyUser };

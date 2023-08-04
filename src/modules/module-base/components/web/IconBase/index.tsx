@@ -10,13 +10,14 @@ import * as React from 'react';
 import { comparePure } from '@module-base/constants';
 
 /** types */
-import type { SVGProps, LazyExoticComponent } from 'react';
+import type { SVGProps, LazyExoticComponent, RefObject } from 'react';
 
 type IconBaseType = keyof typeof Icons;
 
 interface IconBaseProps extends SVGProps<SVGSVGElement> {
     name: IconBaseType;
     size?: number;
+    ref?: ((instance: SVGSVGElement | null) => void) | RefObject<SVGSVGElement> | null;
 }
 
 const Icons = Object.freeze({

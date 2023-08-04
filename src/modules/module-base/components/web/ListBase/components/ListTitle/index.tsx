@@ -5,27 +5,37 @@
  */
 
 import * as React from 'react';
-import classnames from 'classnames';
+import styled from 'styled-components';
 
-// styles
-import styles from '@snw-components/web-antd-custom/ListBase/styles/index.local.less';
+/** types */
+import type { ListTitleProps } from '@module-base/models';
+import type { ForwardRefExoticComponent, RefAttributes, HTMLAttributes } from 'react';
 
-// utils
-import type { ListTitleProps } from '@snw-components/web-antd-custom/ListBase/utils/type';
+/** styles */
+const ListTitleElement: ForwardRefExoticComponent<
+    HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>
+> = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    width: calc(100% - 24px);
+    margin: 6px 12px;
+    //.text-medium();
+    color: var(--text-color-secondary);
+`;
 
 const ListTitle = React.memo(
     (props: ListTitleProps) => {
         const { title } = props;
 
-        return !title
-            ? null
-            : ((typeof title === 'string' || typeof title === 'number' ? (
-                  <div className={classnames(styles['list-base-title'], 'list-base-title')}>
-                      <span>{title}</span>
-                  </div>
-              ) : (
-                  title
-              )) as React.ReactElement);
+        return (
+            typeof title === 'string' || typeof title === 'number' ? (
+                <ListTitleElement>
+                    <span>{title}</span>
+                </ListTitleElement>
+            ) : (
+                title
+            )
+        ) as React.ReactElement;
     },
     (prev, next) => prev.title === next.title
 );

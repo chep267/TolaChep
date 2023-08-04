@@ -16,10 +16,7 @@ import { baseMessage } from '@module-base/utils';
 
 /** types */
 import type { ForwardRefExoticComponent, RefAttributes, ForwardedRef } from 'react';
-import type { InputProps, InputRef } from 'antd';
-
-type InputBaseRef = InputRef;
-type InputBaseProps = InputProps;
+import type { InputBaseProps, InputBaseRef } from '@module-base/models';
 
 /** styles */
 const InputBaseElement: ForwardRefExoticComponent<InputBaseProps & RefAttributes<InputBaseRef>> = styled(Input)`
@@ -37,5 +34,4 @@ const InputBase = React.forwardRef((props: InputBaseProps, ref: ForwardedRef<Inp
 });
 
 InputBase.displayName = 'InputBase';
-export type { InputBaseRef, InputBaseProps };
 export default InputBase;

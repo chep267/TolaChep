@@ -11,19 +11,17 @@ import { useIntl } from 'react-intl';
 import Text from 'antd/es/typography/Text';
 
 /** types */
-import type { TextProps } from 'antd/es/typography/Text';
-import type { MessageDescriptor } from '@formatjs/intl/src/types';
-import type { FormatXMLElementFn, PrimitiveType } from 'intl-messageformat';
+import type { TextBaseProps } from '@module-base/models';
 
-type TextBaseProps = {
-    message: MessageDescriptor;
-    messageOption?: Record<string, PrimitiveType | FormatXMLElementFn<string, string>>;
-};
-function TextBase(props: TextBaseProps & TextProps) {
-    const { message, messageOption, ...textProps } = props;
+function TextBase(props: TextBaseProps) {
+    const { className, message, messageOption, textProps } = props;
     const { formatMessage } = useIntl();
 
-    return <Text {...textProps}>{formatMessage(message, messageOption)}</Text>;
+    return (
+        <Text className={className} {...textProps}>
+            {formatMessage(message, messageOption)}
+        </Text>
+    );
 }
 
 export default TextBase;

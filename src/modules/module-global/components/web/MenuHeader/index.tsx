@@ -8,22 +8,26 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Button, Dropdown } from 'antd';
 import { MenuOutlined, SettingOutlined } from '@ant-design/icons';
-import { MenuInfo } from 'rc-menu/lib/interface';
 
 /** actions */
 import { authAction } from '@module-auth/actions';
 
 /** components */
 import { MenuBase } from '@module-base/components/web';
-import type { MenuBaseType } from '@module-base/components/web';
+
+/** constants */
+import { localeObject } from '@module-language/constants';
+import { FlexBase, FlexCustom, themeObject } from '@module-theme/constants';
 
 /** utils */
 import { useAppDispatch } from '@module-global/utils';
-import { localeObject } from '@module-language/constants';
-import { FlexBase, FlexCustom, themeObject } from '@module-theme/constants';
 import { authMessage } from '@module-auth/utils';
 import { useLanguage, langMessage } from '@module-language/utils';
 import { useTheme, themeMessage } from '@module-theme/utils';
+
+/** types */
+import type { MenuInfo } from 'rc-menu/lib/interface';
+import type { MenuBaseType } from '@module-base/models';
 
 const LayoutMenu = styled.div(({ theme }) => ({
     ...FlexCustom({ flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-start' }),

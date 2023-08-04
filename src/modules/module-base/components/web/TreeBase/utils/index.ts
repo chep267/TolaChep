@@ -7,7 +7,7 @@
 import * as React from 'react';
 
 /** types */
-import type { DataNode } from 'antd/lib/tree';
+import type { DataNode } from 'antd/es/tree';
 import type { NodeDragEventParams } from 'rc-tree/lib/contextTypes';
 import type { EventDataNode, Key } from 'rc-tree/lib/interface';
 

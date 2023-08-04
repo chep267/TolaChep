@@ -19,4 +19,4 @@ const firebaseConfig = Object.freeze({
 
 if (!getApps().length) initializeApp(firebaseConfig);
 const firebaseApp = initializeApp(firebaseConfig);
-export default firebaseApp;
+export { firebaseApp };
