@@ -13,6 +13,7 @@ const EN_AUTH = {
     'module.auth.form.title.register': 'Register',
     'module.auth.form.title.recover': 'Recover',
     'module.auth.form.checkbox.giveMe': 'Remember me',
+    'module.auth.form.button.recover.code': 'Gửi lại',
 
     'module.auth.form.navigate.signin': 'Already have an account? Go to sign in!',
     'module.auth.form.navigate.register': 'No account? Go to registration!',
@@ -21,6 +22,7 @@ const EN_AUTH = {
     'module.auth.form.input.placeholder.account': 'Email/phone number...',
     'module.auth.form.input.placeholder.password': 'Password...',
     'module.auth.form.input.placeholder.passwordHill': 'Enter the password...',
+    'module.auth.form.input.placeholder.code': 'Enter auth code...',
 
     'module.auth.form.input.error.account.empty': 'Empty account !!!',
     'module.auth.form.input.error.password.empty': 'Empty password !!!',
@@ -33,8 +35,13 @@ const EN_AUTH = {
     'module.auth.form.input.error.passwordHill.incorrect': 'Confirm password does not match !!!',
     'module.auth.form.input.error.account.exist':
         'This email/phone number already exists! Please use a different email/phone number.',
+    'module.auth.form.input.error.code.notSend': 'Gửi code xác thực thất bại !!!\nXin hãy thử lại!',
+    'module.auth.form.input.error.code.incorrect': 'Mã code xác thực không chính xác !!!',
 
     'module.auth.form.message.success.register': 'Sign Up Success! Please log in now!',
+    'module.auth.form.message.success.recover': 'Liên kết xác thực đã được gửi về {value}',
+    'module.auth.form.message.success.recover.email': 'địa chỉ email: {account}',
+    'module.auth.form.message.success.recover.phone': 'số điện thoại: {account}',
 } as const;
 
 const VI_AUTH = {
@@ -43,6 +50,7 @@ const VI_AUTH = {
     'module.auth.form.title.register': 'Đăng ký',
     'module.auth.form.title.recover': 'Xác thực',
     'module.auth.form.checkbox.giveMe': 'Ghi nhớ tôi',
+    'module.auth.form.button.recover.code': 'Gửi lại',
 
     'module.auth.form.navigate.signin': 'Đã có tài khoản? Đi tới đăng nhập!',
     'module.auth.form.navigate.register': 'Chưa có tài khoản? Đi tới đăng ký!',
@@ -51,6 +59,7 @@ const VI_AUTH = {
     'module.auth.form.input.placeholder.account': 'Nhập email/số điện thoại...',
     'module.auth.form.input.placeholder.password': 'Nhập mật khẩu...',
     'module.auth.form.input.placeholder.passwordHill': 'Nhập lại mật khẩu...',
+    'module.auth.form.input.placeholder.code': 'Nhập mã xác thực...',
 
     'module.auth.form.input.error.account.empty': 'Tài khoản trống !!!',
     'module.auth.form.input.error.account.failed': 'Tài khoản phải là email/số điện thoại !!!',
@@ -58,13 +67,17 @@ const VI_AUTH = {
     'module.auth.form.input.error.account.registered':
         'Email/số điện thoại này đã tồn tại! Vui lòng sử dụng email/số điện thoại khác.',
     'module.auth.form.input.error.account.unregistered': 'Tài khoản này chưa được đăng ký !!!',
-
+    'module.auth.form.input.error.code.incorrect': 'Mã code xác thực không chính xác !!!',
     'module.auth.form.input.error.password.empty': 'Mật khẩu trống !!!',
     'module.auth.form.input.error.passwordHill.empty': 'Mật khẩu xác nhận trống !!!',
     'module.auth.form.input.error.password.short': 'Mật khẩu dài tối thiểu 6 kí tự!',
     'module.auth.form.input.error.passwordHill.different': 'Mật khẩu xác nhận không khớp !!!',
+    'module.auth.form.input.error.code.notSend': 'Gửi code xác thực thất bại !!!\nXin hãy thử lại!',
 
     'module.auth.form.message.success.register': 'Đăng ký thành công! Bạn hãy đăng nhập ngay nhé!',
+    'module.auth.form.message.success.recover': 'Liên kết xác thực đã được gửi về {value}',
+    'module.auth.form.message.success.recover.email': 'địa chỉ email: {account}',
+    'module.auth.form.message.success.recover.phone': 'số điện thoại: {account}',
 } as const;
 
 const authMessage = createMessageIntl(VI_AUTH);

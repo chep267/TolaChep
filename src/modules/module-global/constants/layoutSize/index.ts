@@ -43,5 +43,3 @@ export const AppSizeCustom = Object.freeze({
         xxl: '1600px',
     },
 });
-
-export const TIME_LOADING_APP = 1000;

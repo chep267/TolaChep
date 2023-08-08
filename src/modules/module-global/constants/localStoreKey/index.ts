@@ -7,7 +7,6 @@
 /** utils */
 import { Encrypt } from '@module-base/utils';
 
-export const meIdLocalKey = Encrypt('tlc_meId_local');
 export const meIdCookieKey = Encrypt('tlc_meId_cookie');
 export const emailLocalKey = Encrypt('tlc_email_local');
 export const localeLocalKey = Encrypt('tlc_locale_local');

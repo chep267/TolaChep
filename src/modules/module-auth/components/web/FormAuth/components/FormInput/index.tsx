@@ -18,7 +18,7 @@ interface FormInputProps extends FormItemProps {
 }
 
 const FormInput = React.forwardRef((props: FormInputProps, ref) => {
-    const { name, hasFeedback, rules, resetStatus, validateStatus, help, inputProps } = props;
+    const { resetStatus, inputProps, ...formInputProps } = props;
     const inputRef: React.Ref<InputRef> = React.useRef(null);
     const [value, setValue] = React.useState('');
 
@@ -35,7 +35,7 @@ const FormInput = React.forwardRef((props: FormInputProps, ref) => {
     };
 
     return (
-        <Form.Item name={name} validateStatus={validateStatus} hasFeedback={hasFeedback} help={help} rules={rules}>
+        <Form.Item {...formInputProps}>
             {inputProps.type === 'password' ? (
                 <Input.Password
                     ref={inputRef}

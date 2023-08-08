@@ -39,6 +39,7 @@ const FormWrap = styled(Form)`
 const ButtonSubmit = styled(Button)`
     float: right;
     min-width: 100px;
+    margin-left: 10px;
 `;
 
 export { FormAuth, FormWrap, ButtonSubmit };

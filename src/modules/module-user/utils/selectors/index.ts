@@ -16,7 +16,7 @@ const genNewUser = (payload: {
     name?: string;
     phone?: string;
     contact?: string;
-    type: AccountType;
+    type?: AccountType;
 }): UserType => {
     const { uid = '', email = '', phone = '', type = 'account' } = payload;
     return {

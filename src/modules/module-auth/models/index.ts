@@ -11,8 +11,12 @@ type StoreAuthType = {
     meId: string;
 };
 
-type AuthFormErrorType = (typeof AUTH_FORM_ERROR)[keyof typeof AUTH_FORM_ERROR];
+type FormErrorType = (typeof AUTH_FORM_ERROR)[keyof typeof AUTH_FORM_ERROR];
 
 type AccountType = 'account' | 'facebook' | 'google';
 
-export type { StoreAuthType, AuthFormErrorType, AccountType };
+type FormStatusType = Record<'account' | 'password' | 'passwordHill', FormErrorType>;
+
+type FormDataType = Record<'account' | 'password' | 'passwordHill', string>;
+
+export type { StoreAuthType, FormErrorType, AccountType, FormStatusType, FormDataType };

@@ -22,10 +22,11 @@ type UserActionPayloadType = {
         user: UserType;
     };
     [USER_ACTION.CREATE.REQUEST]: {
-        uid: string;
+        user: UserType;
     };
     [USER_ACTION.CREATE.SUCCESS]: {
         user: UserType;
+        uid: string;
     };
     [USER_ACTION.UPDATE.REQUEST]: {
         account: string;

@@ -40,6 +40,12 @@ const AUTH_FORM_ERROR = Object.freeze({
 
     /**  mật khẩu xác nhận không khớp */
     PASSWORD_DIFFERENT: 'passwordHill.different',
+
+    /**  gửi code xác thực thất bại */
+    SEND_CODE: 'code.notSend',
+
+    /**  code xác thực sai */
+    CODE_INCORRECT: 'code.incorrect',
 } as const);
 
 export { AUTH_STORE_KEY, PATH_AUTH_FIREBASE, AUTH_FORM_ERROR };

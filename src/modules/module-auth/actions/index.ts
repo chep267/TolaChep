@@ -8,7 +8,7 @@
 import { createActionKey, createAction as createActionBase } from '@module-base/utils';
 
 /** types */
-import type { AuthFormErrorType } from '@module-auth/models';
+import type { FormErrorType } from '@module-auth/models';
 
 const arrActionKey = ['AUTO_START', 'SIGN_IN', 'REGISTER', 'RECOVER', 'SIGN_OUT', 'CHANGE_PATH_NAME'] as const;
 const AUTH_ACTION = createActionKey('AUTH_ACTION', arrActionKey);
@@ -18,21 +18,31 @@ type AuthActionPayloadType = {
         account: string;
         password: string;
         onSuccess?(): void;
-        onFailure?(value: AuthFormErrorType): void;
+        onFailure?(value: FormErrorType): void;
     };
     [AUTH_ACTION.SIGN_IN.SUCCESS]: {
         meId: string;
     };
+
     [AUTH_ACTION.SIGN_OUT.REQUEST]: null;
     [AUTH_ACTION.SIGN_OUT.SUCCESS]: null;
+
     [AUTH_ACTION.REGISTER.REQUEST]: {
         account: string;
         password: string;
         type?: 'account';
         onSuccess?(): void;
-        onFailure?(value: AuthFormErrorType): void;
+        onFailure?(value: FormErrorType): void;
     };
     [AUTH_ACTION.REGISTER.SUCCESS]: object;
+
+    [AUTH_ACTION.RECOVER.REQUEST]: {
+        account: string;
+        type?: 'account';
+        onSuccess?(): void;
+        onFailure?(error: FormErrorType): void;
+    };
+    [AUTH_ACTION.RECOVER.SUCCESS]: object;
 };
 
 function createAction<Type extends keyof AuthActionPayloadType>(type: Type) {
@@ -51,6 +61,10 @@ const authAction = Object.freeze({
     register: {
         request: createAction(AUTH_ACTION.REGISTER.REQUEST),
         success: createAction(AUTH_ACTION.REGISTER.SUCCESS),
+    },
+    recover: {
+        request: createAction(AUTH_ACTION.RECOVER.REQUEST),
+        success: createAction(AUTH_ACTION.RECOVER.SUCCESS),
     },
 });
 

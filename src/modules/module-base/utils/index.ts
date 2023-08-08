@@ -5,7 +5,7 @@
  */
 
 export * from './security';
-export * from './timer';
+export * from './selectors';
 export * from './init';
 export * from './msg';
 export * from './storages';

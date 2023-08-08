@@ -5,14 +5,15 @@
  */
 
 import * as React from 'react';
-import { Form, Checkbox } from 'antd';
 import { useIntl } from 'react-intl';
+import { Form, Checkbox, Input } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 /** actions */
 import { authAction } from '@module-auth/actions';
 
 /** components */
-import { FormWrap, ButtonSubmit, FormInput, FormFooter } from '@module-auth/components/web/FormAuth/components';
+import { FormWrap, ButtonSubmit, FormFooter } from '@module-auth/components/web/FormAuth/components';
 
 /** constants */
 import { REGEX_PHONE, REGEX_EMAIL } from '@module-base/constants';
@@ -25,35 +26,30 @@ import { useAppDispatch } from '@module-global/utils';
 import { Decrypt, localStorageBase } from '@module-base/utils';
 
 /** types */
-import type { AuthFormErrorType } from '@module-auth/models';
 import type { InputBaseRef } from '@module-base/models';
+import type { FormErrorType, FormStatusType, FormDataType } from '@module-auth/models';
+
+const statusDefault: Omit<FormStatusType, 'passwordHill'> = {
+    account: AUTH_FORM_ERROR.DEFAULT,
+    password: AUTH_FORM_ERROR.DEFAULT,
+};
 
 function SignInForm() {
     const dispatch = useAppDispatch();
     const { formatMessage } = useIntl();
+    const [form] = Form.useForm<FormDataType>();
 
     const accountRef = React.useRef<InputBaseRef>(null);
     const passwordRef = React.useRef<InputBaseRef>(null);
 
-    const [status, setStatus] = React.useState<{
-        account: AuthFormErrorType;
-        password: AuthFormErrorType;
-    }>({
-        account: AUTH_FORM_ERROR.DEFAULT,
-        password: AUTH_FORM_ERROR.DEFAULT,
-    });
+    const [status, setStatus] = React.useState<Omit<FormStatusType, 'passwordHill'>>(statusDefault);
     const [isSubmit, setIsSubmit] = React.useState(false);
 
-    const onResetStatus = React.useCallback(() => {
-        setStatus({
-            account: AUTH_FORM_ERROR.DEFAULT,
-            password: AUTH_FORM_ERROR.DEFAULT,
-        });
-    }, []);
+    const onResetStatus = React.useCallback(() => setStatus(statusDefault), []);
 
-    const onSubmit = () => {
-        const account = accountRef.current?.input?.value?.trim() || '';
-        const password = passwordRef.current?.input?.value?.trim() || '';
+    const onSubmit = React.useCallback((data: any) => {
+        const account = `${data?.account || accountRef.current?.input?.value || ''}`.trim();
+        const password = `${data?.password || passwordRef.current?.input?.value || ''}`.trim();
         const isEmail = REGEX_EMAIL.test(account);
         const isPhone = REGEX_PHONE.test(account);
 
@@ -105,7 +101,7 @@ function SignInForm() {
                     setIsSubmit(false);
                 };
 
-                const onFailure = (value: AuthFormErrorType) => {
+                const onFailure = (value: FormErrorType) => {
                     accountRef.current?.focus();
                     setStatus({
                         account: value,
@@ -116,53 +112,70 @@ function SignInForm() {
                 dispatch(authAction.signIn.request({ account, password, onSuccess, onFailure }));
                 return;
         }
-    };
+    }, []);
+
+    const formHelper = React.useMemo(() => {
+        const shouldInputUpdate = (prevValues: string, nextValues: string) => prevValues !== nextValues;
+        return {
+            account: {
+                name: 'account',
+                validateStatus: status.account ? 'error' : undefined,
+                help: status.account
+                    ? formatMessage(authMessage[`module.auth.form.input.error.${status.account}`])
+                    : undefined,
+                hasFeedback: !!status.account,
+                shouldUpdate: shouldInputUpdate,
+            },
+            password: {
+                name: 'password',
+                validateStatus: status.password ? 'error' : undefined,
+                help: status.password
+                    ? formatMessage(authMessage[`module.auth.form.input.error.${status.password}`])
+                    : undefined,
+                hasFeedback: !!status.password,
+                shouldUpdate: shouldInputUpdate,
+            },
+        } as const;
+    }, [status]);
 
     return (
         <FormWrap
             name="tola_signin_form"
+            form={form}
+            onFinish={onSubmit}
+            onValuesChange={onResetStatus}
             initialValues={{
                 remember_username: true,
-                username: Decrypt(localStorageBase.get(emailLocalKey)),
+                account: Decrypt(localStorageBase.get(emailLocalKey)),
             }}>
-            <FormInput
-                ref={accountRef}
-                name="username"
-                validateStatus={status.account ? 'error' : undefined}
-                help={
-                    status.account ? formatMessage(authMessage[`module.auth.form.input.error.${status.account}`]) : undefined
-                }
-                hasFeedback={!!status.account}
-                resetStatus={onResetStatus}
-                inputProps={{
-                    type: 'text',
-                    placeholder: formatMessage(authMessage['module.auth.form.input.placeholder.account']),
-                    autoFocus: true, // eslint-disable-line jsx-a11y/no-autofocus
-                }}
-            />
+            <Form.Item {...formHelper.account}>
+                <Input
+                    ref={accountRef}
+                    size="large"
+                    addonBefore={<UserOutlined className="site-form-item-icon" />}
+                    placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.account'])}
+                    autoComplete="on"
+                    allowClear
+                    autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                />
+            </Form.Item>
 
-            <FormInput
-                ref={passwordRef}
-                name="password"
-                validateStatus={status.password ? 'error' : undefined}
-                help={
-                    status.password
-                        ? formatMessage(authMessage[`module.auth.form.input.error.${status.password}`])
-                        : undefined
-                }
-                hasFeedback={!!status.password}
-                resetStatus={onResetStatus}
-                inputProps={{
-                    type: 'password',
-                    placeholder: formatMessage(authMessage['module.auth.form.input.placeholder.password']),
-                }}
-            />
+            <Form.Item {...formHelper.password}>
+                <Input.Password
+                    ref={passwordRef}
+                    size="large"
+                    allowClear
+                    addonBefore={<LockOutlined className="site-form-item-icon" />}
+                    placeholder={formatMessage(authMessage['module.auth.form.input.placeholder.password'])}
+                    autoComplete="on"
+                />
+            </Form.Item>
 
             <Form.Item>
                 <Form.Item name="remember_username" valuePropName="checked" noStyle>
                     <Checkbox>{formatMessage(authMessage['module.auth.form.checkbox.giveMe'])}</Checkbox>
                 </Form.Item>
-                <ButtonSubmit type="primary" size="large" htmlType="submit" onClick={onSubmit} loading={isSubmit}>
+                <ButtonSubmit type="primary" size="large" htmlType="submit" loading={isSubmit}>
                     {formatMessage(authMessage['module.auth.form.title.signin'])}
                 </ButtonSubmit>
             </Form.Item>
