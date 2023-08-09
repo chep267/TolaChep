@@ -47,7 +47,7 @@ const MessengerContent = styled(Content)`
     border-radius: 12px;
 `;
 
-const LeftRight = styled(Sider)`
+const LeftRight = styled(Content)`
     display: flex;
     ${resize()};
     height: 100%;

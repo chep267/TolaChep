@@ -37,7 +37,7 @@ function* doGetUser(payload: UserActionPayloadType[typeof USER_ACTION.GET.REQUES
 
 function* doCreateUser(payload: UserActionPayloadType[typeof USER_ACTION.CREATE.REQUEST]): any {
     const { user, onSuccess = emptyFunction, onFailure = emptyFunction } = payload;
-    const error = yield call(FIREBASE_SET, { path: `${PATH_USER_FIREBASE}${user.uid}`, data: user });
+    const { error } = yield call(FIREBASE_SET, { path: `${PATH_USER_FIREBASE}${user.uid}`, data: user });
     if (error) {
         // co loi xay ra
         yield fork(onFailure);

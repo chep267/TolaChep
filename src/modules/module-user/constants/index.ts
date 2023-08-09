@@ -42,8 +42,6 @@ const AVATAR_SIZE = {
     HUGE: 'huge',
 };
 
-export type AVATAR_TYPE = keyof typeof AVATAR_SIZE;
-
 const avatarSize = {
     mini: 26,
     small: 32,

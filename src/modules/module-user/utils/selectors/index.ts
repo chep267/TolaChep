@@ -25,7 +25,7 @@ const genNewUser = (payload: {
             account: '',
             email,
             name: '',
-            contact: '',
+            contact: email,
             age: '',
             phone,
         },

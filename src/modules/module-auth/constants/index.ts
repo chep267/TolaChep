@@ -8,8 +8,6 @@ const AUTH_STORE_KEY = Object.freeze({
     ROOT: 'StoreAuth',
 } as const);
 
-const PATH_AUTH_FIREBASE = '/auths/';
-
 const AUTH_FORM_ERROR = Object.freeze({
     /**  không có lỗi */
     DEFAULT: '',
@@ -48,4 +46,4 @@ const AUTH_FORM_ERROR = Object.freeze({
     CODE_INCORRECT: 'code.incorrect',
 } as const);
 
-export { AUTH_STORE_KEY, PATH_AUTH_FIREBASE, AUTH_FORM_ERROR };
+export { AUTH_STORE_KEY, AUTH_FORM_ERROR };

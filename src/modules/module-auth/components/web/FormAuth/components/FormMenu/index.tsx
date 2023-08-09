@@ -19,8 +19,8 @@ import { useLanguage, langMessage } from '@module-language/utils';
 import { useTheme, themeMessage } from '@module-theme/utils';
 
 /** type */
-import type { MenuInfo } from 'rc-menu/lib/interface';
-import type { MenuBaseType } from '@module-base/components/web';
+import type { MenuInfo } from 'rc-menu/es/interface';
+import type { MenuBaseType } from '@module-base/models';
 
 const LayoutMenu = styled.div(({ theme }) => ({
     ...FlexCustom({ flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-start' }),

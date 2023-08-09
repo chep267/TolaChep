@@ -35,14 +35,12 @@ type HasUserType = {
 };
 
 type UsersType = {
-    [key: string]: {
-        data: UserType;
-    };
+    [key: string]: UserType;
 };
 
-type UserStoreType = {
+type StoreUserType = {
     [USER_STORE_KEY.HAS_USER]: HasUserType;
     [USER_STORE_KEY.USER]: UsersType;
 };
 
-export type { UserType, HasUserType, UsersType, UserStoreType };
+export type { UserType, HasUserType, UsersType, StoreUserType };

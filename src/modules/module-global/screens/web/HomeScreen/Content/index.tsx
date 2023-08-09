@@ -29,9 +29,9 @@ export default function TolaContent(props: { element: React.ReactElement }) {
 
     return (
         <Layout>
-            {/*<ContentLayout>{element}</ContentLayout>*/}
             <ContentLayout>
-                <TestComponent />
+                {element}
+                {/*<TestComponent />*/}
             </ContentLayout>
         </Layout>
     );

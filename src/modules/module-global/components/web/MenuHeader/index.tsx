@@ -26,7 +26,7 @@ import { useLanguage, langMessage } from '@module-language/utils';
 import { useTheme, themeMessage } from '@module-theme/utils';
 
 /** types */
-import type { MenuInfo } from 'rc-menu/lib/interface';
+import type { MenuInfo } from 'rc-menu/es/interface';
 import type { MenuBaseType } from '@module-base/models';
 
 const LayoutMenu = styled.div(({ theme }) => ({

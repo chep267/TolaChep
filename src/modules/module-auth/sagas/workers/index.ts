@@ -32,10 +32,9 @@ function* doSignIn(payload: AuthActionPayloadType[typeof AUTH_ACTION.SIGN_IN.REQ
 
     /** Failure */
     if (error) {
-        yield fork(
-            onFailure,
-            error?.code === 'auth/wrong-password' ? AUTH_FORM_ERROR.ACCOUNT_INCORRECT : AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED
-        );
+        const msgError =
+            error?.code === 'auth/wrong-password' ? AUTH_FORM_ERROR.ACCOUNT_INCORRECT : AUTH_FORM_ERROR.ACCOUNT_UNREGISTERED;
+        yield fork(onFailure, msgError);
         return false;
     }
 
@@ -63,7 +62,11 @@ function* doRegister(payload: AuthActionPayloadType[typeof AUTH_ACTION.REGISTER.
     const phone = REGEX_PHONE.test(account) ? account : '';
     const user = genNewUser({ email, phone, uid: genUid(response.uid) });
     const emailLocal: string | undefined = yield call(localStorageBase.get, emailLocalKey);
-    yield all([call(doCreateUser, { user }), delay(TIME_WAITING_API)]);
+
+    let isCreated = false;
+    while (!isCreated) {
+        isCreated = yield call(doCreateUser, { user });
+    }
     if (!emailLocal) {
         yield fork(localStorageBase.set, emailLocalKey, Encrypt(account));
     }

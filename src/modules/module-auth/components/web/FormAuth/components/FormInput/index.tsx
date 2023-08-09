@@ -10,7 +10,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 /** types */
 import type { FormItemProps } from 'antd/es/form/FormItem';
-import type { InputProps, InputRef } from 'rc-input/lib/interface';
+import type { InputProps, InputRef } from 'rc-input/es/interface';
 
 interface FormInputProps extends FormItemProps {
     resetStatus?: () => void;

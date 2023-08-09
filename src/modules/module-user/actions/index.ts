@@ -19,15 +19,20 @@ type UserActionPayloadType = {
         onFailure?(): void;
     };
     [USER_ACTION.GET.SUCCESS]: {
+        parentId?: string;
         user: UserType;
     };
+
     [USER_ACTION.CREATE.REQUEST]: {
         user: UserType;
+        onSuccess?(): void;
+        onFailure?(): void;
     };
     [USER_ACTION.CREATE.SUCCESS]: {
+        parentId?: string;
         user: UserType;
-        uid: string;
     };
+
     [USER_ACTION.UPDATE.REQUEST]: {
         account: string;
         password: string;
@@ -37,13 +42,14 @@ type UserActionPayloadType = {
     [USER_ACTION.UPDATE.SUCCESS]: {
         user: UserType;
     };
+
     [USER_ACTION.DELETE.REQUEST]: {
         account: string;
         password: string;
         onSuccess(): void;
         onFailure(): void;
     };
-    [USER_ACTION.DELETE.SUCCESS]: {};
+    [USER_ACTION.DELETE.SUCCESS]: unknown;
 };
 
 function createAction<Type extends Readonly<string>>(type: Type) {

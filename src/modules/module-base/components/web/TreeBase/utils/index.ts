@@ -8,8 +8,8 @@ import * as React from 'react';
 
 /** types */
 import type { DataNode } from 'antd/es/tree';
-import type { NodeDragEventParams } from 'rc-tree/lib/contextTypes';
-import type { EventDataNode, Key } from 'rc-tree/lib/interface';
+import type { NodeDragEventParams } from 'rc-tree/es/contextTypes';
+import type { EventDataNode, Key } from 'rc-tree/es/interface';
 
 /** hàm cắt 1 node khỏi tree */
 export const pruneNode = (tree: DataNode[], nodeId: string | number) => {
