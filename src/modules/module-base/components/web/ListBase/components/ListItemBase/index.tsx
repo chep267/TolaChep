@@ -5,79 +5,57 @@
  */
 
 import * as React from 'react';
-import classnames from 'classnames';
+import { Avatar, Typography } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
-// styles
-import styles from '../../styles/index.local.less';
+/** components */
+import { ListItemBaseElement, NameItemBaseElement } from '../Layout';
 
-// utils
-import { getBackgroundAvatar } from '@module-user/utils/getURLAvatar';
+/** types */
+import type { ListItemBaseProps } from '@module-base/models';
 
-type ItemProps = {
-    className?: string;
-    avatarProps: {
-        className?: string;
-        url?: string;
-    };
-    nameProps: {
-        className?: string;
-        primaryText?: string;
-        secondText?: string;
-    };
-    renderOption?: React.ReactNode | (() => React.ReactNode);
-};
+function ListItemBase(props: ListItemBaseProps) {
+    const { avatarProps, nameProps, renderOption } = props;
 
-const AvatarItem = React.memo(
-    (props: ItemProps['avatarProps'] & { name?: string }) => {
-        const { className, url, name } = props;
+    const renderAvatar = React.useMemo(() => {
+        if (avatarProps?.url) {
+            return <Avatar className={avatarProps.className} src={avatarProps.url} alt="avatar" size={avatarProps.size} />;
+        }
+        if (nameProps?.primaryText) {
+            return (
+                <Avatar
+                    className={avatarProps?.className}
+                    alt="avatar"
+                    size={avatarProps?.size}
+                    style={{ backgroundColor: '#fde3cf', color: '#f56a00' }}>
+                    {nameProps.primaryText[0]}
+                </Avatar>
+            );
+        }
+        return <Avatar icon={<UserOutlined />} className={avatarProps?.className} alt="avatar" size={avatarProps?.size} />;
+    }, [avatarProps?.url, nameProps?.primaryText]);
 
-        const styleDefault = {
-            background: url ? 'unset' : getBackgroundAvatar(name),
-        };
-
+    const renderName = React.useMemo(() => {
         return (
-            <div
-                className={classnames(styles['list-item-base-avatar'], 'list-item-base-avatar', className)}
-                style={styleDefault}>
-                {url ? <img alt="" src={url} /> : name ? <span>{name[0]}</span> : null}
-            </div>
-        );
-    },
-    (prev, next) => prev.url === next.url
-);
-AvatarItem.displayName = 'AvatarItem';
-
-const NameItem = React.memo(
-    (props: ItemProps['nameProps']) => {
-        const { className, primaryText, secondText } = props;
-
-        return (
-            <div className={classnames(styles['list-item-base-name'], 'list-item-base-name', className)}>
-                <div className={classnames(styles['list-item-base-name-primary'], 'list-item-base-name-primary', className)}>
-                    <span>{primaryText}</span>
-                </div>
-                {secondText ? (
-                    <div
-                        className={classnames(styles['list-item-base-name-second'], 'list-item-base-name-second', className)}>
-                        {secondText}
-                    </div>
+            <NameItemBaseElement className={nameProps?.className}>
+                <Typography.Text className="primary" strong>
+                    {nameProps?.primaryText}
+                </Typography.Text>
+                {nameProps?.secondText ? (
+                    <Typography.Text className="second" italic>
+                        {nameProps.secondText}
+                    </Typography.Text>
                 ) : null}
-            </div>
+            </NameItemBaseElement>
         );
-    },
-    (prev, next) => prev.primaryText === next.primaryText || prev.secondText === next.secondText
-);
-NameItem.displayName = 'NameItem';
-
-function ListItemBase(props: ItemProps) {
-    const { className, avatarProps, nameProps, renderOption } = props;
+    }, [nameProps?.primaryText, nameProps?.secondText]);
 
     return (
-        <div className={classnames(styles['list-item-base'], 'list-item-base', className)}>
-            <AvatarItem {...avatarProps} name={nameProps.primaryText} />
-            <NameItem {...nameProps} />
+        <ListItemBaseElement>
+            {renderAvatar}
+            {renderName}
             {typeof renderOption === 'function' ? renderOption() : renderOption}
-        </div>
+        </ListItemBaseElement>
     );
 }
 

@@ -10,6 +10,7 @@ export const SCREEN = Object.freeze({
     FEED: '/feed',
     MESSENGER: '/messenger',
     GROUP: '/group',
+    PROFILE: '/profile',
     NOT_FOUND: '/404',
 
     // auth

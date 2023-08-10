@@ -4,5 +4,6 @@
  *
  */
 
+export * from './hooks';
 export * from './msg';
 export * from './selectors';

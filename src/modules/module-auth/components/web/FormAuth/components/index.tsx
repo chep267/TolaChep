@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { Form, Button } from 'antd';
 import { FlexBase } from '@module-theme/constants';
 
-const FormAuth = styled.div<{ $colorBG: string }>((props) => {
+const FormAuth = styled.div<{ $colorBg: string }>((props) => {
     const styleForm = window.isMobile
         ? {
               width: 'calc(100% - 30px)',
@@ -25,7 +25,7 @@ const FormAuth = styled.div<{ $colorBG: string }>((props) => {
         height: 'auto',
         flexDirection: 'column',
         borderRadius: 12,
-        backgroundColor: props.$colorBG,
+        backgroundColor: props.$colorBg,
         zIndex: props.theme.zIndex.layout,
         ...styleForm,
     };
@@ -45,4 +45,3 @@ const ButtonSubmit = styled(Button)`
 export { FormAuth, FormWrap, ButtonSubmit };
 export { default as FormFooter } from './FormFooter';
 export { default as FormMenu } from './FormMenu';
-export { default as FormInput } from './FormInput';

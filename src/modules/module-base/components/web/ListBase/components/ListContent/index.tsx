@@ -5,39 +5,47 @@
  */
 
 import * as React from 'react';
-import classnames from 'classnames';
-import { Button, Spin } from 'antd';
 import { UpCircleFilled } from '@ant-design/icons';
 
-// components
-import ListItem from '@snw-components/web-antd-custom/ListBase/components/ListItem';
+/** components */
+import {
+    ListContentElementWrap,
+    ListContentElement,
+    ListContentEmptyElement,
+    ListContentLoadingElement,
+    ListContentButtonScroll,
+} from '../Layout';
+import ListItem from '../ListItem';
+import ListSearch from '../ListSearch';
+import { TextBase } from '@module-base/components/web';
 
-// styles
-import styles from '@snw-components/web-antd-custom/ListBase/styles/index.local.less';
+/** utils */
+import { baseMessage, useListBase } from '@module-base/utils';
 
-// utils
-import type { ListContentProps } from '@snw-components/web-antd-custom/ListBase/utils/type';
+/** constants */
+import { emptyArray, emptyFunction } from '@module-base/constants';
 
-const ListContent = React.memo((props: ListContentProps) => {
+/** types */
+import type { ListBaseProps, ItemDataType } from '@module-base/models';
+
+const ListContent = React.memo((props: Pick<ListBaseProps, 'searchProps' | 'contentProps'>) => {
+    const { contentProps, searchProps } = props;
     const {
         disableEventKey = false,
         idSelect = '',
-        contentClassName,
-        loading,
+        loading = false,
         empty,
-        data,
+        data = emptyArray,
         renderItem,
-        onSelect,
-        listHook,
-    } = props;
-    const ElementScroll = React.useRef<HTMLDivElement>(null);
+        onSelect = emptyFunction,
+    } = contentProps;
+
+    const listHook = useListBase();
+    const listRef = React.useRef<HTMLDivElement>(null);
     const [visibleScroll, setVisibleScroll] = React.useState(false);
 
-    // @ts-ignore
-    const dataSize = (data && (data.length || data.size)) || 0;
-
     React.useEffect(() => {
-        const update = { total: dataSize, disableEventKey };
+        const update = { total: data.length, disableEventKey };
         listHook.onUpdate(update);
     }, [data]);
 
@@ -47,23 +55,24 @@ const ListContent = React.memo((props: ListContentProps) => {
         }
     }, [idSelect]);
 
-    const onSelectItem = React.useCallback((id: string, key: number) => {
+    const onSelectItem = React.useCallback((item: ItemDataType, key: number) => {
+        const id = typeof item === 'object' ? item.id : item;
         listHook.onSelect({ idSelect: id, itemSelect: key });
-        if (typeof onSelect === 'function') {
-            onSelect(id);
-        }
+        onSelect(id);
     }, []);
 
     const renderList = () => {
         if (loading) {
-            return <Spin className={classnames(styles['list-base-empty'], 'list-base-empty')} />;
+            return <ListContentLoadingElement />;
         }
 
-        if (!data || !dataSize) {
-            return !empty || typeof empty === 'string' ? (
-                <div className={classnames(styles['list-base-empty'], 'list-base-empty')}>
-                    <span>{empty || 'Danh sách trống'}</span>
-                </div>
+        if (data.length === 0) {
+            return !empty || typeof empty === 'string' || typeof empty === 'number' ? (
+                <ListContentEmptyElement>
+                    {empty || (
+                        <TextBase className="text-empty" message={baseMessage['module.base.component.tree.text.empty']} />
+                    )}
+                </ListContentEmptyElement>
             ) : (
                 empty
             );
@@ -72,9 +81,10 @@ const ListContent = React.memo((props: ListContentProps) => {
         let count = 0;
         return data.map((item) => {
             count += 1;
+            const key = typeof item === 'object' ? item.id : item;
             return (
                 <ListItem
-                    key={item}
+                    key={key}
                     item={item}
                     index={count}
                     isHovered={listHook.itemHover === count}
@@ -86,41 +96,37 @@ const ListContent = React.memo((props: ListContentProps) => {
         });
     };
 
-    const onScroll = () => {
-        if (ElementScroll.current) {
-            const rangeScroll = (ElementScroll.current.clientHeight * 30) / 100;
-            if (ElementScroll.current.scrollTop > rangeScroll && !visibleScroll) {
+    const onScroll = React.useCallback(() => {
+        if (listRef.current) {
+            const rangeScroll = (listRef.current.clientHeight * 30) / 100;
+            if (listRef.current.scrollTop > rangeScroll && !visibleScroll) {
                 setVisibleScroll(true);
             }
-            if (ElementScroll.current.scrollTop < rangeScroll && visibleScroll) {
+            if (listRef.current.scrollTop < rangeScroll && visibleScroll) {
                 setVisibleScroll(false);
             }
         }
-    };
+    }, [visibleScroll]);
 
-    const onClickButtonScroll = () => {
-        if (ElementScroll.current) {
-            ElementScroll.current.scrollTop = 0;
+    const onClickButtonScroll = React.useCallback(() => {
+        if (listRef.current) {
+            listRef.current.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    };
+    }, []);
 
     return (
-        <div className={classnames(styles['list-base-content'], contentClassName, 'list-base-content')}>
-            <div
-                ref={ElementScroll}
-                onScroll={onScroll}
-                className={classnames(styles['list-base-content-absolute'], 'list-base-content-absolute')}>
+        <ListContentElementWrap>
+            <ListContentElement ref={listRef} onScroll={onScroll}>
+                {searchProps ? <ListSearch {...searchProps} onKeyDown={listHook.onKeyPress} /> : false}
                 {renderList()}
-            </div>
-            <Button
+            </ListContentElement>
+            <ListContentButtonScroll
+                $visible={visibleScroll}
                 onClick={onClickButtonScroll}
-                className={classnames(styles['list-base-buttonScroll'], 'list-base-buttonScroll', {
-                    [styles['list-base-buttonScroll-hidden']]: !visibleScroll,
-                })}
                 shape="circle"
-                icon={<UpCircleFilled />}
+                icon={<UpCircleFilled style={{ color: '#f56a00' }} />}
             />
-        </div>
+        </ListContentElementWrap>
     );
 });
 ListContent.displayName = 'ListContent';

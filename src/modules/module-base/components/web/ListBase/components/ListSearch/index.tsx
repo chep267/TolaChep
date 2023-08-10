@@ -5,17 +5,25 @@
  */
 
 import * as React from 'react';
+import { theme } from 'antd';
 
 /** components */
+import { ListSearchElement } from '../Layout';
 import { InputChange } from '@module-base/components/web';
 
 /** types */
 import type { ListSearchProps } from '@module-base/models';
 
 const ListSearch = React.memo((props: ListSearchProps) => {
-    const { visible, ...otherProps } = props;
+    const {
+        token: { colorBorderBg },
+    } = theme.useToken();
 
-    return visible ? null : <InputChange {...otherProps} />;
+    return (
+        <ListSearchElement $colorBg={colorBorderBg}>
+            <InputChange size="large" mode="search" {...props} />
+        </ListSearchElement>
+    );
 });
 
 ListSearch.displayName = 'ListSearch';

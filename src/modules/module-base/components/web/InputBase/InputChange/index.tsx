@@ -12,23 +12,22 @@ import { SearchOutlined } from '@ant-design/icons';
 import InputBase from '../Input';
 
 /** constants */
-import { emptyFunction } from '@module-base/constants';
+import { emptyFunction, TIMING_SEARCHING } from '@module-base/constants';
 
 /** utils */
 import { baseMessage } from '@module-base/utils';
 
 /** types */
-import type { ForwardedRef } from 'react';
 import type { InputChangeProps, InputChangeRef, InputBaseRef } from '@module-base/models';
 
-const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef<InputChangeRef>) => {
+const InputChange = React.forwardRef<InputChangeRef, InputChangeProps>((props, ref) => {
     const {
         onChangeValue = emptyFunction,
         onLoading = emptyFunction,
         placeholder,
         prefix,
         mode,
-        timing = mode === 'search' ? 300 : 0,
+        timing = mode === 'search' ? TIMING_SEARCHING : 0,
         ...inputProps
     } = props;
     const { formatMessage } = useIntl();
@@ -45,9 +44,8 @@ const InputChange = React.forwardRef((props: InputChangeProps, ref: ForwardedRef
         } else if (nextValue !== prevValue.current) {
             prevValue.current = nextValue;
             if (timing > 0) {
-                // xử lý loading khi bắt đầu nhập text
+                /** xử lý loading khi bắt đầu nhập text */
                 onLoading(true);
-
                 timeout = setTimeout(() => {
                     onChangeValue(nextValue);
                 }, timing);

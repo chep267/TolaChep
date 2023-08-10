@@ -5,22 +5,28 @@
  */
 
 import * as React from 'react';
-import { Button } from 'antd';
-import classnames from 'classnames';
+import { theme } from 'antd';
 
-// styles
-import styles from '../../styles/index.local.less';
+/** components */
+import { ListItemElement } from '../Layout';
 
-// utils
-import { ListItemProps } from '@snw-components/web-antd-custom/ListBase/utils/type';
+/** constants */
+import { emptyFunction } from '@module-base/constants';
+
+/** types */
+import type { ListItemProps } from '@module-base/models';
 
 const ListItem = React.memo((props: ListItemProps) => {
-    const { item, index, isHovered, isSelected, onClick, renderItem } = props;
+    const { item, index, isHovered, isSelected, onClick = emptyFunction, renderItem } = props;
     const itemRef: React.RefObject<HTMLElement> = React.useRef(null);
 
+    const {
+        token: { colorPrimaryHover },
+    } = theme.useToken();
+
     React.useEffect(() => {
-        if (isHovered && itemRef.current && itemRef.current.scrollIntoView) {
-            itemRef.current.scrollIntoView({ block: 'end', inline: 'nearest', behavior: 'smooth' });
+        if (isHovered) {
+            itemRef?.current?.scrollIntoView({ block: 'end', inline: 'nearest', behavior: 'smooth' });
         }
     }, [isHovered]);
 
@@ -30,25 +36,18 @@ const ListItem = React.memo((props: ListItemProps) => {
         }
     }, [isSelected]);
 
-    const handleClick = React.useCallback(() => {
-        if (typeof onClick === 'function') {
-            onClick(item, index);
-        }
-    }, []);
+    const handleClick = React.useCallback(() => onClick(item, index), []);
 
     return (
-        <Button
+        <ListItemElement
             ref={itemRef}
             type="default"
-            className={classnames(
-                styles['list-base-content-item'],
-                'list-base-content-item',
-                { [`${styles['list-base-content-item-hover']}`]: isHovered },
-                { [`${styles['list-base-content-item-select']}`]: isSelected }
-            )}
+            $isHovered={isHovered}
+            $isSelected={isSelected}
+            $colorBgHover={colorPrimaryHover}
             onClick={handleClick}>
-            {typeof renderItem === 'function' ? renderItem(item, index) : item}
-        </Button>
+            {typeof renderItem === 'function' ? renderItem(item, index) : typeof item === 'object' ? item.id : item}
+        </ListItemElement>
     );
 });
 

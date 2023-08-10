@@ -48,9 +48,7 @@ const FIREBASE_GET = async (payload: payloadPropsWithoutCallBack) => {
     if (!queryConstraints || queryConstraints.length === 0) {
         return get(query(dbRef(realtimeDB, path)));
     }
-    return get(query(dbRef(realtimeDB, path), ...queryConstraints))
-        .then(onSuccess)
-        .catch(onError);
+    return get(query(dbRef(realtimeDB, path), ...queryConstraints));
 };
 
 const FIREBASE_ON_GET = (payload: payloadPropsWithCallBack) => {

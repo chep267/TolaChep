@@ -15,7 +15,7 @@ import { Input } from 'antd';
 import { baseMessage } from '@module-base/utils';
 
 /** types */
-import type { ForwardRefExoticComponent, RefAttributes, ForwardedRef } from 'react';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { TextAreaBaseProps, TextAreaBaseRef } from '@module-base/models';
 
 /** styles */
@@ -26,7 +26,7 @@ const TextAreaBaseElem: ForwardRefExoticComponent<TextAreaBaseProps & RefAttribu
     border-radius: 6px;
 `;
 
-const TextAreaBase = React.forwardRef((props: TextAreaBaseProps, ref: ForwardedRef<TextAreaBaseRef>) => {
+const TextAreaBase = React.forwardRef<TextAreaBaseRef, TextAreaBaseProps>((props, ref) => {
     const { placeholder, ...inputProps } = props;
     const { formatMessage } = useIntl();
 

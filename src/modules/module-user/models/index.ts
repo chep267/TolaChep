@@ -43,4 +43,5 @@ type StoreUserType = {
     [USER_STORE_KEY.USER]: UsersType;
 };
 
+export * from './Avatar';
 export type { UserType, HasUserType, UsersType, StoreUserType };

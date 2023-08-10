@@ -6,11 +6,11 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import { useIntl } from 'react-intl';
+import { Tree, Spin, theme } from 'antd';
+import RcTree from 'rc-tree';
 
 /** components */
-import RcTree from 'rc-tree';
-import { Tree, Spin, theme, Typography } from 'antd';
+import { TextBase } from '@module-base/components/web';
 
 /** utils */
 import { onDropTree } from './utils';
@@ -84,7 +84,6 @@ const TreeBase = React.forwardRef<TreeBaseRef, TreeBaseProps>((props, ref) => {
     const {
         token: { colorPrimary },
     } = theme.useToken();
-    const { formatMessage } = useIntl();
 
     React.useEffect(() => {
         setGData(treeData);
@@ -96,22 +95,18 @@ const TreeBase = React.forwardRef<TreeBaseRef, TreeBaseProps>((props, ref) => {
         return (
             <TreeLoading>
                 <Spin />
-                <Typography.Text className="text-loading">
-                    {formatMessage(baseMessage['module.base.component.tree.text.loading'])}
-                </Typography.Text>
+                <TextBase className="text-loading" message={baseMessage['module.base.component.tree.text.loading']} />
             </TreeLoading>
         );
     }
 
     if (!gData || gData.length === 0) {
-        return !!empty && (typeof empty === 'object' || typeof empty === 'symbol') ? (
-            empty
-        ) : (
+        return !empty || typeof empty === 'string' || typeof empty === 'number' ? (
             <TreeLoading>
-                <Typography.Text className="text-empty">
-                    {empty || formatMessage(baseMessage['module.base.component.tree.text.empty'])}
-                </Typography.Text>
+                {empty || <TextBase className="text-empty" message={baseMessage['module.base.component.tree.text.empty']} />}
             </TreeLoading>
+        ) : (
+            empty
         );
     }
 

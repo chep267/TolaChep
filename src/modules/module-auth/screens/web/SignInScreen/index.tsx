@@ -15,13 +15,13 @@ import { FlexBase } from '@module-theme/constants';
 const ToLaParticle = React.lazy(() => import('@modules/module-base/components/web/Particles'));
 const FormAuth = React.lazy(() => import('@modules/module-auth/components/web/FormAuth'));
 
-const LayoutScreen = styled.div<{ $colorBG: string }>((props) => ({
+const LayoutScreen = styled.div<{ $colorBg: string }>((props) => ({
     ...FlexBase,
     flexDirection: 'column',
     width: '100vw',
     height: '100vh',
     overflow: 'hidden',
-    backgroundColor: props.$colorBG,
+    backgroundColor: props.$colorBg,
 }));
 
 function SignInScreen() {
@@ -30,7 +30,7 @@ function SignInScreen() {
     } = theme.useToken();
 
     return (
-        <LayoutScreen $colorBG={colorBgLayout}>
+        <LayoutScreen $colorBg={colorBgLayout}>
             <React.Suspense fallback={null}>
                 <FormAuth />
                 <ToLaParticle />

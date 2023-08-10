@@ -8,6 +8,8 @@ const emptyFunction = Object.freeze(() => {});
 const emptyObject = Object.freeze({}) as object;
 const emptyArray = Object.freeze([]) as [];
 
+const TIMING_SEARCHING = 300;
+
 const comparePure =
     (type: 'pure' | 'check' | 'ignore' = 'pure', keys: string[] = emptyArray) =>
     (prev: Record<string, unknown>, next: Record<string, unknown>) => {
@@ -39,4 +41,4 @@ const comparePure =
         return true;
     };
 
-export { emptyFunction, emptyObject, emptyArray, comparePure };
+export { emptyFunction, emptyObject, emptyArray, comparePure, TIMING_SEARCHING };

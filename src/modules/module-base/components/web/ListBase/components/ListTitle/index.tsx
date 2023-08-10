@@ -5,32 +5,22 @@
  */
 
 import * as React from 'react';
-import styled from 'styled-components';
+import { Typography } from 'antd';
+
+/** components */
+import { ListTitleElement } from '../Layout';
 
 /** types */
 import type { ListTitleProps } from '@module-base/models';
-import type { ForwardRefExoticComponent, RefAttributes, HTMLAttributes } from 'react';
-
-/** styles */
-const ListTitleElement: ForwardRefExoticComponent<
-    HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>
-> = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    width: calc(100% - 24px);
-    margin: 6px 12px;
-    //.text-medium();
-    color: var(--text-color-secondary);
-`;
 
 const ListTitle = React.memo(
     (props: ListTitleProps) => {
-        const { title } = props;
+        const { title, className } = props;
 
         return (
             typeof title === 'string' || typeof title === 'number' ? (
-                <ListTitleElement>
-                    <span>{title}</span>
+                <ListTitleElement className={className}>
+                    <Typography.Text>{title}</Typography.Text>
                 </ListTitleElement>
             ) : (
                 title

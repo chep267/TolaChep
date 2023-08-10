@@ -15,7 +15,7 @@ import { Input } from 'antd';
 import { baseMessage } from '@module-base/utils';
 
 /** types */
-import type { ForwardRefExoticComponent, RefAttributes, ForwardedRef } from 'react';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { InputBaseProps, InputBaseRef } from '@module-base/models';
 
 /** styles */
@@ -24,7 +24,7 @@ const InputBaseElement: ForwardRefExoticComponent<InputBaseProps & RefAttributes
     border-radius: 6px;
 `;
 
-const InputBase = React.forwardRef((props: InputBaseProps, ref: ForwardedRef<InputBaseRef>) => {
+const InputBase = React.forwardRef<InputBaseRef, InputBaseProps>((props, ref) => {
     const { placeholder, ...inputProps } = props;
     const { formatMessage } = useIntl();
 

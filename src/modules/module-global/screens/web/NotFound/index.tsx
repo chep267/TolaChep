@@ -21,7 +21,7 @@ const NotFoundView = styled.div({
     padding: 10,
 
     img: {
-        borderRadius: 8,
+        borderRadius: 6,
         objectFit: 'fill',
         width: '100%',
         height: '100%',

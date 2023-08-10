@@ -8,9 +8,7 @@ import * as React from 'react';
 import { Layout } from 'antd';
 
 /** components */
-import TolaSider from './Sider';
-import TolaHeader from './Header';
-import TolaContent from './Content';
+import { TolaSider, TolaHeader, TolaContent } from './components';
 
 export default function MainScreen(props: { element: React.ReactElement }) {
     const { element } = props;

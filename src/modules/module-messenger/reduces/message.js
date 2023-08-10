@@ -1,6 +1,6 @@
 import { emptyArray, emptyObject } from '@module-base/constants';
-import THREAD_ACTION from '../actions/thread';
-import MESSAGE_ACTION from '../actions/message';
+import THREAD_ACTION from '../actions/old/thread.js';
+import MESSAGE_ACTION from '../actions/old/message.js';
 
 const initState = {
     threadIdSelected: '',

@@ -16,8 +16,9 @@ import { SCREEN } from '@module-global/constants';
 /** screens */
 const SignInScreen = React.lazy(() => import('@module-auth/screens/web/SignInScreen'));
 const HomeScreen = React.lazy(() => import('@module-global/screens/web/HomeScreen'));
-const FeedScreen = React.lazy(() => import('@module-feed/screens/NewFeed'));
-const MessengerScreen = React.lazy(() => import('@module-messenger/screens/MessengerApp'));
+const FeedScreen = React.lazy(() => import('@module-feed/screens/web/FeedScreen'));
+const MessengerScreen = React.lazy(() => import('@module-messenger/screens/web/MessengerApp'));
+const ProfileScreen = React.lazy(() => import('@module-user/screens/web/ProfileScreen'));
 const NotFoundScreen = React.lazy(() => import('@module-global/screens/web/NotFound'));
 
 function HomeRouter() {
@@ -25,7 +26,12 @@ function HomeRouter() {
         <React.Suspense fallback={null}>
             <Routes>
                 <Route path={SCREEN.FEED} element={<FeedScreen />} />
-                <Route path={SCREEN.MESSENGER} element={<MessengerScreen />} />
+                <Route path={SCREEN.MESSENGER} element={<MessengerScreen />}>
+                    <Route path={`${SCREEN.MESSENGER}/:threadId`} element={<MessengerScreen />} />
+                </Route>
+                <Route path={SCREEN.PROFILE} element={<ProfileScreen />}>
+                    <Route path={`${SCREEN.PROFILE}/:userId`} element={<ProfileScreen />} />
+                </Route>
                 <Route path="*" element={<NotFoundScreen />} />
             </Routes>
         </React.Suspense>

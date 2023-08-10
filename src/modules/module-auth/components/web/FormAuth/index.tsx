@@ -24,7 +24,7 @@ export default function FormAuth() {
     } = theme.useToken();
 
     return (
-        <FormAuthElement $colorBG={colorBgElevated}>
+        <FormAuthElement $colorBg={colorBgElevated}>
             <FormMenu />
             {pathname === SCREEN.SIGN_IN ? <SignInForm /> : pathname === SCREEN.REGISTER ? <RegisterForm /> : <RecoverForm />}
         </FormAuthElement>

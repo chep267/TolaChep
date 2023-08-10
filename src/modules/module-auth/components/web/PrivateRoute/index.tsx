@@ -40,37 +40,25 @@ function PrivateRoute(props: PrivateRouteProps) {
     const meIdCookie = Cookies.get(meIdCookieKey) || '';
 
     React.useEffect(() => {
+        const runEffectRoute = () => {
+            if (!meIdCookie) {
+                // chưa đăng nhập, trở về đăng nhập
+                saveRoute();
+                return navigate(SCREEN.SIGN_IN, { replace: true });
+            }
+            // có meIdCookie là đã đăng nhập
+            if (meId) {
+                // có meId là đã start xong -> chuyển vào home
+                const prevRouterPathname: string = Decrypt(sessionStorageBase.get(routerLocalKey)) || SCREEN.FEED;
+                return navigate(prevRouterPathname, { replace: true });
+            }
+            // gửi api start
+            saveRoute();
+            dispatch(authAction.signIn.success({ meId: meIdCookie }));
+        };
+
         runEffectRoute();
     }, [meId, meIdCookie]);
-
-    const runEffectRoute = () => {
-        if (!meIdCookie) {
-            // chưa đăng nhập, trở về đăng nhập
-            return goSignIn();
-        }
-        // có meIdCookie là đã đăng nhập
-        if (meId) {
-            // có meId là đã start xong -> chuyển vào home
-            return goHome();
-        }
-        // gửi api start
-        doStart();
-    };
-
-    const doStart = () => {
-        saveRoute();
-        dispatch(authAction.signIn.success({ meId: meIdCookie }));
-    };
-
-    const goSignIn = () => {
-        saveRoute();
-        navigate(SCREEN.SIGN_IN, { replace: true });
-    };
-
-    const goHome = () => {
-        const prevRouterPathname: string = Decrypt(sessionStorageBase.get(routerLocalKey)) || SCREEN.FEED;
-        navigate(prevRouterPathname, { replace: true });
-    };
 
     const saveRoute = () => {
         const { pathname, search } = location;

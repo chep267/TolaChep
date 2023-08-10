@@ -19,12 +19,13 @@ const genNewUser = (payload: {
     type?: AccountType;
 }): UserType => {
     const { uid = '', email = '', phone = '', type = 'account' } = payload;
+    const name = email.split('@')[0];
     return {
         uid: uid || genUid(),
         info: {
             account: '',
             email,
-            name: '',
+            name,
             contact: email,
             age: '',
             phone,

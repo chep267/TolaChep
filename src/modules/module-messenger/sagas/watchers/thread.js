@@ -1,5 +1,5 @@
 import { fork, take } from 'redux-saga/effects';
-import THREAD_ACTION from '../../actions/thread';
+import THREAD_ACTION from '../../actions/old/thread.js';
 import { doUpdateThreadIds, doSearchListThread, doStartNewThread } from '../workers/thread';
 
 function* updateThreadIdsWatcher() {

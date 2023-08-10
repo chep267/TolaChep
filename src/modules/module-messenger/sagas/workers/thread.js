@@ -1,7 +1,7 @@
 import { call, put, select } from 'redux-saga/effects';
 import { getThreadSearch } from '../helper/thread';
-import THREAD_ACTION from '../../actions/thread';
-import { getThreadIdSelected, getThreadIds } from '../../selectors/thread';
+import THREAD_ACTION from '../../actions/old/thread.js';
+import { getThreadIdSelected, getThreadIds } from '../../utils/selectors/thread';
 
 export function* doUpdateThreadIds(payload) {
     const { type, data } = payload;

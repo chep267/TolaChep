@@ -1,6 +1,6 @@
 import { all, call, fork, put } from 'redux-saga/effects';
-import { apiDeleteMessage, apiRemoveMessage, apiSendMessage } from '../../apis/message';
-import MESSAGE_ACTION from '../../actions/message';
+import { apiDeleteMessage, apiRemoveMessage, apiSendMessage } from '../../apis/old/message.js';
+import MESSAGE_ACTION from '../../actions/old/message.js';
 import { apiSendFile } from '@module-global/apis';
 
 export function* doSendMessage(payload) {

@@ -1,5 +1,5 @@
 import { fork, take } from 'redux-saga/effects';
-import MESSAGE_ACTION from '../../actions/message';
+import MESSAGE_ACTION from '../../actions/old/message.js';
 import { doDeleteMessage, doGetListMessageSuccess, doRemoveMessage, doSendMessage } from '../workers/message';
 import { doMoveThreadToTop } from '../workers/thread';
 
